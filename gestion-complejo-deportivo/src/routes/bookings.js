@@ -9,6 +9,10 @@ router.get('/create', (req, res) => {
     res.render('bookings/create');
 });
 
+router.get('/list', (req, res) => {
+    res.render('bookings/list');
+});
+
 router.post('/create', async (req, res) => {
     const { id_cancha, fecha_reserva, hora_reserva, ci_cliente} = req.body;
     const status = "Libre";
@@ -25,7 +29,7 @@ router.post('/create', async (req, res) => {
         id_cancha
     };
     await pool.query('INSERT INTO reserva set ?', [newBooking]);
-    res.send('Received');
+    res.render('bookings/list');
 });
 
 function makeid(length) {
