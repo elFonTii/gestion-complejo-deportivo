@@ -1,0 +1,52 @@
+const express = require('express');
+const morgan = require('morgan');
+const exphbs = require('express-handlebars');
+const path = require('path');
+const { url } = require('inspector');
+
+// initiazing express
+const app = express();
+
+// settings
+
+//Incializamos el puerto en el que la app se va a ejecutar
+app.set('port', (process.env.PORT || 4000));
+
+//Inicializamos el directorio donde se encuentran las plantillas
+app.set('views', path.join(__dirname, 'views'));
+app.engine('.hbs', exphbs({
+    defaultLayout: 'main',
+    layoutsDir: path.join(app.get('views'), 'layouts'),
+// La carpeta partials contiene codigo html que se va a renderizar en las plantillas y es reutilizable.
+    partialsDir: path.join(app.get('views'), 'partials'),
+    extname: '.hbs',
+    helpers: require('./lib/handlebars')
+}));
+
+//Luego de configurar los directorios y la engine de plantillas, le decimos a express que lo utilice para renderizar las plantillas.
+app.set('view engine', '.hbs');
+
+// middlewares
+app.use(morgan('dev'));
+
+// Le decimos a express que la url de la app no debe de añadir caracteres extraños ni parametros.
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// global vars
+app.use((req, res, next) => {
+    
+    next();
+});
+// routes
+    app.use(require('./routes'));
+    app.use(require('./routes/authentication'));
+    app.use('/bookings', require('./routes/bookings'));
+
+// public folder
+    //En la carpeta public se encuentran los archivos estaticos (css, js, imgs, etc)
+    app.use(express.static(path.join(__dirname, 'public')));
+// start server
+    app.listen(app.get('port')), () => {
+        console.log('Server started on port ' + app.get('port'));
+    }

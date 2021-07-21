@@ -1,0 +1,28 @@
+<div id="content-wrapper" class="d-flex flex-column">
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/bookings/create" method="POST">
+                            <div class="form-group mb-2">
+                                <input type="number" max="99" min="1" class="form-control" name="id_cancha" placeholder="ID de la cancha" autofocus required>
+                                <input type="number" max="8" min="8" class="form-control" name="ci_cliente" placeholder="CI del cliente" required>
+                            </div>
+                            <div class="form-group">
+                                <div class="card-text">
+                                    Fecha y hora de la reserva
+                                </div>
+                                <input type="date" name="fecha_reserva" class="form-control mb-2" required>
+                                <input type="time" name="hora_reserva" class="form-control mb-2" required>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success form-control"> Reservar </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
