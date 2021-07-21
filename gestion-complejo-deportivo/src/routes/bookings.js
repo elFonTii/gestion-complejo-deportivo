@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //Referencia a la conexión a la base de datos
-const pool = require('../database')
+const pool = require('../database');
 
 
 router.get('/create', (req, res) => {

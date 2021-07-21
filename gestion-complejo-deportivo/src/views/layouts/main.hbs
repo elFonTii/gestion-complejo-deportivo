@@ -17,14 +17,17 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"/>
 
 </head>
-<body>
+<body id="page-top">
     <div id="wrapper">
     
         <!-- Navigation -->
         {{> navigation }}
-    
+        <div id="page-wrapper">
+            {{> header }}
+        
     {{!--Sintaxis de handlebars, el texto entre tres llaves es el contenido de la plantilla (El contenido que va a variar, el resto es estático). --}}
-    {{{ body }}}
+            {{{ body }}}
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
