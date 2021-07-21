@@ -34,7 +34,7 @@ router.post('/create', async (req, res) => {
 
 function makeid(length) {
     var result           = '';
-    var characters       = '1234567890';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
       result += characters.charAt(Math.floor(Math.random() * 
@@ -42,4 +42,7 @@ function makeid(length) {
    }
    return result;
 }
+
+//Datatable export buttons 
+
 module.exports = router;
