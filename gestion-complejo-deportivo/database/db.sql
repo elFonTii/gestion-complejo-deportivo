@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2021 a las 01:18:56
+-- Tiempo de generación: 22-07-2021 a las 07:21:55
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -22,8 +22,7 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS `complejodeportivo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `complejodeportivo`;
+
 --
 -- Estructura de tabla para la tabla `cancha`
 --
@@ -37,6 +36,13 @@ CREATE TABLE `cancha` (
   `disponibilidad` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `cancha`
+--
+
+INSERT INTO `cancha` (`id_cancha`, `tipoCancha`, `precioCancha`, `aperturaCancha`, `cierreCancha`, `disponibilidad`) VALUES
+(1, 'Fútbol', 500, '00:00:00', '23:59:59', 'Disponible');
+
 -- --------------------------------------------------------
 
 --
@@ -47,7 +53,7 @@ CREATE TABLE `reserva` (
   `horaReserva` time NOT NULL,
   `fechaReserva` date NOT NULL,
   `idReserva` int(11) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` varchar(15) NOT NULL,
   `ci_user` int(8) NOT NULL,
   `id_c` int(11) NOT NULL
@@ -82,7 +88,7 @@ CREATE TABLE `user` (
   `fullname` varchar(50) NOT NULL,
   `mail` varchar(40) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp,
+  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `CI` int(8) NOT NULL,
   `rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -90,6 +96,9 @@ CREATE TABLE `user` (
 --
 -- Volcado de datos para la tabla `user`
 --
+
+INSERT INTO `user` (`fullname`, `mail`, `password`, `create_at`, `CI`, `rol`) VALUES
+('Felipe Fontana', 'feluubotta685@gmail.com', '12345', '2021-07-21 02:43:58', 53679745, 1);
 
 --
 -- Índices para tablas volcadas
@@ -130,7 +139,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `cancha`
 --
 ALTER TABLE `cancha`
-  MODIFY `id_cancha` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`

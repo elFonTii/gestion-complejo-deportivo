@@ -14,21 +14,15 @@ router.get('/list', (req, res) => {
 });
 
 router.post('/create', async (req, res) => {
-    const { id_cancha, fecha_reserva, hora_reserva, ci_cliente} = req.body;
-    const status = "Libre";
-    const id_reserva = makeid(10);
+    const { user, cancha, date_booking } = req.body;
     
     //Objeto de la reserva
     const newBooking = {
-        hora_reserva,
-        fecha_reserva,
-        id_reserva,
-        //created_at
-        status,
-        ci_cliente,
-        id_cancha
+        user,
+        cancha,
+        date_booking,
     };
-    await pool.query('INSERT INTO reserva set ?', [newBooking]);
+    await pool.query('INSERT INTO booking set ?', [newBooking]);
     res.render('bookings/list');
 });
 
