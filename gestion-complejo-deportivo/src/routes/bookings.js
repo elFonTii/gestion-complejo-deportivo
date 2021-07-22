@@ -23,7 +23,8 @@ router.post('/create', async (req, res) => {
         date_booking,
     };
     await pool.query('INSERT INTO booking set ?', [newBooking]);
-    res.render('bookings/list');
+    req.flash('success', 'Reserva añadida correctamente');
+    res.redirect('./list');
 });
 
 function makeid(length) {

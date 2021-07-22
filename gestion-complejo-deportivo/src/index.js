@@ -3,6 +3,10 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const { url } = require('inspector');
+const flash = require('connect-flash');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session');
+const { database } = require('./keys');
 
 // initiazing express
 const app = express();
@@ -27,15 +31,22 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // middlewares
-app.use(morgan('dev'));
+app.use(session({
+    secret: 'sqlsession',
+    resave: false,
+    saveUninitialized: false,
+    store: new MySQLStore(database)
+}));
 
+app.use(flash());
+app.use(morgan('dev'));
 // Le decimos a express que la url de la app no debe de añadir caracteres extraños ni parametros.
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // global vars
 app.use((req, res, next) => {
-    
+   app.locals.success = req.flash('success');
     next();
 });
 // routes
