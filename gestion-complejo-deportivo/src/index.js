@@ -7,9 +7,11 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
+const passport = require('passport');
 
 // initiazing express
 const app = express();
+require('./lib/passport');
 
 // settings
 
@@ -37,12 +39,13 @@ app.use(session({
     saveUninitialized: false,
     store: new MySQLStore(database)
 }));
-
 app.use(flash());
 app.use(morgan('dev'));
 // Le decimos a express que la url de la app no debe de añadir caracteres extraños ni parametros.
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // global vars
 app.use((req, res, next) => {

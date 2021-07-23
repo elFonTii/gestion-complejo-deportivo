@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-07-2021 a las 07:21:55
+-- Tiempo de generación: 23-07-2021 a las 05:24:47
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -18,8 +18,23 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `complejodeportivo`
+-- Base de datos: `gestioncomplejo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `booking`
+--
+
+CREATE TABLE `booking` (
+  `id_booking` int(5) NOT NULL,
+  `date_booking` date DEFAULT NULL,
+  `start` time NOT NULL,
+  `end` time NOT NULL,
+  `cancha` int(5) DEFAULT NULL,
+  `booking_state` int(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -28,35 +43,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cancha` (
-  `id_cancha` int(11) NOT NULL,
-  `tipoCancha` varchar(20) NOT NULL,
-  `precioCancha` int(11) NOT NULL,
-  `aperturaCancha` time NOT NULL,
-  `cierreCancha` time NOT NULL,
-  `disponibilidad` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `cancha`
---
-
-INSERT INTO `cancha` (`id_cancha`, `tipoCancha`, `precioCancha`, `aperturaCancha`, `cierreCancha`, `disponibilidad`) VALUES
-(1, 'Fútbol', 500, '00:00:00', '23:59:59', 'Disponible');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `reserva`
---
-
-CREATE TABLE `reserva` (
-  `horaReserva` time NOT NULL,
-  `fechaReserva` date NOT NULL,
-  `idReserva` int(11) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` varchar(15) NOT NULL,
-  `ci_user` int(8) NOT NULL,
-  `id_c` int(11) NOT NULL
+  `id_cancha` int(5) NOT NULL,
+  `tipo_cancha` varchar(20) DEFAULT NULL,
+  `price` varchar(8) DEFAULT NULL,
+  `players` int(30) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -67,42 +58,71 @@ CREATE TABLE `reserva` (
 
 CREATE TABLE `roles` (
   `id_rol` int(11) NOT NULL,
-  `nombreRol` varchar(15) NOT NULL
+  `rol_name` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `roles`
 --
 
-INSERT INTO `roles` (`id_rol`, `nombreRol`) VALUES
-(1, 'Usuario'),
-(2, 'Administrador');
+INSERT INTO `roles` (`id_rol`, `rol_name`) VALUES
+(1, 'Administrador'),
+(2, 'Usuario');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `user`
+-- Estructura de tabla para la tabla `sessions`
 --
 
-CREATE TABLE `user` (
-  `fullname` varchar(50) NOT NULL,
-  `mail` varchar(40) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `CI` int(8) NOT NULL,
-  `rol` int(11) NOT NULL
+CREATE TABLE `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `user`
+-- Volcado de datos para la tabla `sessions`
 --
 
-INSERT INTO `user` (`fullname`, `mail`, `password`, `create_at`, `CI`, `rol`) VALUES
-('Felipe Fontana', 'feluubotta685@gmail.com', '12345', '2021-07-21 02:43:58', 53679745, 1);
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('PwjNo_b2i5RyHKYY4le_z8u0LSTgyWFR', 1627021637, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('Qrw8imAFaFUmes8f_iLNh_sfCVI4Ce_Q', 1627019996, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('fDVx-6pyVuKKuM1hN7NMhNe1OHP6xQAy', 1627020412, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `username` varchar(10) NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `surname` varchar(20) DEFAULT NULL,
+  `password` varchar(16) DEFAULT NULL,
+  `rol` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`username`, `name`, `surname`, `password`, `rol`) VALUES
+('elfontii', 'Felipe', 'Fontana', 'topo', 2),
+('mfiorelli', 'Mateo', 'Fiorelli', 'topo', 1);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `booking`
+--
+ALTER TABLE `booking`
+  ADD PRIMARY KEY (`id_booking`),
+  ADD KEY `ref_02` (`user`),
+  ADD KEY `ref_03` (`cancha`);
 
 --
 -- Indices de la tabla `cancha`
@@ -111,64 +131,50 @@ ALTER TABLE `cancha`
   ADD PRIMARY KEY (`id_cancha`);
 
 --
--- Indices de la tabla `reserva`
---
-ALTER TABLE `reserva`
-  ADD PRIMARY KEY (`idReserva`),
-  ADD KEY `ci_user` (`ci_user`,`id_c`),
-  ADD KEY `id_c` (`id_c`);
-
---
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id_rol`);
 
 --
--- Indices de la tabla `user`
+-- Indices de la tabla `sessions`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`CI`),
-  ADD KEY `rol` (`rol`);
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`session_id`);
+
+--
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`username`),
+  ADD KEY `ref_01` (`rol`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `cancha`
+-- AUTO_INCREMENT de la tabla `booking`
 --
-ALTER TABLE `cancha`
-  MODIFY `id_cancha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `reserva`
---
-ALTER TABLE `reserva`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `booking`
+  MODIFY `id_booking` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `reserva`
+-- Filtros para la tabla `booking`
 --
-ALTER TABLE `reserva`
-  ADD CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`ci_user`) REFERENCES `user` (`CI`),
-  ADD CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`id_c`) REFERENCES `cancha` (`id_cancha`);
+ALTER TABLE `booking`
+  ADD CONSTRAINT `ref_02` FOREIGN KEY (`user`) REFERENCES `users` (`username`),
+  ADD CONSTRAINT `ref_03` FOREIGN KEY (`cancha`) REFERENCES `cancha` (`id_cancha`);
 
 --
--- Filtros para la tabla `user`
+-- Filtros para la tabla `users`
 --
-ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`rol`) REFERENCES `roles` (`id_rol`);
+ALTER TABLE `users`
+  ADD CONSTRAINT `ref_01` FOREIGN KEY (`rol`) REFERENCES `roles` (`id_rol`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
