@@ -33,6 +33,8 @@ CREATE TABLE `booking` (
   `start` time NOT NULL,
   `end` time NOT NULL,
   `cancha` int(5) DEFAULT NULL,
+  `user` varchar(10) DEFAULT NULL,
+  `create_at` date DEFAULT current_timestamp(),
   `booking_state` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
