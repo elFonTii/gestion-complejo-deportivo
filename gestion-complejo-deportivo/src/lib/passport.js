@@ -8,24 +8,25 @@ passport.use('local-signin', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, username, password, done) => {
-
+    console.log(req.body);
    const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
     //Si se encuentra un usuario con ese username:
-        if(rows.length === 0) {
+        if(rows.length > 0) {
             const user = rows[0];
-    //Verifica que la contraseña es correcta:
-          const isValidPassword = await helpers.comparePasswords(password, user.password);
+            console.log(user);
+            const validPassword = await helpers.matchPassword(password, user.password);
+    
     //Si la contraseña es correcta:
-          if(isValidPassword) {
-            return done(null, user, req.flash('Bienvenido a la plataforma' + ' ' + user.name));
+          if(validPassword) {
+            done(null, user, req.flash('success','Bienvenido a la plataforma' + ' ' + user.name));
     //Si no:
           } else{
-              done(null, false, req.flash('Contraseña incorrecta, intenta nuevamente.'));
+            done(null, false, req.flash('message','Contraseña incorrecta, intenta nuevamente.'));
           }
         } 
     //Si el usuario no existe:
         else {
-            return done(null, false, req.flash('El usuario no existe.'));
+            return done(null, false, req.flash('message','El usuario no existe.'));
         }
 
 }));

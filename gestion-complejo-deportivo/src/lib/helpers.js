@@ -9,9 +9,12 @@ helpers.encryptPassword = async (password) => {
     return cryptedPass;
 };
 
-helpers.comparePasswords = async (password, savedPass) => {
-    // Compare the password with the crypted password
-    // (Verifica si la contraseña es correcta)
-    return await bcrypt.compare(password, savedPass);
+helpers.matchPassword = async (password, savedPassword) => {
+    try {
+        return await bcrypt.compare(password, savedPassword);
+    } catch(e){
+        console.log(e)
+    }
 };
+
 module.exports = helpers;

@@ -52,6 +52,11 @@ app.use((req, res, next) => {
    app.locals.success = req.flash('success');
     next();
 });
+app.use((req, res, next) => {
+    app.locals.message = req.flash('message');
+     next();
+ });
+
 // routes
     app.use(require('./routes'));
     app.use(require('./routes/authentication'));
