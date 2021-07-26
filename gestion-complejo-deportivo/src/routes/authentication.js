@@ -8,7 +8,7 @@ router.get('/signup', (req, res) => {
 
 
 //Redireccionamiento al registrarse
-router.post('/signup', passport.authenticate('local-signup', {
+router.post('/signup', passport.authenticate('local.signup', {
     //En el caso de que se registre correctamente, redireccionará al '/profile'.
         successRedirect: '/profile',
     //En el caso de que el registro falle, redireccionará al '/signup'.
@@ -22,7 +22,7 @@ router.get('/signin', (req, res) => {
 });
 
 router.post('/signin', async (req, res, next) => {
-    passport.authenticate('local-signin', {
+    passport.authenticate('local.signin', {
         successRedirect: '/profile',
         failureRedirect: '/signin',
         failureFlash: true   
