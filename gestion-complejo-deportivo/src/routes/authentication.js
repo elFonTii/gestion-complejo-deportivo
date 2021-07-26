@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
+const { isLoggedIn} = require('../lib/auth');
+
 router.get('/signup', (req, res) => {
     res.render('auth/signup')
 });
@@ -29,8 +31,18 @@ router.post('/signin', async (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/profile', (req, res) => {
-    res.send('Profile');
+router.get('/profile', isLoggedIn, (req, res) => {
+    res.render('profile');
+});
+
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/signin');
+    req.flash('success', 'Sesión cerrada correctamente.');
+});
+
+router.get('/profile/personal', isLoggedIn , (req, res) => {
+    res.render('user/personal-info')
 });
 
 module.exports = router;

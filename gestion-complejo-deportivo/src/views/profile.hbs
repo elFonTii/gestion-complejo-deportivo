@@ -1,0 +1,24 @@
+<div class="card m-3 shadow" style="width: 18rem;">
+  <img class="card-img-top" src="/img/undraw_profile.svg" alt="User Profile">
+  <div class="card-body">
+    <h5 class="card-title text-center">
+      {{user.name}} {{user.surname}}</h5>
+    <p class="card-subtitle text-center">@{{user.username}}</p>
+  </div>
+  <ul class="list-group list-group-flush text-center">
+    <li class="list-group-item">
+        <a class="text text-secondary" href="#">
+            <span>Datos personales</span>
+        </a>
+    </li>
+    <li class="list-group-item text-center">
+        <a class="text text-secondary" href="#">
+            <span>Facturación</span>
+        </a>
+    </li>
+    <li class="list-group-item text-center" id="profile-selector">
+            <a class="text text-secondary" href="#">
+            <span>Preferencias</span>
+    </li>
+  </ul>
+</div>
