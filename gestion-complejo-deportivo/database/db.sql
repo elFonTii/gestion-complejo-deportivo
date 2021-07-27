@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-07-2021 a las 05:24:47
+-- Tiempo de generación: 27-07-2021 a las 03:39:03
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `booking` (
   `id_booking` int(5) NOT NULL,
   `date_booking` date DEFAULT NULL,
-  `start` time NOT NULL,
-  `end` time NOT NULL,
+  `start_booking` varchar(5) NOT NULL,
+  `end_booking` varchar(5) NOT NULL,
   `cancha` int(5) DEFAULT NULL,
   `user` varchar(10) DEFAULT NULL,
-  `create_at` date DEFAULT current_timestamp(),
+  `create_at` timestamp NULL DEFAULT current_timestamp(),
   `booking_state` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -51,6 +51,13 @@ CREATE TABLE `cancha` (
   `players` int(30) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cancha`
+--
+
+INSERT INTO `cancha` (`id_cancha`, `tipo_cancha`, `price`, `players`, `description`) VALUES
+(1, 'Futbol 5', '800', 10, 'Cancha clásica de Futbol 5.');
 
 -- --------------------------------------------------------
 
@@ -88,9 +95,14 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('PwjNo_b2i5RyHKYY4le_z8u0LSTgyWFR', 1627021637, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('Qrw8imAFaFUmes8f_iLNh_sfCVI4Ce_Q', 1627019996, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('fDVx-6pyVuKKuM1hN7NMhNe1OHP6xQAy', 1627020412, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
+('A7eYexGZ1T93mVRLK0JDp6UGuiDAVJIS', 1627418169, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"error\":[\"Missing credentials\",\"Missing credentials\",\"Missing credentials\"]},\"passport\":{}}'),
+('Ab5lhOcDb7vPhtHEtsBcayc3xSIly8Yx', 1627409174, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('AxQZtvxsaptraAaZMazyczju-S9Sr9OH', 1627352046, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"success\":[\"Bienvenido a la plataforma Felipe\"]}}'),
+('I99b7-27U1GFqcPum7wGr9GX4iktaaLk', 1627409727, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('VFauBT4an8wnbq-KsjVe1ApKoGzFJXi8', 1627416374, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"fonti\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"password\":\"fonti\",\"rol\":2,\"profile_photo\":\"\"}}}'),
+('aAoX2Xl89FsLoO7Adtx7pERvuwkhYuzh', 1627353720, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{\"success\":[\"Bienvenido a la plataforma Felipe\"]},\"passport\":{\"user\":0}}'),
+('lXxcpqOivMKUxPgBJcHcG9uG4TpJy8q-', 1627352365, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"fonti\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"password\":\"fonti\",\"rol\":2}}}'),
+('y2iENXTocuPOniVYK87au4TkzRxrDeeL', 1627409071, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
 
 -- --------------------------------------------------------
 
@@ -99,20 +111,21 @@ INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
 --
 
 CREATE TABLE `users` (
-  `username` varchar(10) NOT NULL,
+  `username` varchar(15) NOT NULL,
   `name` varchar(20) DEFAULT NULL,
   `surname` varchar(20) DEFAULT NULL,
   `password` varchar(16) DEFAULT NULL,
-  `rol` int(11) DEFAULT NULL
+  `rol` int(11) DEFAULT NULL,
+  `profile_photo` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`username`, `name`, `surname`, `password`, `rol`) VALUES
-('elfontii', 'Felipe', 'Fontana', 'topo', 2),
-('mfiorelli', 'Mateo', 'Fiorelli', 'topo', 1);
+INSERT INTO `users` (`username`, `name`, `surname`, `password`, `rol`, `profile_photo`) VALUES
+('fonti', 'Felipe', 'Fontana', 'fonti', 2, ''),
+('topo', 'Felipe', 'Fontana', '1234', 2, '');
 
 --
 -- Índices para tablas volcadas
@@ -159,7 +172,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id_booking` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_booking` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas

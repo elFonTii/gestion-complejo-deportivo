@@ -8,6 +8,7 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
 const passport = require('passport');
+const forumRouter = require('./routes/forum');
 
 // initiazing express
 const app = express();
@@ -16,7 +17,7 @@ require('./lib/passport');
 // settings
 
 //Incializamos el puerto en el que la app se va a ejecutar
-app.set('port', (process.env.PORT || 4000));
+app.set('port', (process.env.PORT || 10));
 
 //Inicializamos el directorio donde se encuentran las plantillas
 app.set('views', path.join(__dirname, 'views'));
@@ -60,6 +61,8 @@ app.use((req, res, next) => {
     app.use(require('./routes'));
     app.use(require('./routes/authentication'));
     app.use('/bookings', require('./routes/bookings'));
+    app.use('/dashboard', require('./routes/dashboard'))
+    app.use('/forum', forumRouter);
 
 // public folder
     //En la carpeta public se encuentran los archivos estaticos (css, js, imgs, etc)

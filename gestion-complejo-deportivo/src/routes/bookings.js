@@ -11,12 +11,13 @@ router.get('/create', isLoggedIn , (req, res) => {
 });
 
 router.get('/', isLoggedIn , async (req, res) => {
-   const bookings = await pool.query('SELECT create_at, date_booking, id_booking, start_booking, end_booking, tipo_cancha, price FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha');
+   const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE user = ?',[req.user.username]);
     res.render('bookings/list', {bookings: bookings});
 });
 
 router.post('/create', isLoggedIn , async (req, res) => {
-    const { user, cancha, start_booking, end_booking, date_booking } = req.body;
+    const user = req.user.username;
+    const { cancha, start_booking, end_booking, date_booking } = req.body;
     
     //Objeto de la reserva
     const newBooking = {

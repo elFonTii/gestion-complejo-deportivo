@@ -1,0 +1,13 @@
+{{#if notification}}
+<a class="dropdown-item d-flex align-items-center" href="#">
+    <div class="mr-3">
+        <div class="icon-circle bg-success">
+            <i class="{{noti.icon}}"></i>
+        </div>
+    </div>
+    <div>
+        <div class="small text-gray-500">{{noti.title}}</div>
+            <span class="text text-secondary">{{noti.content}}</span>
+        </div>
+</a>
+{{/if}}

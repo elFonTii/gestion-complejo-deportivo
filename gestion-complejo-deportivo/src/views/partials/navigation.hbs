@@ -14,7 +14,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="./">
+                <a class="nav-link" href="./dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Tablero</span></a>
             </li>
@@ -29,28 +29,37 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/bookings" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBookings"
+                    aria-expanded="true" aria-controls="collapseBookings">
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Reservas</span>
                 </a>
+                <div id="collapseBookings" class="collapse" aria-labelledby="headingBookings"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Reservas</h6>
+                        <a class="collapse-item" href="/bookings">Mis reservas</a>
+                        <a class="collapse-item" href="/bookings/create">Nueva reserva</a>
+
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Comunidad</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePreferences"
+                    aria-expanded="true" aria-controls="collapsePreferences">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Preferencias</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapsePreferences" class="collapse" aria-labelledby="headingPreferences"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">La comunidad:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Foro</a>
-                        <a class="collapse-item" href="utilities-color.html">Buscador de equipos <b>SOON</b></a>
-                        <a class="collapse-item" href="utilities-color.html">Campeonatos <b>SOON</b></a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+                        <h6 class="collapse-header">Usuario</h6>
+                        <a class="collapse-item" href="">Almacenamiento</a>
+                        <a class="collapse-item" href="">Temas</a>
+                        <h6 class="collapse-header">Sistema</h6>
+                        <a class="collapse-item" href="">Facturación</a>
                     </div>
                 </div>
             </li>

@@ -1,5 +1,4 @@
 <a href="/bookings" class="btn btn-primary p-2 mr-4 float-right">Mis reservas</a>
-
 <div id="content-wrapper" class="d-flex">
     <div class="container">
         <div class="row">
@@ -12,9 +11,8 @@
                                        <strong>Datos</strong>
                                 </div>
                                 <div class="card-text text-success mb-3">
-                                   <strong>Cancha Fútbol 5</strong>
+                                   <strong>Fútbol - Fútbol 5</strong>
                                 </div>
-                                <input type="text" max="10" class="form-control mb-2" name="user" placeholder="Username" required autofocus >
                                 <input type="hidden" value="1" class="form-control" name="cancha" placeholder="Cancha" required>
                             </div>
                             <div class="form-group">
@@ -25,8 +23,8 @@
                                 <div class="card-text">
                                     Hora de inicio y fin de la reserva
                                 </div>
-                                <input type="text" name="start_booking" value="11:15" class="form-control mb-2" readonly>
-                                <input type="text" name="end_booking"  value="10:15" class="form-control mb-2" readonly>
+                                <input type="time" name="start_booking" value="11:15" class="form-control mb-2">
+                                <input type="time" name="end_booking"  value="10:15" class="form-control mb-2">
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-success form-control"> Reservar </button>
