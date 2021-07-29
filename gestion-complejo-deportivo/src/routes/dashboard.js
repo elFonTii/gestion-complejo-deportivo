@@ -7,16 +7,8 @@ const pool = require('../database');
 
 //Create a new route with the name 'dashboard'.
 router.get('/', isLoggedIn, async (req, res) => {
-    res.render('dashboard/dashboard');
-})
-router.post('/', isLoggedIn, async (req, res) => {
-    const noti = {
-        title: notifications[0].title,
-        content: notifications[0].content,
-        icon: notifications[0].icon
-    }
-    console.log(noti);
-    res.render('dashboard/dashboard', {noti});
+    const notification = notis.get(1);
+        res.render('dashboard/dashboard', {notification: notis});
 })
 
 module.exports = router;

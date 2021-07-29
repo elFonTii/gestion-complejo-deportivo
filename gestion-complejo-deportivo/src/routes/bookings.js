@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { isLoggedIn } = require('../lib/auth');
 
+const notis = require('../lib/notifications');
 //Referencia a la conexión a la base de datos
 const pool = require('../database');
 
@@ -30,6 +31,7 @@ router.post('/create', isLoggedIn , async (req, res) => {
     };
     await pool.query('INSERT INTO booking set ?', [newBooking]);
     req.flash('success', 'Reserva añadida correctamente');
+    notis.windows('Nueva reserva ingresada', '¡Atención! Una nueva reserva a ingresado a la plataforma.');
     res.redirect('/bookings');
 });
 

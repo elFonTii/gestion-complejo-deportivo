@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
+const notis = require('../lib/notifications');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 
 router.get('/signup', (req, res) => {

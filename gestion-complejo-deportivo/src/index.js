@@ -61,7 +61,7 @@ app.use((req, res, next) => {
     app.use(require('./routes'));
     app.use(require('./routes/authentication'));
     app.use('/bookings', require('./routes/bookings'));
-    app.use('/dashboard', require('./routes/dashboard'))
+    app.use('/dashboard', require('./routes/dashboard'));
     app.use('/forum', forumRouter);
 
 // public folder

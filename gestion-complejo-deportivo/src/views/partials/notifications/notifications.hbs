@@ -1,13 +1,20 @@
-{{#if notification}}
+{{#each notis}}
 <a class="dropdown-item d-flex align-items-center" href="#">
     <div class="mr-3">
         <div class="icon-circle bg-success">
-            <i class="{{noti.icon}}"></i>
+            <i class="fas fa-carrot"></i>
         </div>
     </div>
     <div>
-        <div class="small text-gray-500">{{noti.title}}</div>
-            <span class="text text-secondary">{{noti.content}}</span>
+        <div class="small text-gray-500">{{title}}</div>
+            <span class="text text-secondary">{{content}}</span>
         </div>
 </a>
-{{/if}}
+{{else}}
+<a class="dropdown-item d-flex align-items-center"  href="">
+    <div>
+        <div class="small text-gray-500"></div>
+            <span class="small text-gray-500">Parece que no hay notificaciones</span>
+        </div>
+</a>
+{{/each}}
