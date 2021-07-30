@@ -13,6 +13,7 @@ notification.get = async (id_notification) => {
     console.log(user);
     const notification = await pool.query('SELECT * FROM notifications WHERE  id_notification = ?', id_notification);
     return notification;
+    const alv = document.getElementById('nashe');
 };
 
 notification.windows = (title, message) => {

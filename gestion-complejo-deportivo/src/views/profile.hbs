@@ -1,26 +1,58 @@
-<div class="card m-3 shadow" style="width: 18rem;">
-  <img class="card-img-top" src="{{user.profile}}" alt="User Profile">
-  <div class="card-body">
-    <h5 class="card-title text-center">
-      {{user.name}} {{user.surname}}</h5>
-    <p class="card-subtitle text-center">@{{user.username}}</p>
-  </div>
-  <ul class="list-group list-group-flush text-center">
-    <li class="list-group-item">
-    </li>
-    <li class="list-group-item">
-        <a class="text text-secondary" href="">
-            <span>Datos personales</span>
-        </a>
-    </li>
-    <li class="list-group-item text-center">
-        <a class="text text-secondary" href="">
-            <span>Facturación</span>
-        </a>
-    </li>
-    <li class="list-group-item text-center" id="profile-selector">
-            <a class="text text-secondary" href="">
-            <span>Preferencias</span>
-    </li>
-  </ul>
-</div>
+<!-- Page Heading -->
+<div class="container-fluid">
+                    <h1 class="h3 mb-4 text-gray-800">Perfil</h1>
+
+                    <div class="row">
+
+                        <div class="col-lg-3">
+
+                            <!-- Circle Buttons -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                      <img class="card-img-top" src="{{user.profile}}" alt="Card image cap">
+                                      <a href="/profile" class="link-secondary">
+                                      <h4 class="card-title text-center text-secondary mt-3">@{{user.username}}</h4>
+                                      </a>
+                                </div>
+                                <div class="card-body">
+                                    <p>Aquí podrás modificar todo lo relacionado contigo (Tus datos personales, métodos de facturación y preferencias)</p>
+                                    <!-- User Information -->
+                                  <ul class="list-group list-group-flush text-center">
+                                    <li class="list-group-item">{{user.name}}</li>
+                                    <li class="list-group-item">{{user.surname}}</li>
+                                    <li class="list-group-item">User data: Nacimiento</li>
+                                    <li class="list-group-item">User data: Direccion</li>
+                                    <li class="list-group-item">User data: Localidad</li>
+                                  </ul>
+                                </div>
+                            </div>
+
+                            <!-- Brand Buttons -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-secondary">Preferencias</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="my-2"></div>
+                                <div class="card-header py-3 text-center mt-3">
+                                    <h6 class="m-0 font-weight-bold text-secondary">Preferencias</h6>
+                                </div>
+                                  <ul class="list-group list-group-flush text-center">
+                                    <a class=" btn btn-light">Preferencia</a>
+                                    <a class=" btn btn-light">Preferencia</a>
+                                    <a class=" btn btn-light">Preferencia</a>
+                                  </ul>
+                                    </div>
+                            </div>
+
+                        </div>
+
+                        {{> user/alterProfile}}
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->

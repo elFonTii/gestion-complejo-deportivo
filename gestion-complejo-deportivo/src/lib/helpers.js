@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const pool = require('../database');
 
 const helpers = {};
 
@@ -15,5 +16,13 @@ helpers.matchPassword = async (password, savedPassword) => {
     console.log(e)
   }
 };
+
+helpers.getProfileImage = async (img_id) => {
+  const src = await pool.query('SELECT src FROM profile_img WHERE id_img = ?', [img_id]);
+}
+
+helpers.setProfileImage = async (img) => {
+  const src = await pool.query('INSERT INTO profile_img (src) VALUES (?)', [img]);
+}
 
 module.exports = helpers;
