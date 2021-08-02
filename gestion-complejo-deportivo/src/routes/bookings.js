@@ -7,19 +7,28 @@ const notis = require('../lib/notifications');
 const pool = require('../database');
 
 
-router.get('/create', isLoggedIn , (req, res) => {
-    res.render('bookings/create');
+router.get('/create', isLoggedIn , async (req, res) => {
+    const cancha = await pool.query('SELECT * FROM cancha');
+    res.render('bookings/create', {cancha: cancha});
 });
+
+router.get('/create/new/:id_cancha', isLoggedIn, async (req, res) => {
+    const cancha = req.params.id_cancha;
+    const data = await pool.query('SELECT * FROM cancha WHERE id_cancha = ?', [cancha]);
+    console.log(data);
+    res.render('bookings/new', {cancha: cancha, data: data});
+})
 
 router.get('/', isLoggedIn , async (req, res) => {
    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE user = ?',[req.user.username]);
     res.render('bookings/list', {bookings: bookings});
 });
 
-router.post('/create', isLoggedIn , async (req, res) => {
+router.post('/create/new', isLoggedIn , async (req, res) => {
+    const { date_booking, start_booking, cancha } = req.body;
     const user = req.user.username;
-    const { cancha, start_booking, end_booking, date_booking } = req.body;
-    
+    //The lenght of the booking is 1 hour.
+    const end_booking = start_booking + 1;
     //Objeto de la reserva
     const newBooking = {
         //Los nombres de las variables del objeto 'newBooking' deben ser coincidentes con los de la tabla 'booking'.

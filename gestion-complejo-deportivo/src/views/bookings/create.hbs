@@ -1,38 +1,41 @@
-<a href="/bookings" class="btn btn-primary p-2 mr-4 float-right">Mis reservas</a>
-<div id="content-wrapper" class="d-flex">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="/bookings/create" method="POST">
-                            <div class="form-group mb-2">
-                                <div class="card-title">
-                                       <strong>Datos</strong>
-                                </div>
-                                <div class="card-text text-success mb-3">
-                                   <strong>Fútbol - Fútbol 5</strong>
-                                </div>
-                                <input type="hidden" value="1" class="form-control" name="cancha" placeholder="Cancha" required>
+<div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Reserva de canchas</h1>
+                    <p class="mb-4">En este apartado podrás ver las canchas que están a tu disposición en nuestro complejo</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-secondary">Listado de canchas</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Máximo de jugadores</th>
+                                            <th>Descripción</th>
+                                            <th>Precio</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each cancha}}
+                                        <tr>
+                                            <td>{{tipo_cancha}}</td>
+                                            <td>{{players}}</td>
+                                            <td>{{description}}</td>
+                                            <td class="text text-primary">${{price}}</td>
+                                            <td> <a href="/bookings/create/new/{{id_cancha}}" class="btn btn-success">Reservar</a></td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="form-group">
-                                <div class="card-text">
-                                    Fecha de la reserva
-                                </div>
-                                <input type="date" name="date_booking" class="form-control mb-2" required>
-                                <div class="card-text">
-                                    Hora de inicio y fin de la reserva
-                                </div>
-                                <input type="time" name="start_booking" value="11:15" class="form-control mb-2">
-                                <input type="time" name="end_booking"  value="10:15" class="form-control mb-2">
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-success form-control"> Reservar </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
+
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+                <!-- /.container-fluid -->

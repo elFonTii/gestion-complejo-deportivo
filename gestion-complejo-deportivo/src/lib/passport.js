@@ -32,13 +32,16 @@ passport.use('local.signup', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, username, password, done) => {
-  const { name, surname } = req.body;
+  const { name, surname, localidad, direccion, nacimiento } = req.body;
   const get_img = await pool.query('SELECT src FROM profile_img WHERE id_img = 1');
   const profile = get_img[0].src;
   let newUser = {
     name,
     surname,
     username,
+    nacimiento,
+    direccion,
+    localidad,
     profile,
     password,
     rol: 2

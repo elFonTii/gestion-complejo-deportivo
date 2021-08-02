@@ -13,6 +13,12 @@
                                       <a href="/profile" class="link-secondary">
                                       <h4 class="card-title text-center text-secondary mt-3">@{{user.username}}</h4>
                                       </a>
+                                      <div class="btn btn-primary">
+                                        <p class="small m-0"><i class="fas fa-dumbbell mr-1"></i>Gimnasio</p>
+                                      </div>
+                                      <div class="btn btn-info">
+                                        <p class="small m-0"><i class="fas fa-swimmer mr-1"></i>Piscina</p>
+                                      </div>
                                 </div>
                                 <div class="card-body">
                                     <p>Aquí podrás modificar todo lo relacionado contigo (Tus datos personales, métodos de facturación y preferencias)</p>
@@ -20,9 +26,9 @@
                                   <ul class="list-group list-group-flush text-center">
                                     <li class="list-group-item">{{user.name}}</li>
                                     <li class="list-group-item">{{user.surname}}</li>
-                                    <li class="list-group-item">User data: Nacimiento</li>
-                                    <li class="list-group-item">User data: Direccion</li>
-                                    <li class="list-group-item">User data: Localidad</li>
+                                    <li class="list-group-item"> {{user.nacimiento}} </li>
+                                    <li class="list-group-item"> {{user.direccion}} </li>
+                                    <li class="list-group-item"> {{user.localidad}} </li>
                                   </ul>
                                 </div>
                             </div>
