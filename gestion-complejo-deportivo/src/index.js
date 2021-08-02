@@ -61,6 +61,7 @@ app.use((req, res, next) => {
     app.use(require('./routes/authentication'));
     app.use('/bookings', require('./routes/bookings'));
     app.use('/dashboard', require('./routes/dashboard'));
+    app.use('/subscriptions', require('./routes/subscriptions'));
     app.use('/forum', forumRouter);
 
 // public folder
@@ -68,5 +69,5 @@ app.use((req, res, next) => {
     app.use(express.static(path.join(__dirname, 'public')));
 // start server
     app.listen(app.get('port')), () => {
-        console.log('Server started on port ' + app.get('port'));
+        console.log('Server inicializado con éxito.');
     }

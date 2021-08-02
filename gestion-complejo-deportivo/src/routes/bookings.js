@@ -26,15 +26,26 @@ router.get('/', isLoggedIn , async (req, res) => {
 
 router.post('/create/new', isLoggedIn , async (req, res) => {
     var actual_date = new Date();
+    var actual_time = actual_date.getHours();
     const { date_booking, start_booking, cancha } = req.body;
     const user = req.user.username;
+    //js_NAME es una actualización de la fecha del formulario, la actualización le permite a Node traa la fecha en formato ISO (YYYY-MM-DD).
     js_bookingDate = new Date(date_booking);
-    console.log(js_bookingDate);
+    var js_Hour = new Date(start_booking);
+    var js_bookingHour = js_Hour.getHours();
     //verify if the date is higher than the current date
     if(js_bookingDate < actual_date){
         res.render('bookings/create', {message: 'La fecha de reservación debe ser mayor o igual a la fecha actual'});
+    } else if(js_bookingHour < actual_time){
+        res.render('bookings/create', {message: 'La hora de reservación debe ser mayor o igual a la hora actual'});
     } else {
-        const end_booking = start_booking + 1;
+
+    const start_splitted = start_booking.split(':');
+    const start_hour = start_splitted[0];
+    //add 1 to the hour to get the end hour
+    const end_hour = parseInt(start_hour) + 1;
+    const end_booking = end_hour +':'+ start_splitted[1];
+    console.log(end_booking);
     //Objeto de la reserva
     const newBooking = {
         //Los nombres de las variables del objeto 'newBooking' deben ser coincidentes con los de la tabla 'booking'.

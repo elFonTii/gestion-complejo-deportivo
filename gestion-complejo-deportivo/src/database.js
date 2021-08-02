@@ -19,7 +19,8 @@ pool.getConnection((err, connection) => {
     }
     // Si la conexión es exitosa, se ejecuta la función.
     if(connection) connection.release();
-    console.log('Database connection successfully');
+    console.log('La conexión con la base de datos ' + database.database + ' se ha establecido correctamente.');
+    console.log('Server inicializado con éxito.');
     return;
 }); 
 
