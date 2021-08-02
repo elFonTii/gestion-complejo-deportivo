@@ -1,4 +1,3 @@
-<a href="bookings/create" class="btn btn-success p-2 mr-4 float-right">Nueva reserva</a>
 <div class="container-fluid m-2">
   <div class="row">
     
@@ -11,9 +10,9 @@
                     </h3>
                 <p class="text-light"></p>
                 <p class="text-secondary">Precio: UYU {{price}}</p>
-                <p class="text-secondaryt">{{timeago create_at}}</p>
-                <p class="text-secondaryt">{{date_booking}}</p>
-                <p class="text-secondaryt">{{start_booking}}</p>
+                <p class="text-secondary">{{timeago date_booking}} ({{date_booking}})</p>
+                <p class="text-secondary">Inicia a las {{start_booking}}</p>
+                <p class="text-secondary">{{timeago create_at}}</p>
                 <a href="/bookings/delete/{{id_booking}}" class="btn btn-danger">Cancelar</a>
                 <a href="" class="btn btn-secondary">Visualizar</a>
             </div>

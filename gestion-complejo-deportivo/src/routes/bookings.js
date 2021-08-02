@@ -26,6 +26,7 @@ router.get('/', isLoggedIn , async (req, res) => {
 
 router.post('/create/new', isLoggedIn , async (req, res) => {
     var actual_date = new Date();
+    var max_date = new Date(actual_date.getFullYear(), actual_date.getMonth()+1, actual_date.getDate());
     var actual_time = actual_date.getHours();
     const { date_booking, start_booking, cancha } = req.body;
     const user = req.user.username;
@@ -36,6 +37,8 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
     //verify if the date is higher than the current date
     if(js_bookingDate < actual_date){
         res.render('bookings/create', {message: 'La fecha de reservación debe ser mayor o igual a la fecha actual'});
+    } else if(js_bookingDate > max_date){
+        res.render('bookings/create', {message: 'Las reservas no pueden realizarse a largo plazo, el máximo es de un mes a futuro.'});
     } else if(js_bookingHour < actual_time){
         res.render('bookings/create', {message: 'La hora de reservación debe ser mayor o igual a la hora actual'});
     } else {
