@@ -5,5 +5,7 @@ module.exports = {
         user : 'root',
         password : '',
         database : 'gestioncomplejo',
+        //Nos permite que la fecha sea facil de leer para el usuario.
+        dateStrings: 'date'
     }
 }

@@ -25,10 +25,16 @@ router.get('/', isLoggedIn , async (req, res) => {
 });
 
 router.post('/create/new', isLoggedIn , async (req, res) => {
+    var actual_date = new Date();
     const { date_booking, start_booking, cancha } = req.body;
     const user = req.user.username;
-    //The lenght of the booking is 1 hour.
-    const end_booking = start_booking + 1;
+    js_bookingDate = new Date(date_booking);
+    console.log(js_bookingDate);
+    //verify if the date is higher than the current date
+    if(js_bookingDate < actual_date){
+        res.render('bookings/create', {message: 'La fecha de reservación debe ser mayor o igual a la fecha actual'});
+    } else {
+        const end_booking = start_booking + 1;
     //Objeto de la reserva
     const newBooking = {
         //Los nombres de las variables del objeto 'newBooking' deben ser coincidentes con los de la tabla 'booking'.
@@ -42,6 +48,7 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
     req.flash('success', 'Reserva añadida correctamente');
     notis.windows('Nueva reserva ingresada', '¡Atención! Una nueva reserva a ingresado a la plataforma.');
     res.redirect('/bookings');
+    }
 });
 
 router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {

@@ -1,16 +1,19 @@
 <a href="bookings/create" class="btn btn-success p-2 mr-4 float-right">Nueva reserva</a>
-<div class="container p-4 m-2">
+<div class="container-fluid m-2">
   <div class="row">
+    
     <div class="col-md-3">
       {{#each bookings}}
-          <div class="card text-center bg-dark card-outline-secondary">
+          <div class="card text-center bg-light shadow card-outline-secondary">
             <div class="card-body">
-                    <h3 class="card-title text-light text-uppercase font-weight-bold">
+                    <h3 class="card-title text-secondary h5 text-uppercase font-weight-bold">
                         {{tipo_cancha}}
                     </h3>
                 <p class="text-light"></p>
-                <p class="text-light">Precio: UYU {{price}}</p>
-                <p class="text-light">{{timeago create_at}}</p>
+                <p class="text-secondary">Precio: UYU {{price}}</p>
+                <p class="text-secondaryt">{{timeago create_at}}</p>
+                <p class="text-secondaryt">{{date_booking}}</p>
+                <p class="text-secondaryt">{{start_booking}}</p>
                 <a href="/bookings/delete/{{id_booking}}" class="btn btn-danger">Cancelar</a>
                 <a href="" class="btn btn-secondary">Visualizar</a>
             </div>
@@ -20,8 +23,10 @@
             <p>Ooh... parece que no hay reservas aún</p>
             <a href="/bookings/create" class="btn btn-success">Crear una</a>
           </div>
+          
         </div>
-      {{/each}}
+        
       </div>
+      {{/each}}
   </div>
 </div>

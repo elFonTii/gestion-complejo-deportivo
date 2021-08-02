@@ -13,12 +13,13 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Ingresar reserva</h1>
-                                        <p class="text text-gray-900 mb-4">Estás a punto de ingresar una reserva</p>
+                                        <p class="text text-gray-900 mb-1">Estás a punto de ingresar una reserva, a continuación ingrese la fecha y hora de la reserva</p>
+                                        <p class="text text-danger mb-4">Mantenga presente que la duración de la reserva es en todos los casos de 90 minutos.</p>
                                     </div>
                                     {{#each data}}
                                     <div class="card text-center">
                                     <div class="card-body">
-                                        <h5 class="card-title h5">{{tipo_cancha}}</h5>
+                                        <a href="/bookings/create" class="card-title  link-dark h5">{{tipo_cancha}}</a>
                                         <p class="card-text mb-2">{{description}}</p>
                                         <p class="text text-secondary m-1">Precio:</p>
                                         <h6 class="card-subtitle text-light mb-2 bg-secondary rounded p-2">UYU{{price}}</h6>
