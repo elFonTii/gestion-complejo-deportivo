@@ -13,6 +13,23 @@ router.get('/inspect/:username', isAdmin, async (req, res) => {
   //Obtenemos los usuarios desde la base de datos.
     const row = await pool.query('SELECT * FROM users WHERE username = ?', [req.params.username]);
     const subject = row[0];
-    res.render('users/inspect', {subject});
+
+    if(subject.username == req.user.username) {
+      req.flash('success', '¿No crees que es mejor idea inspeccionar a alguien más?');
+        res.redirect('/users');
+    } else { res.render('users/inspect', {subject}); }
 });
+
+router.get('/insert/', isAdmin, async (req, res) => {
+  res.render('users/insert');
+});
+
+router.post('/insert', passport.authenticate('local.signup', {
+  //En el caso de que se registre correctamente, redireccionará al '/profile'.
+      successRedirect: '/profile',
+  //En el caso de que el registro falle, redireccionará al '/signup'.
+      failureRedirect: '/signup',
+  //Permitimos el uso de las alertas de connect-flash.
+      failureFlash: true
+}));
 module.exports = router;
