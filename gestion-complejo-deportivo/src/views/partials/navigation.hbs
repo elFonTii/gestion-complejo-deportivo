@@ -8,7 +8,12 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">title<sup>v0.05</sup></div>
             </a>
-
+                    {{#if (isAdmin user.rol)}}
+                    <li class="nav-item m-0">
+                    <a class="nav-link text-center">
+                    <span class="bg-warning text-light font-weight-bold rounded p-2">ADMIN SIDE</span></a>        
+                    </li>
+                    {{/if}}
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -17,8 +22,9 @@
                 <a class="nav-link" href="./dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Tablero</span></a>
+                    
             </li>
-
+                    
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -40,7 +46,6 @@
                         <h6 class="collapse-header">Reservas</h6>
                         <a class="collapse-item" href="/bookings">Mis reservas</a>
                         <a class="collapse-item" href="/bookings/create">Nueva reserva</a>
-
                     </div>
                 </div>
             </li>

@@ -14,7 +14,7 @@ passport.use('local.signin', new LocalStrategy({
   const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
   if (rows.length > 0) {
     const user = rows[0];
-    const profile_img = pool.query('SELECT src FROM profile_img INNER JOIN users ON profile_img.id_img = users.profile WHERE username = ?', [user.username])
+    const profile_img = pool.query('SELECT src FROM profile_img INNER JOIN users ON profile_img.id_img = users.profile WHERE username = ?', [user.username]);
     var validPassword = false;
     if(password === user.password){ validPassword = true}
     if (validPassword) {

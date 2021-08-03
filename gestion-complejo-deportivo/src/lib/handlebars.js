@@ -3,6 +3,10 @@ const { format, register } = require('timeago.js');
 
 const helpers = {};
 
+helpers.isAdmin = (rol) => {
+    //verify if the variables are equal
+    return rol == '1';
+};
 
 const spanish = (number, index, total_sec) => {
     return [
