@@ -8,12 +8,9 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">title<sup>v0.05</sup></div>
             </a>
-                    {{#if (isAdmin user.rol)}}
-                    <li class="nav-item m-0">
-                    <a class="nav-link text-center">
-                    <span class="bg-warning text-light font-weight-bold rounded p-2">ADMIN SIDE</span></a>        
-                    </li>
-                    {{/if}}
+                <div class="sidebar-card d-none d-lg-flex">
+                <p class="text-center m-1"> Lado del administrador</p>
+            </div>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -35,6 +32,39 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmins"
+                    aria-expanded="true" aria-controls="collapseAdmins">
+                    <i class="fas fa-user-lock"></i>
+                    <span>Administradores</span>
+                </a>
+                <div id="collapseAdmins" class="collapse" aria-labelledby="headingAdmins"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Administradores</h6>
+                        <a class="collapse-item" href="">Añadir</a>
+                        <a class="collapse-item" href="">Eliminar</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+                    aria-expanded="true" aria-controls="collapseUsers">
+                    <i class="fas fa-user"></i>
+                    <span>Usuarios</span>
+                </a>
+                <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Usuarios</h6>
+                        <a class="collapse-item" href="/users">Ver</a>
+                        <a class="collapse-item" href="">Añadir</a>
+                        <a class="collapse-item" href="">Restringir</a>
+                        <a class="collapse-item" href="">Eliminar</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBookings"
                     aria-expanded="true" aria-controls="collapseBookings">
                     <i class="fas fa-fw fa-dollar-sign"></i>
@@ -44,12 +74,26 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Reservas</h6>
-                        <a class="collapse-item" href="/bookings">Mis reservas</a>
-                        <a class="collapse-item" href="/bookings/create">Nueva reserva</a>
+                        <a class="collapse-item" href="">Añadir</a>
+                        <a class="collapse-item" href="">Ver</a>
                     </div>
                 </div>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFields"
+                    aria-expanded="true" aria-controls="collapseFields">
+                    <i class="far fa-futbol"></i>
+                    <span>Canchas</span>
+                </a>
+                <div id="collapseFields" class="collapse" aria-labelledby="headingFields"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones</h6>
+                        <a class="collapse-item" href="">Añadir</a>
+                        <a class="collapse-item" href="">Eliminar</a>
+                    </div>
+                </div>
+            </li>
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePreferences"
@@ -100,18 +144,6 @@
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="/img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SABÍAS QUÉ: </strong> <br> Tip sobre la página!</p>
-                <a class="btn btn-success btn-sm" target="_blank" >Nice</a>
-            </div>
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="/img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SABÍAS QUÉ: </strong> <br> Tip sobre la página!</p>
-                <a class="btn btn-success btn-sm" target="_blank" >Nice</a>
             </div>
 
         </ul>

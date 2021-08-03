@@ -15,7 +15,6 @@ router.get('/create', isLoggedIn , async (req, res) => {
 router.get('/create/new/:id_cancha', isLoggedIn, async (req, res) => {
     const cancha = req.params.id_cancha;
     const data = await pool.query('SELECT * FROM cancha WHERE id_cancha = ?', [cancha]);
-    console.log(data);
     res.render('bookings/new', {cancha: cancha, data: data});
 })
 
