@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { isLoggedIn } = require('../lib/auth');
+const { isLoggedIn, isAdmin } = require('../lib/auth');
 
 const notis = require('../lib/notifications');
 //Referencia a la conexión a la base de datos
@@ -47,7 +47,6 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
     //add 1 to the hour to get the end hour
     const end_hour = parseInt(start_hour) + 1;
     const end_booking = end_hour +':'+ start_splitted[1];
-    console.log(end_booking);
     //Objeto de la reserva
     const newBooking = {
         //Los nombres de las variables del objeto 'newBooking' deben ser coincidentes con los de la tabla 'booking'.
@@ -55,7 +54,8 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
         cancha,
         date_booking,
         start_booking,
-        end_booking
+        end_booking,
+        booking_state: 1,
     };
     await pool.query('INSERT INTO booking set ?', [newBooking]);
     req.flash('success', 'Reserva añadida correctamente');
@@ -71,5 +71,14 @@ router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
     res.redirect('/bookings');
 });
 
+
+
+//ADMIN SIDE ROUTES
+
+router.get('/admin/list', isAdmin , async (req, res) => {
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha INNER JOIN status ON booking.booking_state = status.id_status');
+    console.log(bookings[0]);
+    res.render('bookings/admin/list', {bookings: bookings});
+});
 
 module.exports = router;
