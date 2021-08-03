@@ -20,8 +20,16 @@
 </head>
 <body id="page-top">
     <div id="wrapper">
+    
     {{#if user}}
+        {{#if (isUser user.rol)}}
             {{> navigation }}
+        <div id="content-wrapper">
+            {{> header }}
+        {{/if}}
+    {{/if}}
+    {{#if (isAdmin user.rol)}}
+            {{> admin-navigation }}
         <div id="content-wrapper">
             {{> header }}
     {{/if}}

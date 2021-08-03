@@ -4,9 +4,14 @@ const { format, register } = require('timeago.js');
 const helpers = {};
 
 helpers.isAdmin = (rol) => {
-    //verify if the variables are equal
+    //Verificar si el usuario es administrador.
     return rol == '1';
 };
+
+helpers.isUser = (rol) => {
+    //Verificar si es un usuario simple.
+    return rol == '2';
+}
 
 const spanish = (number, index, total_sec) => {
     return [
