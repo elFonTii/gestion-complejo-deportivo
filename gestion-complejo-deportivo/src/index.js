@@ -63,6 +63,7 @@ app.use((req, res, next) => {
     app.use('/subscriptions', require('./routes/subscriptions'));
     app.use('/forum', require('./routes/forum'));
     app.use('/users', require('./routes/user'));
+    app.use('/admin', require('./routes/admins'));
 
 // public folder
     //En la carpeta public se encuentran los archivos estaticos (css, js, imgs, etc)
