@@ -10,5 +10,12 @@ module.exports = {
             return next();
         }
         return res.redirect('/profile');
+    },
+
+    isAdmin(req, res, next) {
+        if (req.isAuthenticated() && req.user.rol =='1') {
+            return next();
+        }
+        return res.redirect('/dashboard');
     }
 }

@@ -20,10 +20,20 @@
 </head>
 <body id="page-top">
     <div id="wrapper">
+    
     {{#if user}}
+
+        {{#if (isUser user.rol)}}
             {{> navigation }}
+            <div id="content-wrapper">
+            {{> header }}
+        {{/if}}
+
+        {{#if (isAdmin user.rol)}}
+            {{> admin-navigation }}
         <div id="content-wrapper">
             {{> header }}
+        {{/if}}
     {{/if}}
         <!-- Navigation -->
 
@@ -34,7 +44,7 @@
             {{#if message}}
                 <div class="container" style="z-index: 1060;">
                     <div class="row">
-                        <div class="col-md-4 mx-auto">
+                        <div class="col-md-6 mx-auto">
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 {{message}}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
@@ -49,7 +59,7 @@
             {{#if success}}
                 <div class="container" style="z-index: 1060;">
                     <div class="row">
-                        <div class="col-md-4 mx-auto">
+                        <div class="col-md-6 mx-auto">
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{success}}
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">

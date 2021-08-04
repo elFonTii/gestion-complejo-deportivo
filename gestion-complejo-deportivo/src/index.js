@@ -8,7 +8,6 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
 const passport = require('passport');
-const forumRouter = require('./routes/forum');
 
 // initiazing express
 const app = express();
@@ -62,7 +61,9 @@ app.use((req, res, next) => {
     app.use('/bookings', require('./routes/bookings'));
     app.use('/dashboard', require('./routes/dashboard'));
     app.use('/subscriptions', require('./routes/subscriptions'));
-    app.use('/forum', forumRouter);
+    app.use('/forum', require('./routes/forum'));
+    app.use('/users', require('./routes/user'));
+    app.use('/admin', require('./routes/admins'));
 
 // public folder
     //En la carpeta public se encuentran los archivos estaticos (css, js, imgs, etc)

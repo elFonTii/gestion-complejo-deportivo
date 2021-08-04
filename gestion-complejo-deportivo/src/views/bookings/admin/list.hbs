@@ -14,23 +14,28 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Realizada por</th>
                                             <th>ID</th>
-                                            <th>Tipo</th>
-                                            <th>Máximo de jugadores</th>
-                                            <th>Descripción</th>
-                                            <th>Precio</th>
-                                            <th>Acciones</th>
+                                            <th>Fecha</th>
+                                            <th>Hora de inicio</th>
+                                            <th>Hora de fin</th>
+                                            <th>Cancha</th>
+                                            <th>Estado</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{#each cancha}}
+                                        {{#each bookings}}
                                         <tr>
-                                            <td>{{id_cancha}}</td>
-                                            <td>{{tipo_cancha}}</td>
-                                            <td>{{players}}</td>
-                                            <td>{{description}}</td>
-                                            <td class="text text-primary">${{price}}</td>
-                                            <td> <a href="/bookings/create/new/{{id_cancha}}" class="btn btn-success">Reservar</a></td>
+                                            <td>{{user}}</td>
+                                            <td>{{id_booking}}</td>
+                                            <td>{{date_booking}}</td>
+                                            <td>{{start_booking}}</td>
+                                            <td>{{end_booking}}</td>
+                                            <td><a class="link link-success" href="">{{cancha}}</a></td>
+                                            {{#if (isActive booking_state)}}<td><a class="link link-success">Activa</a></td>
+                                            {{else}}
+                                            <td><a class="link link-warning">Inactiva</a></td>
+                                            {{/if}}
                                         </tr>
                                         {{/each}}
                                     </tbody>

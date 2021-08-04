@@ -1,0 +1,55 @@
+<!-- Page Heading -->
+<div class="container-fluid">
+                <div class="container" style="z-index: 1060;">
+                    <div class="row">
+                        <div class="col-md-12 mx-auto">
+                            <div class="alert alert-secondary text-danger text-center alert-dismissible fade show">
+                                 Inspeccionando a @{{subject.username}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+
+                        <div class="col-lg-3">
+
+                            <!-- Circle Buttons -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                      <img class="card-img-top" src="{{subject.profile}}" alt="Card image cap">
+                                      <a href="/users/inspect/{{subject.username}}" class="link-dark">
+                                      <h4 class="card-title text-center text-danger font-italic mt-3">@{{subject.username}}</h4>
+                                      {{#if (isAdmin subject.rol)}}
+                                        <a class="btn btn-info text-center">Administrador</a>
+                                      </a>
+                                      {{else}}
+                                        <a class="btn btn-info text-center">Usuario</a>
+                                      {{/if}}
+                                </div>
+                                <div class="card-body">
+                                    <p>Aquí podrás modificar todo lo relacionado contigo (Tus datos personales, métodos de facturación y preferencias)</p>
+                                    <!-- subject Information -->
+                                  <ul class="list-group list-group-flush text-center">
+                                    <li class="list-group-item"><code>Reservas realizadas</code></li>
+                                    <li class="list-group-item"><code>More data</code> </li>
+                                    <li class="list-group-item"> <code>More data</code> </li>
+                                    <li class="list-group-item"> <code>More data</code> </li>
+                                    <li class="list-group-item"> <code>More data</code> </li>
+                                    <li class="list-group-item"><a class="btn btn-warning text-center">Restringir</a> <a class="btn btn-danger text-center" data-toggle="modal" data-target="#deleteModal">Eliminar</a></li>
+                                  </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {{> admin/inspectProfile}}
+
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+
+            {{> modals/delete-user }}
+            <!-- End of Main Content -->

@@ -3,6 +3,23 @@ const { format, register } = require('timeago.js');
 
 const helpers = {};
 
+helpers.isAdmin = (rol) => {
+    //Verificar si el usuario es administrador.
+    return rol == '1';
+};
+
+helpers.isActive = (value) => {
+    return value == '1';
+};
+
+helpers.isInactive = (value) => {
+  return value == '2';
+};
+
+helpers.isUser = (rol) => {
+    //Verificar si es un usuario simple.
+    return rol == '2';
+};
 
 const spanish = (number, index, total_sec) => {
     return [
