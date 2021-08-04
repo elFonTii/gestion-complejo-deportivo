@@ -1,0 +1,61 @@
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">¡Edita una cancha!</h1>
+                                        <p class="text text-gray-900 mb-4">En este aparta</p>
+                                        <p class="text text-danger small text-center mt-2">Los datos anteriores a la actualización no es posible recuperarlos, deberas hacerlo manualmente.</p>
+                                    </div>
+                                    {{#each cancha}}
+                                    <form class="user" action="/field/edit/{{id_cancha}}" method="POST">
+                                        <div class="form-group">
+                                            <p class="small text text-secondary mb-1 ml-2">ID de la cancha</p>
+                                            <input type="text" class="form-control form-control-user"
+                                                name="id_cancha" value="{{id_cancha}}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                name="tipo_cancha" value="{{tipo_cancha}}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                name="price" value="{{price}}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                name="players" value="{{players}}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                name="description" value="{{description}}" required>
+                                        </div>
+                                        <button class="btn btn-info btn-user btn-block">
+                                            <i class="fas fa-check fa-fw"></i> Confirmar
+                                        </button>
+                                        <a href="/field" class="btn btn-danger btn-user btn-block">
+                                            <i class="fas fa-check fa-fw"></i> Cancelar
+                                        </a>
+                                    </form>
+                                    {{/each}}
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</html>
