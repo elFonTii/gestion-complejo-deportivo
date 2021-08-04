@@ -53,32 +53,6 @@ passport.use('local.signup', new LocalStrategy({
   return done(null, newUser);
 }));
 
-passport.use('admin.signup', new LocalStrategy({
-  usernameField: 'username',
-  passwordField: 'password',
-  passReqToCallback: true
-}, async (req, username, password, done) => {
-  const { name, surname, localidad, direccion, nacimiento } = req.body;
-  const get_img = await pool.query('SELECT src FROM profile_img WHERE id_img = 8');
-  const profile = get_img[0].src;
-  let newUser = {
-    name,
-    surname,
-    username,
-    nacimiento,
-    direccion,
-    localidad,
-    profile,
-    password,
-    rol: 1
-  };
-  newUser.password = await password;
-  // Saving in the Database
-  const result = await pool.query('INSERT INTO users SET ? ', newUser);
-  newUser.id = result.insertId;
-  return done(null, newUser);
-}));
-
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
