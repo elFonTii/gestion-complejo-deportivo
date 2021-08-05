@@ -1,0 +1,28 @@
+{
+"users": [
+    {
+        "id": 802476417,
+        "nickname": "TESTC0NZTZVX",
+        "password": "qatest9477",
+        "site_status": "active",
+        "email": "test_user_21439575@testuser.com",
+        "credentials":{
+                "test":{
+                    "access_token": "APP_USR-480946484611783-080505-0b7125d5565332320fe452702573c60b-802476417"
+                    }
+        }
+    }, 
+    {
+        "id": 802481042,
+        "nickname": "TETE2910723",
+        "password": "qatest8934",
+        "site_status": "active",
+        "email": "test_user_20128074@testuser.com",
+        "credentials":{
+            "test":{
+                "access_token": "APP_USR-2170459883057217-080506-68806317e2da25555194f9127fa66995-802481042"
+                }
+    }
+    }
+    ]
+}

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { isLoggedIn, isAdmin } = require('../lib/auth');
 
+const mercadopago = require('mercadopago');
 const notis = require('../lib/notifications');
 //Referencia a la conexión a la base de datos
 const pool = require('../database');
@@ -42,6 +43,7 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
         res.render('bookings/create', {message: 'La hora de reservación debe ser mayor o igual a la hora actual'});
     } else {
 
+
     const start_splitted = start_booking.split(':');
     const start_hour = start_splitted[0];
     //add 1 to the hour to get the end hour
@@ -58,9 +60,34 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
         booking_state: 1,
     };
     await pool.query('INSERT INTO booking set ?', [newBooking]);
-    req.flash('success', 'Reserva añadida correctamente');
+
     notis.windows('Nueva reserva ingresada', '¡Atención! Una nueva reserva a ingresado a la plataforma.');
-    res.redirect('/bookings');
+    //MERCADOPAGO CHECKOUT
+    const cancha_data = await pool.query('SELECT * FROM cancha WHERE id_cancha = ?', [cancha]);
+    let reserva_checkout = {
+        items: [
+          {
+            title: 'Reserva de cancha - ' + cancha_data[0].tipo_cancha,
+            unit_price: cancha_data[0].price,
+            quantity: 1,
+
+            back_urls: {
+                "success": "/bookings",
+                "failure": "/bookings/new/badcheckout",
+                "pending": "/bookings/new/pending"
+            },
+            auto_return: 'approved',
+          }
+        ]
+      };
+      
+      mercadopago.preferences.create(reserva_checkout)
+      .then(function(response){
+          res.redirect(response.body.init_point);
+      }).catch(function(error){
+        console.log(error);
+      });
+    
     }
 });
 
@@ -68,7 +95,7 @@ router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
     const id_booking = req.params.id_booking;
     await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
     req.flash('success', 'Reserva eliminada correctamente');
-    res.redirect('/bookings');
+
 });
 
 
@@ -77,7 +104,6 @@ router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
 
 router.get('/admin/list', isAdmin , async (req, res) => {
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha INNER JOIN status ON booking.booking_state = status.id_status');
-    console.log(bookings[0]);
     res.render('bookings/admin/list', {bookings: bookings});
 });
 
