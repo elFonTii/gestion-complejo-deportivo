@@ -62,32 +62,6 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
     await pool.query('INSERT INTO booking set ?', [newBooking]);
 
     notis.windows('Nueva reserva ingresada', '¡Atención! Una nueva reserva a ingresado a la plataforma.');
-    //MERCADOPAGO CHECKOUT
-    const cancha_data = await pool.query('SELECT * FROM cancha WHERE id_cancha = ?', [cancha]);
-    let reserva_checkout = {
-        items: [
-          {
-            title: 'Reserva de cancha - ' + cancha_data[0].tipo_cancha,
-            unit_price: cancha_data[0].price,
-            quantity: 1,
-
-            back_urls: {
-                "success": "/bookings",
-                "failure": "/bookings/new/badcheckout",
-                "pending": "/bookings/new/pending"
-            },
-            auto_return: 'approved',
-          }
-        ]
-      };
-      
-      mercadopago.preferences.create(reserva_checkout)
-      .then(function(response){
-          res.redirect(response.body.init_point);
-      }).catch(function(error){
-        console.log(error);
-      });
-    
     }
 });
 
