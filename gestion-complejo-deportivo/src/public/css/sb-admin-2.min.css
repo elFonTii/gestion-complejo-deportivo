@@ -12,3 +12,17 @@
   width: 60em;
   height: 60em;
 }
+.darkmode-layer, .darkmode-toggle {
+  z-index: 500;
+}
+.darkmode--activated p, .darkmode--activated li {
+  color: #2e2e2e;
+}
+ 
+.button {
+  isolation: isolate;
+}
+ 
+.darkmode--activated .logo {
+  mix-blend-mode: difference;
+}
