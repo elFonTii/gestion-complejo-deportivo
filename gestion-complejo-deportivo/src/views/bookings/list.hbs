@@ -13,8 +13,20 @@
                 <p class="text-secondary">{{timeago date_booking}} ({{date_booking}})</p>
                 <p class="text-secondary">Inicia a las {{start_booking}}</p>
                 <p class="text-secondary">{{timeago create_at}}</p>
+                <p class="text text-secondary"> Estado:
+                  {{#if (isActive booking_state)}}
+                  <span class="text text-success font-weight-bold">
+                      Activa
+                  </span>
+                  {{else}}
+                  <span class="text text-danger font-weight-bold">
+                      Inactiva
+                  </span>
+                  {{/if}}
+                  </p>
                 <a href="/bookings/delete/{{id_booking}}" class="btn btn-danger">Cancelar</a>
-                <a href="" class="btn btn-secondary">Visualizar</a>
+                <a href="" class="btn btn-info">Visualizar</a>
+                <a href="/checkout/{{id_booking}}" class="btn btn-light text-secondary shadow p-2 mt-2 font-weight-bold"></i>Pagar con MercadoPago <span class="text text-secondary"><i class="far fa-handshake m-1"></i></span></a>
             </div>
       {{else}}
         <div class="col-md-12 mx-auto"> 

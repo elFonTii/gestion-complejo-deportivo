@@ -34,6 +34,12 @@ passport.use('local.signup', new LocalStrategy({
 }, async (req, username, password, done) => {
   const { name, surname, localidad, direccion, nacimiento } = req.body;
   const get_img = await pool.query('SELECT src FROM profile_img WHERE id_img = 1');
+  
+  //Verify if the user already exists
+  const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+  if (rows.length > 0) {
+    return done(null, false, req.flash('message', 'El usuario ' + username + ' ya existe, por favor, elige otro.'));
+  } else {
   const profile = get_img[0].src;
   let newUser = {
     name,
@@ -51,6 +57,7 @@ passport.use('local.signup', new LocalStrategy({
   const result = await pool.query('INSERT INTO users SET ? ', newUser);
   newUser.id = result.insertId;
   return done(null, newUser);
+  }
 }));
 
 passport.serializeUser(function(user, done) {
