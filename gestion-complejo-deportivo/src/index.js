@@ -68,7 +68,6 @@ app.use((req, res, next) => {
     app.use('/field', require('./routes/fields'));
     app.use('/checkout', require('./routes/checkout'));
 
-
 //Mercadopago Integration
 
 //Seteamos credenciales
