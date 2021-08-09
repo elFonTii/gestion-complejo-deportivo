@@ -11,7 +11,7 @@ if(process.env.NODE_ENV === 'development') {
     })
 }
 
-//Server URL
+//Here we define the server that the application will use to get and post data.
 const server = 'http://complejotest.hopto.org:10/signin';
 
 //This is the main window of the app.
@@ -25,8 +25,15 @@ app.on('ready', () => {
             height: 820,
             resizable: false,
             frame: false,
+            show: false,
             });
-    //This code will load the HTML file called index.html to render the visual of the app.
+
+    //Load the content of the app when the app is ready.
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    });
+
+    //This code will render the app loaded from the server in the main window.
     mainWindow.loadURL(server);
 
 });
