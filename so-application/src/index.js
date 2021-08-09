@@ -22,7 +22,7 @@ app.on('ready', () => {
     //Create the main window.
     mainWindow = new BrowserWindow({
             width: 1366,
-            height: 768,
+            height: 820,
             resizable: false,
             frame: false,
             });
