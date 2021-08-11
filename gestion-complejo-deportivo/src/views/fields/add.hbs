@@ -1,0 +1,54 @@
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">¡Añade una cancha!</h1>
+                                        <p class="text text-secondary mb-4">Registra una cancha nueva a la base de datos.</p>
+                                    </div>
+                                    <form class="user" action="/field/add/" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                name="tipo_cancha" placeholder="Tipo de cancha" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                name="price" placeholder="Precio del alquiler" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="small text text-secondary mb-1 ml-2">Cantidad máxima de jugadores</p>
+                                            <input type="number" max="22" min="2" value="11" class="form-control form-control-user"
+                                                name="players" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                name="description" placeholder="Breve descripción" required>
+                                        </div>
+                                        <button class="btn btn-info btn-user btn-block">
+                                            <i class="fas fa-check fa-fw"></i> Confirmar
+                                        </button>
+                                        <a href="/field" class="btn btn-danger btn-user btn-block">
+                                            <i class="fas fa-check fa-fw"></i> Cancelar
+                                        </a>
+                                    </form>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</html>

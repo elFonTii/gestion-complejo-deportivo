@@ -1,0 +1,50 @@
+<div class="container-fluid">
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Lista de servicios</h1>
+                    <p class="mb-4">En este apartado podrás ver, editar y eliminar los servicios establecidos, además de poder integrar nuevos servicios.</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-secondary">Listado de servicios</h6>
+                            <p class="text text-secondary">Cantidad de servicios: <span class="font-weight-bold text-success">{{quantity}}</span></p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre del servicio</th>
+                                            <th>Precio del servicio</th>
+                                            <th>Tipo de servicio</th>
+                                            <th>Descripción del servicio</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each services}}
+                                        <tr>
+                                            <td>{{service_name}}</td>
+                                            <td>{{service_price}}</td>
+                                            <td>{{service_type_name}}</td>
+                                            <td>{{service_description}}</td>
+                                            <td>
+                                                <div class="m-0">
+                                                    <a class="btn btn-info" href="/services/edit/{{service_id}}">
+                                                    <i class="fas fa-pencil-alt"></i> Editar
+                                                    </a>
+                                                    <a class="btn btn-danger" href="/services/delete/{{service_id}}">
+                                                        <i class="fas fa-trash"></i> Eliminar
+                                                    </a>
+                                                </div>
+                                                
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
