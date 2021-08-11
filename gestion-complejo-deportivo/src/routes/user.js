@@ -49,5 +49,4 @@ router.get('/delete/:username', isAdmin, async (req, res) => {
     }
 });
 
-
 module.exports = router;

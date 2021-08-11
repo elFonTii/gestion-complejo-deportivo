@@ -21,6 +21,10 @@ helpers.isUser = (rol) => {
     return rol == '2';
 };
 
+  helpers.discount = (discount, amount) => {
+    return discount += amount;
+}
+
 const spanish = (number, index, total_sec) => {
     return [
       ['Ahora mismo', 'right now'],
