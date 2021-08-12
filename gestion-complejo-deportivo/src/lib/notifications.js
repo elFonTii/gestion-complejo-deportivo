@@ -1,20 +1,23 @@
 const express = require('express');
 const notifier = require('node-notifier');
 
-const app = express();
-
 const pool = require('../database');
 
 const notification = {};
 
+notification.create = async (user, notificationData) => {
+    const notification = {
+        notification_user: user,
+        notification_data: notificationData
+    }
+    
+    await pool.query('INSERT INTO notification set ?', [notification]);
+}
 
-notification.get = async (id_notification) => {
-    const user = app.locals.user;
-    console.log(user);
-    const notification = await pool.query('SELECT * FROM notifications WHERE  id_notification = ?', id_notification);
-    return notification;
-    const alv = document.getElementById('nashe');
-};
+notification.get = async (user) => {
+    const notifications = await pool.query('SELECT * FROM notification WHERE notification_user = ?', [user]);
+    return notifications;
+}
 
 notification.windows = (title, message) => {
     notifier.notify({

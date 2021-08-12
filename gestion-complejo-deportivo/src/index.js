@@ -76,8 +76,6 @@ mercadopago.configure({
     access_token: 'APP_USR-4340992889929344-080505-41c84725d553566484820ee3153552d7-195962628'
   });
 
-          
-// Crea un objeto de preferencia
 
   
 

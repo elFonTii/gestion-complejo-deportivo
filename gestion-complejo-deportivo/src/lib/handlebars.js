@@ -1,5 +1,11 @@
 const { format, register } = require('timeago.js');
+const pool = require('../database');
 
+
+//notificationQuery es un metodo que recibe un usuario y retorna una promesa de JavaScript.
+// Fue necesario implementarlo de esta manera debido a que el método pool.query es asíncrono
+// y no retornaba a tiempo el resultado de la consulta, dando como resultado un error.
+// Por medio de la promesa esperamos a que la consulta se ejecute y luego retornamos el resultado.
 
 const helpers = {};
 
