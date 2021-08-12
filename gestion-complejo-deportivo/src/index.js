@@ -10,6 +10,7 @@ const { database } = require('./keys');
 const passport = require('passport');
 const mercadopago = require('mercadopago');
 const notis = require('./lib/notifications');
+const felino = require('./lib/felino_api');
 // initiazing express
 const app = express();
 require('./lib/passport');
@@ -73,6 +74,8 @@ app.use((req, res, next) => {
 mercadopago.configure({
     access_token: 'APP_USR-4340992889929344-080505-41c84725d553566484820ee3153552d7-195962628'
   });
+
+//ARDUINO
 
 // public folder
     //En la carpeta public se encuentran los archivos estaticos (css, js, imgs, etc)

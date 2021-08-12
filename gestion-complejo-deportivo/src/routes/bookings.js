@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { isLoggedIn, isAdmin } = require('../lib/auth');
+const felino = require('../lib/felino_api');
 
 const notis = require('../lib/notifications');
 //Referencia a la conexión a la base de datos
@@ -61,6 +62,8 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
 
     notis.windows('Nueva reserva ingresada', '¡Atención! Una nueva reserva a ingresado a la plataforma.');
 
+    const uno = felino.init();
+    felino.print(uno, 'booking', user);
     //La referencia 1 es la id de la información de la notificacion.
     notis.create(req.user.username, 1);
     res.redirect('/bookings');
