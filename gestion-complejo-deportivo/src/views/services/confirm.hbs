@@ -1,0 +1,127 @@
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="/img/shopping_cart.svg" alt="Banner" width="250">
+      <h2>Formulario de suscripción</h2>
+      <p class="lead">A continuación deberás escribir la información de facturación para asociar a la suscripción</p>
+    </div>
+
+    <div class="row g-5">
+    {{#each service}}
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Productos</span>
+          <span class="badge bg-primary rounded-pill">1</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Suscripción a {{service_name}}</h6>
+              <small class="text-muted">{{service_description}}</small>
+            </div>
+            <span class="text-muted">${{discount service_price 149.99}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">Código promocional</h6>
+              <small>INAUGURATION120821</small>
+            </div>
+            <span class="text-success">−$149.99</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (UYU)</span>
+            <strong>${{service_price}}</strong>
+          </li>
+        </ul>
+      </div>
+      {{/each}}
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Dirección de facturación</h4>
+        <form class="needs-validation" action="/services/subscription/{{service.service_name}}" novalidate>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Es necesario un nombre válido.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                Es necesario un apellido válido.
+              </div>
+            </div>
+
+            <div class="col-6">
+              <label for="username" class="form-label">Username</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text"><i class="fas fa-at"></i></span>
+                <input type="text" class="form-control" id="username" placeholder="Username" required>
+              <div class="invalid-feedback">
+                  Tu nombre de usuario es necesario.
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <label for="username" class="form-label">Cédula de identidad (Sin puntos ni guiones)</label>
+              <div class="input-group has-validation">
+                <span class="input-group-text"><i class="far fa-id-card"></i></span>
+                <input type="text" class="form-control" id="username" placeholder="1.234.567-8" required>
+              <div class="invalid-feedback">
+                  Tu nombre de usuario es necesario.
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="email" class="form-label">Correo electrónico <span class="text-muted">(Opcional)</span></label>
+              <input type="email" class="form-control" id="email" placeholder="juan@ejemplo.com">
+              <div class="invalid-feedback">
+                Porfavor ingresa un correo electrónico válido.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="address" placeholder="18 de Juan, Martinez 1234" required>
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="address2" class="form-label">Dirección 2 <span class="text-muted">(Opcional)</span></label>
+              <input type="text" class="form-control" id="address2" placeholder="Apartamento o número de vivienda">
+            </div>
+
+            <div class="col-md-5">
+              <label for="country" class="form-label">Localidad</label>
+              <select class="form-select" id="country" required>
+                <option value="0">Elige...</option>
+                <option value="Young">Young</option>
+                <option value="Guichón">Guichón</option>
+                <option value="Paysandú">Paysandú</option>
+                <option value="Fray Bentos">Fray Bentos</option>
+              </select>
+              <div class="invalid-feedback">
+                Selecciona una localidad válida.
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="zip" class="form-label">Código postal</label>
+              <input type="text" class="form-control" id="zip" placeholder="65100" required>
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+          <button class="w-100 btn btn-primary btn-lg mb-4" type="submit">Realizar mi suscripción</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

@@ -15,7 +15,7 @@ notification.create = async (user, notificationData) => {
 }
 
 notification.get = async (user) => {
-    const notifications = await pool.query('SELECT * FROM notification WHERE notification_user = ?', [user]);
+    const notifications = await pool.query('SELECT * FROM notification WHERE notification_user = ?', [user.username]);
     return notifications;
 }
 
@@ -24,7 +24,7 @@ notification.windows = (title, message) => {
         title: title,
         message: message,
         icon: './public/img/profile_picture.svg',
-        appID: 'Gestión de Complejo '
+        appID: 'Gestión de Complejo'
       });
 };
 

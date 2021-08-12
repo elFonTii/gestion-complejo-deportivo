@@ -7,6 +7,6 @@ const pool = require('../database');
 router.get('/' , isLoggedIn , async(req, res) => {
     const user = req.user;
     const subscriptions = await pool.query('SELECT * FROM suscripcion INNER JOIN service ON suscripcion.subscription = service.service_id WHERE owner = ?', user.username);
-    res.render('subs/user/user_subs', {subscriptions} );
+    res.render('subs/user/user_subs.hbs', {subscriptions} );
 }); 
 module.exports = router;

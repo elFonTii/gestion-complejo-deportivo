@@ -9,11 +9,10 @@ const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
 const passport = require('passport');
 const mercadopago = require('mercadopago');
-
+const notis = require('./lib/notifications');
 // initiazing express
 const app = express();
 require('./lib/passport');
-
 // settings
 
 //Incializamos el puerto en el que la app se va a ejecutar
@@ -55,7 +54,6 @@ app.use((req, res, next) => {
    app.locals.user = req.user;
     next();
 });
-
 // routes
     app.use(require('./routes'));
     app.use(require('./routes/authentication'));
@@ -75,9 +73,6 @@ app.use((req, res, next) => {
 mercadopago.configure({
     access_token: 'APP_USR-4340992889929344-080505-41c84725d553566484820ee3153552d7-195962628'
   });
-
-
-  
 
 // public folder
     //En la carpeta public se encuentran los archivos estaticos (css, js, imgs, etc)

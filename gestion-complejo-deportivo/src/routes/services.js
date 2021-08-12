@@ -47,4 +47,12 @@ router.post('/add', isAdmin, async (req, res) => {
 
 });
 
+/*SERVICE ADD SUBSCRIPTION (USER)*/
+router.get('/subscription/:service_id', isLoggedIn, async (req, res) => {
+    const service_id = req.params.service_id;
+    const username = req.user.username;
+    const service = await pool.query('SELECT * FROM service INNER JOIN service_type ON service.service_type = service_type.service_type_id WHERE service_id = ?', service_id);
+    res.render('services/confirm', {service});
+});
+
 module.exports = router;
