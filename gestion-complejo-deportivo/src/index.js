@@ -11,6 +11,7 @@ const passport = require('passport');
 const mercadopago = require('mercadopago');
 const notis = require('./lib/notifications');
 const felino = require('./lib/felino_api');
+const socketio = require('socket.io');
 // initiazing express
 const app = express();
 require('./lib/passport');
@@ -67,6 +68,7 @@ app.use((req, res, next) => {
     app.use('/field', require('./routes/fields'));
     app.use('/checkout', require('./routes/checkout'));
     app.use('/services', require('./routes/services'));
+    app.use('/games', require('./routes/games'));
 
 //Mercadopago Integration
 
@@ -75,12 +77,66 @@ mercadopago.configure({
     access_token: 'APP_USR-4340992889929344-080505-41c84725d553566484820ee3153552d7-195962628'
   });
 
-//ARDUINO
+
+//Socket.io integration
+var players = {},
+  unmatched;
 
 // public folder
     //En la carpeta public se encuentran los archivos estaticos (css, js, imgs, etc)
     app.use(express.static(path.join(__dirname, 'public')));
 // start server
-    app.listen(app.get('port')), () => {
-        console.log('Server inicializado con éxito.');
-    }
+    const io = socketio(app.listen(app.get('port'), () => {
+        console.log('Express server listening on port ' + app.get('port'));
+    }));
+    io.on('connection', (socket) => {
+        socket.emit('connected',{msg:"hello"})
+        joinGame(socket);
+
+        if (getOpponent(socket)) {
+            socket.emit("game.begin", {
+              symbol: players[socket.id].symbol,
+            });
+            getOpponent(socket).emit("game.begin", {
+              symbol: players[getOpponent(socket).id].symbol,
+            });
+          }
+
+          socket.on("make.move", function (data) {
+            if (!getOpponent(socket)) {
+              return;
+            }
+            socket.emit("move.made", data);
+            getOpponent(socket).emit("move.made", data);
+          });
+        
+          socket.on("disconnect", function () {
+            if (getOpponent(socket)) {
+              getOpponent(socket).emit("opponent.left");
+            }
+          });
+
+          function joinGame(socket) {
+            players[socket.id] = {
+              opponent: unmatched,
+          
+              symbol: "X",
+              // The socket that is associated with this player
+              socket: socket,
+            };
+            if (unmatched) {
+              players[socket.id].symbol = "O";
+              players[unmatched].opponent = socket.id;
+              unmatched = null;
+            } else {
+              unmatched = socket.id;
+            }
+          }
+
+          function getOpponent(socket) {
+            if (!players[socket.id].opponent) {
+              return;
+            }
+            return players[players[socket.id].opponent].socket;
+          }
+    });

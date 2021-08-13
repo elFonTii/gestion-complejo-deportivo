@@ -26,3 +26,14 @@
 .darkmode--activated .logo {
   mix-blend-mode: difference;
 }
+
+.board button {
+    height: 100px;
+    width: 100px;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 3em
+   }
