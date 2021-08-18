@@ -1,4 +1,3 @@
-
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
@@ -15,8 +14,8 @@ passport.use('local.signin', new LocalStrategy({
   if (rows.length > 0) {
     const user = rows[0];
     const profile_img = pool.query('SELECT src FROM profile_img INNER JOIN users ON profile_img.id_img = users.profile WHERE username = ?', [user.username]);
-    var validPassword = false;
-    if(password === user.password){ validPassword = true}
+    const validPassword = await helpers.matchPassword(password, user.password);
+    
     if (validPassword) {
       done(null, user, req.flash('success', 'Bienvenido a la plataforma ' + user.name));
     } else {
@@ -52,7 +51,7 @@ passport.use('local.signup', new LocalStrategy({
     password,
     rol: 2
   };
-  newUser.password = await password;
+  newUser.password = await helpers.encryptPassword(password);
   // Saving in the Database
   const result = await pool.query('INSERT INTO users SET ? ', newUser);
   newUser.id = result.insertId;

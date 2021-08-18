@@ -38,7 +38,7 @@ router.get('/profile', isLoggedIn, (req, res) => {
 
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
-    res.redirect('/signin');
+    res.redirect('/');
     req.flash('success', 'Sesión cerrada correctamente.');
 });
 

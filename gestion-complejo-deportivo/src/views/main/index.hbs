@@ -15,38 +15,85 @@
       {{> main/header-main }}
 
       <br>
-      <div class="d-flex justify-content-around">
-        <div class="row">
-          <div class="col-lg-12">
-            <div>
-                <p class="text text-dark font-weight-bold ml-5" style="font-size: 7em;">COMPLEJO <br> DEPORTIVO</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="row">
+      {{#each complejo}}
+        <div class="d-flex justify-content-around">
+          <div class="row">
             <div class="col-lg-12">
-              <div class="text-img">                      
-                <figure><img class=" float-right" src="img/cancha.png"/></figure>
+              <div>
+                  <p class="text text-dark font-weight-bold ml-5" style="font-size: 7em;">{{nombre_complejo}}</p>
               </div>
             </div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-12">
+                <div class="text-img">                      
+                  <figure><img class=" float-right" src="img/cancha.png"/></figure>
+                </div>
+              </div>
+          </div>
         </div>
+<<<<<<< Updated upstream
       </div>
       <div id="sobre-nasta" class="card ml-5 mr-5 mt-4 mb-4 shadow">
         <div class="card-body">
           <h2 class="card-title font-weight-bold">Sobre el complejo: </h2>
           <p class="card-text">Información sobre el complejo...</p>
-        </div>
-      </div>
+=======
 
-      <div id="contacto" class="card ml-5 mr-5 mt-4 mb-4 shadow">
-        <div class="card-body">
-          <div class="d-flex justify-content-lg-between">
-            <span><i class="fas fa-envelope text-dark mr-1"></i>ejemplo@gmail.com</span>
-            <span><i class="fas fa-phone-alt text-dark mr-1"></i>(+598) 123-456-789</span>
+        <div id="sobre-nasta" class="card ml-5 mr-5 mt-4 mb-4 shadow">
+          <div class="card-body">
+            <h2 class="card-title font-weight-bold">Sobre el complejo: </h2>
+            <p class="card-text">{{informacion_complejo}}</p>
+          </div>
+>>>>>>> Stashed changes
+        </div>
+
+        <div id="contacto" class="card ml-5 mr-5 mt-4 mb-4 shadow">
+          <div class="card-body">
+            <div class="d-flex justify-content-lg-between">
+              <span><i class="fas fa-map-marker-alt text-dark mr-1"></i>{{direccion_complejo}}</span>
+              <span><i class="fas fa-envelope text-dark mr-1"></i>{{correo_complejo}}</span>
+              <span><i class="fas fa-phone-alt text-dark mr-1"></i>{{telefono_complejo}}</span>
+            </div>
           </div>
         </div>
-      </div>
+        {{else}}
+          <div class="d-flex justify-content-around">
+            <div class="row">
+              <div class="col-lg-12">
+                <div>
+                    <p class="text text-dark font-weight-bold ml-5" style="font-size: 7em;">Nombre <br> Complejo</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="text-img">                      
+                    <figure><img class=" float-right" src="img/cancha.png"/></figure>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div id="sobre-nasta" class="card ml-5 mr-5 mt-4 mb-4 shadow">
+            <div class="card-body">
+              <h2 class="card-title font-weight-bold">Sobre el complejo: </h2>
+              <p class="card-text">Información del complejo...</p>
+            </div>
+          </div>
+
+          <div id="contacto" class="card ml-5 mr-5 mt-4 mb-4 shadow">
+            <div class="card-body">
+              <div class="d-flex justify-content-lg-between">
+                <span><i class="fas fa-map-marker-alt text-dark mr-1"></i>Direccion del complejo</span>
+                <span><i class="fas fa-envelope text-dark mr-1"></i>Correo del complejo</span>
+                <span><i class="fas fa-phone-alt text-dark mr-1"></i>Teléfono del complejo</span>
+              </div>
+            </div>
+          </div>
+      {{/each}}
     </div>
   </body>
 </html>

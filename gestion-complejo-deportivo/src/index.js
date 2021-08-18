@@ -69,6 +69,7 @@ app.use((req, res, next) => {
     app.use('/checkout', require('./routes/checkout'));
     app.use('/services', require('./routes/services'));
     app.use('/games', require('./routes/games'));
+    app.use('/complejo', require('./routes/complejo'));
 
 //Mercadopago Integration
 
