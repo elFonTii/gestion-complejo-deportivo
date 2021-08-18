@@ -4,13 +4,13 @@ const { isLoggedIn } = require('../lib/auth');
 const notis = require('../lib/notifications');
 const { charts } = require('../lib/chart');
 const pool = require('../database');
+const dbdata = require('../lib/mydata_api');
 
 //Create a new route with the name 'dashboard'.
 router.get('/', isLoggedIn, async (req, res) => {
-    const notification = notis.get(1);
-
-    res.render('dashboard/dashboard', {notification: notis});
+    const currentBooking = await dbdata.getActiveBooking();
+        res.render('dashboard/dashboard', {currentBooking});
 })
 
-module.exports = router;
 
+module.exports = router;
