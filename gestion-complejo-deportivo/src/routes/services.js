@@ -55,4 +55,37 @@ router.get('/subscription/:service_id', isLoggedIn, async (req, res) => {
     res.render('services/confirm', {service});
 });
 
+router.post('/subscription/:service_id', isLoggedIn, async(req,res) => {
+    const subscription = req.params.service_id;
+    console.log(subscription);
+    const owner = req.user.username;
+    const { ass_name, ass_surname, asociated_ci, ass_email, ass_dir1, ass_dir2 } = req.body;
+    const startDate = new Date();
+
+    //Creamos una nueva suscripción
+    const newSubscription = {
+        owner,
+        ass_name,
+        ass_surname,
+        asociated_ci,
+        ass_email,
+        ass_dir1,
+        ass_dir2,
+        subscription,
+        startDate
+    }
+
+    //Verificamos si existe una suscripcion a ese servicio (de el usuario logeado)
+    const isSubscribed = await pool.query('SELECT * FROM suscripcion WHERE owner = ? AND subscription = ?', [owner, subscription]);
+
+    if(isSubscribed.length == 0){
+        await pool.query('INSERT INTO suscripcion SET ?', newSubscription);
+        req.flash('success', 'Tu suscripción ha sido agregada exitosamente');
+        res.redirect('/services');
+    } else {
+        req.flash('message', 'Ya tienes una suscripción activa a este servicio');
+        res.redirect('/services');
+    }
+});
+
 module.exports = router;

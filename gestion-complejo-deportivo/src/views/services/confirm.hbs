@@ -34,14 +34,14 @@
           </li>
         </ul>
       </div>
-      {{/each}}
+      
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Dirección de facturación</h4>
-        <form class="needs-validation" action="/services/subscription/{{service.service_name}}" novalidate>
+        <form class="needs-validation" action="/services/subscription/{{service_id}}" method="POST">
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" class="form-control" name="ass_name" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Es necesario un nombre válido.
               </div>
@@ -49,35 +49,24 @@
 
             <div class="col-sm-6">
               <label for="lastName" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <input type="text" class="form-control" name="ass_surname" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Es necesario un apellido válido.
-              </div>
-            </div>
-
-            <div class="col-6">
-              <label for="username" class="form-label">Username</label>
-              <div class="input-group has-validation">
-                <span class="input-group-text"><i class="fas fa-at"></i> </span>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
-              <div class="invalid-feedback">
-                  Tu nombre de usuario es necesario.
-                </div>
               </div>
             </div>
             <div class="col-6">
               <label for="username" class="form-label">Cédula de identidad (Sin puntos ni guiones)</label>
               <div class="input-group has-validation">
                 <span class="input-group-text"><i class="far fa-id-card"></i></span>
-                <input type="text" class="form-control" id="username" placeholder="1.234.567-8" required>
+                <input type="text" class="form-control" name="asociated_ci" placeholder="1.234.567-8" required>
               <div class="invalid-feedback">
                   Tu nombre de usuario es necesario.
                 </div>
               </div>
             </div>
-            <div class="col-12">
-              <label for="email" class="form-label">Correo electrónico <span class="text-muted">(Opcional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="juan@ejemplo.com">
+            <div class="col-6">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" name="ass_email" placeholder="juan@ejemplo.com" required>
               <div class="invalid-feedback">
                 Porfavor ingresa un correo electrónico válido.
               </div>
@@ -85,43 +74,26 @@
 
             <div class="col-12">
               <label for="address" class="form-label">Dirección</label>
-              <input type="text" class="form-control" id="address" placeholder="18 de Juan, Martinez 1234" required>
+              <input type="text" class="form-control" name="ass_dir1" placeholder="18 de Juan, Martinez 1234" required>
               <div class="invalid-feedback">
-                Please enter your shipping address.
+                Porfavor ingresa tu dirección.
               </div>
             </div>
 
             <div class="col-12">
               <label for="address2" class="form-label">Dirección 2 <span class="text-muted">(Opcional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartamento o número de vivienda">
-            </div>
-
-            <div class="col-md-5">
-              <label for="country" class="form-label">Localidad</label>
-              <select class="form-select" id="country" required>
-                <option value="0">Elige...</option>
-                <option value="Young">Young</option>
-                <option value="Guichón">Guichón</option>
-                <option value="Paysandú">Paysandú</option>
-                <option value="Fray Bentos">Fray Bentos</option>
-              </select>
-              <div class="invalid-feedback">
-                Selecciona una localidad válida.
-              </div>
-            </div>
-            <div class="col-md-3">
-              <label for="zip" class="form-label">Código postal</label>
-              <input type="text" class="form-control" id="zip" placeholder="65100" required>
-              <div class="invalid-feedback">
-                Zip code required.
-              </div>
-            </div>
-          </div>
-
+              <input type="text" class="form-control" name="ass_dir2" placeholder="Apartamento o número de vivienda">
+            </div
           <hr class="my-4">
-          <button class="w-100 btn btn-primary btn-lg mb-4" type="submit">Realizar mi suscripción</button>
+          <div class="col-6">
+            <button class="w-100 btn btn-danger mb-4" type="reset">Cancelar</button>
+          </div>
+          <div class="col-6">
+            <button class="w-100 btn btn-success mb-4" type="submit">Continuar</button>
+          </div>
         </form>
       </div>
     </div>
   </main>
 </div>
+{{/each}}

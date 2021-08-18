@@ -1,6 +1,6 @@
 
 <div class="d-flex justify-content-center">
-    <h1 class="h2 mb-2 text-secondary font-weight-bold">Mis suscripciones</h1>
+    <h1 class="h2 mb-2 text-dark font-weight-bold">Mis suscripciones</h1>
     <p class="mb-4"></p>
 </div>
 <div class="row">
@@ -9,8 +9,17 @@
     <div class="card shadow">
         <img src="/img/gym_banner.svg" class="card-img-top" alt="">
       <div class="card-body">
-        <h5 class="card-title text-dark font-weight-bold text-center">{{service_name}}</h5>
-        <p class="card-text">{{service_description}}</p>
+        <h5 class="card-title text-dark  text-center">{{service_name}}</h5>
+        <p class="card-text text-center">{{service_description}}</p>
+        <h6 class="card-title text-dark  text-center">Estado: <span class="text-success">Activa</span></h6>
+        <h6 class="card-title text-dark  text-center">Información asociada:</h6>
+        <h6 class="card-title text-dark  text-center">Nombre: <span class="text-secondary">{{ass_name}}</span></h6>
+        <h6 class="card-title text-dark  text-center">Apellido: <span class="text-secondary">{{ass_surname}}</span></h6>
+        <h6 class="card-title text-dark  text-center">Cédula: <span class="text-secondary">{{asociated_ci}}</span></h6>
+        <h6 class="card-title text-dark  text-center">e-mail: <span class="text-secondary">{{ass_email}}</span></h6>
+        <h6 class="card-title text-dark  text-center">Dirección 1: <span class="text-secondary">{{ass_dir1}}</span></h6>
+        <h6 class="card-title text-dark  text-center">Dirección 2: <span class="text-secondary">{{ass_dir2}}</span></h6>
+        <h6 class="card-title text-dark  text-center">Realizada: <span class="text-secondary">{{timeago startDate}}</span></h6>
         <div class="d-flex justify-content-center">
         </div>
       </div>

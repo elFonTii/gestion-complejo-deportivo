@@ -74,10 +74,8 @@ router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
     const id_booking = req.params.id_booking;
     await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
     req.flash('success', 'Reserva eliminada correctamente');
-
+    res.redirect('/bookings');
 });
-
-
 
 //ADMIN SIDE ROUTES
 
