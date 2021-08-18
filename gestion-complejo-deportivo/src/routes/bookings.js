@@ -65,7 +65,6 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
     const uno = felino.init();
     felino.print(uno, 'booking', user);
     //La referencia 1 es la id de la información de la notificacion.
-    notis.create(req.user.username, 1);
     res.redirect('/bookings');
     }
 });

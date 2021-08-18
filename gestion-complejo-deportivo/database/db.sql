@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-08-2021 a las 09:02:21
+-- Tiempo de generación: 18-08-2021 a las 09:56:36
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -38,14 +38,6 @@ CREATE TABLE `booking` (
   `booking_state` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `booking`
---
-
-INSERT INTO `booking` (`id_booking`, `date_booking`, `start_booking`, `end_booking`, `cancha`, `user`, `create_at`, `booking_state`) VALUES
-(302, '2021-08-18', '03:18', '04:10', 1, 'feli', '2021-08-18 06:10:40', 1),
-(302, '2021-08-18', '03:18', '04:20', 2, 'fran_cap15', '2021-08-18 06:17:30', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -73,46 +65,16 @@ INSERT INTO `cancha` (`id_cancha`, `tipo_cancha`, `price`, `players`, `descripti
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `notification`
+-- Estructura de tabla para la tabla `complejo`
 --
 
-CREATE TABLE `notification` (
-  `notification_user` varchar(15) NOT NULL,
-  `notification_data` int(11) NOT NULL
+CREATE TABLE `complejo` (
+  `nombre_complejo` varchar(20) NOT NULL,
+  `informacion_complejo` varchar(250) NOT NULL,
+  `direccion_complejo` varchar(40) NOT NULL,
+  `correo_complejo` varchar(30) NOT NULL,
+  `telefono_complejo` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `notification`
---
-
-INSERT INTO `notification` (`notification_user`, `notification_data`) VALUES
-('feli', 1),
-('feli', 1),
-('feli', 1),
-('fran_cap15', 1),
-('feli', 1),
-('fran_cap15', 1),
-('feli', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `notification_data`
---
-
-CREATE TABLE `notification_data` (
-  `notification_id` int(11) NOT NULL,
-  `notification_title` varchar(30) NOT NULL,
-  `notification_description` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `notification_data`
---
-
-INSERT INTO `notification_data` (`notification_id`, `notification_title`, `notification_description`) VALUES
-(1, '¡Nueva reserva ingresada!', 'Su reserva ha quedado almacenada de manera satisfactoria'),
-(2, 'Reserva eliminada', 'Su reserva ha quedado eliminada de nuestro registro.');
 
 -- --------------------------------------------------------
 
@@ -226,7 +188,7 @@ INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
 ('_oOKq_O9lcTstmcCOUKBJHYFnMNZtHjS', 1629342595, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
 ('k71t_ZNNEpOFBUwrALgFWmEHKyd7mYML', 1629342206, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"feli\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2021-05-30\",\"direccion\":\"1231231\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"123\",\"rol\":2}}}'),
 ('nouvPwhyd64M5ge5rcqqqRGt-8AT2cCP', 1629343814, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"feli\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2021-05-30\",\"direccion\":\"1231231\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"123\",\"rol\":2}}}'),
-('qFKuw5o2ykh2ERDZdR72NhISJTvpCes9', 1629355736, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"feli\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2021-05-30\",\"direccion\":\"1231231\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"123\",\"rol\":2}}}'),
+('qFKuw5o2ykh2ERDZdR72NhISJTvpCes9', 1629359604, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
 ('vFt8mL8Ad7poEmBNDjPg0qsZpxSuhH8y', 1629351804, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"fran_cap15\",\"name\":\"Balter\",\"surname\":\"Velázquez\",\"nacimiento\":\"2003-04-11\",\"direccion\":\"Salto 3165\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"1234\",\"rol\":2}}}'),
 ('yNs9N0uZUJVUnSGE5viP3BVni6Ue453Y', 1629342591, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
 
@@ -267,14 +229,6 @@ CREATE TABLE `suscripcion` (
   `startDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `suscripcion`
---
-
-INSERT INTO `suscripcion` (`owner`, `ass_name`, `ass_surname`, `asociated_ci`, `ass_email`, `ass_dir1`, `ass_dir2`, `subscription`, `startDate`) VALUES
-('feli', 'Felipe', 'Fontana', 53679745, 'feluubotta685@gmail.com', '18 de julio', '18 de julio', 1, '2021-08-17'),
-('feli', 'Felipe', 'Fontana', 53679745, 'feluubotta685@gmail.com', '18 de Julio, Joaquin Suarez 1832', 'Numero de puerta 1892', 2, '2021-08-17');
-
 -- --------------------------------------------------------
 
 --
@@ -294,21 +248,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`username`, `name`, `surname`, `nacimiento`, `direccion`, `localidad`, `profile`, `password`, `rol`) VALUES
-('admin', 'Administrador', 'Principal', '2000-01-01', 'Administrator', 'Young', '/img/administracion.svg', 'admin', 1),
-('Coli', 'Nicole', 'Camaño', '2021-08-19', 'Doctor José Martirené', 'Young', '/img/profile_picture.svg', 'jjihgfryuiknbcf', 2),
-('elfontii', 'Felipe', 'Fontana', '2003-08-30', 'Nashe', 'Young', '/img/profile_picture.svg', 'fonti123', 2),
-('fannybotta', 'Fanny', 'Botta', '1974-10-29', '18 de Julio', 'Young', '/img/profile_picture_3.svg', '123', 2),
-('feli', 'Felipe', 'Fontana', '2021-05-30', '1231231', 'Young', '/img/profile_picture.svg', '123', 2),
-('felipe', 'Felipe', 'Fontana', '2021-08-20', 'Felioe', 'Young', '/img/profile_picture.svg', '123', 2),
-('fran_cap15', 'Balter', 'Velázquez', '2003-04-11', 'Salto 3165', 'Young', '/img/profile_picture.svg', '1234', 2),
-('GiniDel007', 'Gino', 'Delmonte', '2003-06-04', '123', 'Young', '/img/profile_picture.svg', 'pVvUafK6nRwnUTX', 2),
-('mateosabe', 'mateo', 'fiorelli', '2021-08-20', 'jc25viv9', 'Young', '/img/profile_picture.svg', 'mateosançbe', 2);
-
---
 -- Índices para tablas volcadas
 --
 
@@ -326,19 +265,6 @@ ALTER TABLE `booking`
 --
 ALTER TABLE `cancha`
   ADD PRIMARY KEY (`id_cancha`);
-
---
--- Indices de la tabla `notification`
---
-ALTER TABLE `notification`
-  ADD KEY `fk_user_noti` (`notification_user`),
-  ADD KEY `fk_noti_data` (`notification_data`);
-
---
--- Indices de la tabla `notification_data`
---
-ALTER TABLE `notification_data`
-  ADD PRIMARY KEY (`notification_id`);
 
 --
 -- Indices de la tabla `profile_img`
@@ -397,12 +323,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT de la tabla `notification_data`
---
-ALTER TABLE `notification_data`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT de la tabla `profile_img`
 --
 ALTER TABLE `profile_img`
@@ -431,13 +351,6 @@ ALTER TABLE `booking`
   ADD CONSTRAINT `FK_Status` FOREIGN KEY (`booking_state`) REFERENCES `status` (`id_status`),
   ADD CONSTRAINT `ref_02` FOREIGN KEY (`user`) REFERENCES `users` (`username`),
   ADD CONSTRAINT `ref_03` FOREIGN KEY (`cancha`) REFERENCES `cancha` (`id_cancha`);
-
---
--- Filtros para la tabla `notification`
---
-ALTER TABLE `notification`
-  ADD CONSTRAINT `fk_noti_data` FOREIGN KEY (`notification_data`) REFERENCES `notification_data` (`notification_id`),
-  ADD CONSTRAINT `fk_user_noti` FOREIGN KEY (`notification_user`) REFERENCES `users` (`username`);
 
 --
 -- Filtros para la tabla `service`
