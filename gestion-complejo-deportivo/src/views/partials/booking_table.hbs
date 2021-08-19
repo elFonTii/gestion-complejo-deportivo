@@ -1,0 +1,44 @@
+                            
+                            <div class="table-responsive">
+                                <table class="text-center text-dark" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Cancha</th>
+                                            <th>Inicio</th>
+                                            <th>Fin</th>
+                                            <th>Hora</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each todayBookings}}
+                                        <tr class="">
+                                            <td class="m-4">{{tipo_cancha}}</td>
+                                            <td class="m-4">{{timeagohour date_booking start_booking}}</td>
+                                            <td class="m-4">{{timeagohour date_booking end_booking}}</td>
+                                            <td class="m-4">{{start_booking}} - {{end_booking}}</td>
+                                            {{#if (isActiveBooking isActive)}}
+                                            <td class="m-4"><i class="text-success fas fa-circle"></i></td>
+                                            {{else}}
+                                            <td class="m-4"><i class="text-danger fa fa-circle"></i></td>
+                                            {{/if}}
+                                        </tr>
+                                        {{else}}
+                                        <div class="table-responsive">
+                                            <table class="text-center text-dark" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><p class="mb-4 text-center text-dark">No hay reservas agendadas para hoy.</p></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>

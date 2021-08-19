@@ -31,23 +31,32 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
     const { date_booking, start_booking, cancha } = req.body;
     const user = req.user.username;
     //js_NAME es una actualización de la fecha del formulario, la actualización le permite a Node traa la fecha en formato ISO (YYYY-MM-DD).
-    js_bookingDate = new Date(date_booking);
+
+    //add 1 day to date_booking
+    var date_booking_new = new Date(date_booking);
+    js_bookingDate = new Date(date_booking_new.setDate(date_booking_new.getDate()));
+    console.log(js_bookingDate);
     var js_Hour = new Date(start_booking);
     var js_bookingHour = js_Hour.getHours();
+
+    console.log('Fecha actual:' + actual_date);
+    console.log('Fecha de la reserva:' + js_bookingDate);
     //verify if the date is higher than the current date
-    if(js_bookingDate < actual_date){
+    if(js_bookingDate <= actual_date){
         res.render('bookings/create', {message: 'La fecha de reservación debe ser mayor o igual a la fecha actual'});
-    } else if(js_bookingDate > max_date){
+    } else if(js_bookingDate >= max_date){
         res.render('bookings/create', {message: 'Las reservas no pueden realizarse a largo plazo, el máximo es de un mes a futuro.'});
-    } else if(js_bookingHour < actual_time){
+    } else if(js_bookingHour <= actual_time){
         res.render('bookings/create', {message: 'La hora de reservación debe ser mayor o igual a la hora actual'});
     } else {
-
     const start_splitted = start_booking.split(':');
     const start_hour = start_splitted[0];
+    const start_minutes = start_splitted[1];
     //add 1 to the hour to get the end hour
     const end_hour = parseInt(start_hour) + 1;
-    const end_booking = end_hour +':'+ start_splitted[1];
+    //add 30 to the minutes to get the end minutes
+    const end_minutes = parseInt(start_minutes) + 30;
+    const end_booking = end_hour +':'+ end_minutes;
     //Objeto de la reserva
     const newBooking = {
         //Los nombres de las variables del objeto 'newBooking' deben ser coincidentes con los de la tabla 'booking'.
@@ -56,17 +65,15 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
         date_booking,
         start_booking,
         end_booking,
-        booking_state: 1,
     };
     await pool.query('INSERT INTO booking set ?', [newBooking]);
 
-    notis.windows('Nueva reserva ingresada', '¡Atención! Una nueva reserva a ingresado a la plataforma.');
-
+    //Notificación de reserva a la placa arduino.
     const uno = felino.init();
     felino.print(uno, 'booking', user);
-    //La referencia 1 es la id de la información de la notificacion.
     res.redirect('/bookings');
     }
+
 });
 
 router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
@@ -79,7 +86,7 @@ router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
 //ADMIN SIDE ROUTES
 
 router.get('/admin/list', isAdmin , async (req, res) => {
-    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha INNER JOIN status ON booking.booking_state = status.id_status');
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha');
     res.render('bookings/admin/list', {bookings: bookings});
 });
 
