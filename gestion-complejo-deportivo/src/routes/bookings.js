@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const { isLoggedIn, isAdmin } = require('../lib/auth');
 const felino = require('../lib/felino_api');
-
+const dbdata = require('../lib/mydata_api');
+const log = require('../lib/log');
 const notis = require('../lib/notifications');
 //Referencia a la conexión a la base de datos
 const pool = require('../database');
+const mydata = require('../lib/mydata_api');
 
 
 router.get('/create', isLoggedIn , async (req, res) => {
@@ -25,38 +27,9 @@ router.get('/', isLoggedIn , async (req, res) => {
 });
 
 router.post('/create/new', isLoggedIn , async (req, res) => {
-    var actual_date = new Date();
-    var max_date = new Date(actual_date.getFullYear(), actual_date.getMonth()+1, actual_date.getDate());
-    var actual_time = actual_date.getHours();
+    //Request the data from the form and the global variables.
     const { date_booking, start_booking, cancha } = req.body;
     const user = req.user.username;
-    //js_NAME es una actualización de la fecha del formulario, la actualización le permite a Node traa la fecha en formato ISO (YYYY-MM-DD).
-
-    //add 1 day to date_booking
-    var date_booking_new = new Date(date_booking);
-    js_bookingDate = new Date(date_booking_new.setDate(date_booking_new.getDate()));
-    console.log(js_bookingDate);
-    var js_Hour = new Date(start_booking);
-    var js_bookingHour = js_Hour.getHours();
-
-    console.log('Fecha actual:' + actual_date);
-    console.log('Fecha de la reserva:' + js_bookingDate);
-    //verify if the date is higher than the current date
-    if(js_bookingDate <= actual_date){
-        res.render('bookings/create', {message: 'La fecha de reservación debe ser mayor o igual a la fecha actual'});
-    } else if(js_bookingDate >= max_date){
-        res.render('bookings/create', {message: 'Las reservas no pueden realizarse a largo plazo, el máximo es de un mes a futuro.'});
-    } else if(js_bookingHour <= actual_time){
-        res.render('bookings/create', {message: 'La hora de reservación debe ser mayor o igual a la hora actual'});
-    } else {
-    const start_splitted = start_booking.split(':');
-    const start_hour = start_splitted[0];
-    const start_minutes = start_splitted[1];
-    //add 1 to the hour to get the end hour
-    const end_hour = parseInt(start_hour) + 1;
-    //add 30 to the minutes to get the end minutes
-    const end_minutes = parseInt(start_minutes) + 30;
-    const end_booking = end_hour +':'+ end_minutes;
     //Objeto de la reserva
     const newBooking = {
         //Los nombres de las variables del objeto 'newBooking' deben ser coincidentes con los de la tabla 'booking'.
@@ -64,16 +37,31 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
         cancha,
         date_booking,
         start_booking,
-        end_booking,
+        end_booking: null
     };
-    await pool.query('INSERT INTO booking set ?', [newBooking]);
-
-    //Notificación de reserva a la placa arduino.
-    const uno = felino.init();
-    felino.print(uno, 'booking', user);
-    res.redirect('/bookings');
+    //Set the end time of the booking
+    dbdata.setEndTime(newBooking);
+    
+    if(dbdata.isFuture(newBooking)){
+        if(dbdata.isFutureTime(newBooking)){
+            if(await dbdata.isAvailable(newBooking)){
+                //Insert the booking in the database
+                await pool.query('INSERT INTO booking set ?', [newBooking]);
+                //Redirect to the list of bookings
+                req.flash('success', 'La reserva fue ingresada correctamente');
+                res.redirect('/bookings');
+            }else{
+                req.flash('message', 'La cancha no está disponible en ese horario');
+                res.redirect('/bookings/create');
+            }
+        } else {
+            req.flash('message', 'El horario de la reserva no es válido');
+            res.redirect('/bookings/create');
+        }
+    } else {
+        req.flash('message', 'La reserva no puede ser en el pasado');
+        res.redirect('/bookings/create');
     }
-
 });
 
 router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {

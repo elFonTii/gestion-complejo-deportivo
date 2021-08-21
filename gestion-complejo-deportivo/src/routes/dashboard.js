@@ -4,8 +4,8 @@ const { isLoggedIn } = require('../lib/auth');
 const notis = require('../lib/notifications');
 const { charts } = require('../lib/chart');
 const pool = require('../database');
+const log = require('../lib/log');
 const dbdata = require('../lib/mydata_api');
-const { isActiveBooking } = require('../lib/mydata_api');
 
 //Create a new route with the name 'dashboard'.
 router.get('/', isLoggedIn, async (req, res) => {
@@ -31,6 +31,7 @@ router.get('/', isLoggedIn, async (req, res) => {
             }
         }
         const currentBooking = await dbdata.getActiveBooking();
+        await log.actives();
         res.render('dashboard/dashboard', {currentBooking, todayBookings});
         } else {
         console.log('No bookings to update');

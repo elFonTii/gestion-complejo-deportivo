@@ -19,7 +19,7 @@ require('./lib/passport');
 // settings
 
 //Incializamos el puerto en el que la app se va a ejecutar
-app.set('port', (process.env.PORT || 10));
+app.set('port', (process.env.PORT || 80));
 
 //Inicializamos el directorio donde se encuentran las plantillas
 app.set('views', path.join(__dirname, 'views'));

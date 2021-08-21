@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="">
 
   </head>
@@ -16,45 +15,37 @@
 
       <br>
       {{#each complejo}}
-        <div class="d-flex justify-content-around">
-          <div class="row">
-            <div class="col-lg-12">
-              <div>
-                  <p class="text text-dark font-weight-bold ml-5" style="font-size: 7em;">{{nombre_complejo}}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="row">
+          <div class="d-flex justify-content-around">
+            <div class="row">
               <div class="col-lg-12">
-                <div class="text-img">                      
-                  <figure><img class=" float-right" src="img/cancha.png"/></figure>
+                <div>
+                    <p class="text text-dark font-weight-bold ml-5" style="font-size: 7em;">{{nombre_complejo}}</p>
                 </div>
               </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                  <div class="text-img">                      
+                    <img class="float-right" src="img/cancha.png"/>
+                  </div>
+                </div>
+            </div>
           </div>
-        </div>
-<<<<<<< Updated upstream
-      </div>
-      <div id="sobre-nasta" class="card ml-5 mr-5 mt-4 mb-4 shadow">
-        <div class="card-body">
-          <h2 class="card-title font-weight-bold">Sobre el complejo: </h2>
-          <p class="card-text">Información sobre el complejo...</p>
-=======
 
         <div id="sobre-nasta" class="card ml-5 mr-5 mt-4 mb-4 shadow">
           <div class="card-body">
             <h2 class="card-title font-weight-bold">Sobre el complejo: </h2>
             <p class="card-text">{{informacion_complejo}}</p>
           </div>
->>>>>>> Stashed changes
         </div>
 
         <div id="contacto" class="card ml-5 mr-5 mt-4 mb-4 shadow">
           <div class="card-body">
             <div class="d-flex justify-content-lg-between">
-              <span><i class="fas fa-map-marker-alt text-dark mr-1"></i>{{direccion_complejo}}</span>
-              <span><i class="fas fa-envelope text-dark mr-1"></i>{{correo_complejo}}</span>
-              <span><i class="fas fa-phone-alt text-dark mr-1"></i>{{telefono_complejo}}</span>
+              <span><i class="fas fa-map-marker-alt text-success mr-1"></i>{{direccion_complejo}}</span>
+              <span><i class="fas fa-envelope text-success mr-1"></i>{{correo_complejo}}</span>
+              <span><i class="fas fa-phone-alt text-success mr-1"></i>{{telefono_complejo}}</span>
             </div>
           </div>
         </div>

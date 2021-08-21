@@ -3,6 +3,9 @@ const router = express.Router();
 const pool = require('../database');
 const { isAdmin } = require('../lib/auth');
 const passport = require('passport');
+const mydata = require('../lib/mydata_api');
+const { getAverageBookingDay } = require('../lib/mydata_api');
+const log = require('../lib/log');
 
 router.get('/', isAdmin , async(req, res) => {
     const admin = await pool.query('SELECT * FROM users WHERE rol = 1');
@@ -56,4 +59,21 @@ router.post('/delete', isAdmin, async(req, res) => {
         }
     }
 });
+
+
+router.get('/dashboard', isAdmin, async(req, res) => {
+    log.message('Dia: ' + await mydata.getAverageBookingDay());
+    log.message('Mes: ' + await mydata.getAverageBookingMonth());
+    log.message('Año: ' + await mydata.getAverageBookingYear());
+    log.message('Mañana: ' + await mydata.getCountByDate('2021-08-21'));    
+    res.send('recibido');
+})
 module.exports = router;
+
+/*
+        avgBookingsMonth: mydata.getAverageBookingMonth(),
+        avgBookingsYear: mydata.getAverageBookingYear(),
+        avgBookingsDay: mydata.getAverageBookingDay(),
+        todayBookings: mydata.getTodayBookings(),
+        userCount: mydata.userCount()
+*/

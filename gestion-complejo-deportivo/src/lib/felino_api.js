@@ -1,4 +1,6 @@
 const five = require('johnny-five');
+const { EtherPortClient } = require('etherport-client');
+const log = require('./log');
 
 //Creamos un objeto con las funciones que contendrá las funciones de la api programada.
 const felino = {}
@@ -47,6 +49,19 @@ felino.lcd = function(arduino, type, secs, pin){
     }
   });
 }
+
+felino.remote = function(host, port){
+  const board = new five.Board({
+    port: new EtherPortClient({
+      host: host,
+      port: port
+    })
+  });
+  return board;
+}
+
+
+
 module.exports = felino;
 
 /*

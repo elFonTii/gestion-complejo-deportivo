@@ -56,3 +56,9 @@
     font-size: 12px;
     line-height: 1.42857;
 }
+
+.not-responsive
+{
+     width: 500px;
+     min-width: 500px;
+}
