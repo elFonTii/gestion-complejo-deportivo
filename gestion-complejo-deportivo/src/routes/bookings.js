@@ -43,7 +43,7 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
         cancha,
         date_booking,
         start_booking,
-        end_booking: null
+        end_booking: null,
     };
     //Set the end time of the booking
     dbdata.setEndTime(newBooking);
@@ -69,6 +69,7 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
         res.redirect('/bookings/create');
     }
 });
+
 
 router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
     const id_booking = req.params.id_booking;
