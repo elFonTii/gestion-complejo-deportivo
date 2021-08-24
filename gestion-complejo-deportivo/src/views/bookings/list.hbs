@@ -1,36 +1,36 @@
-<div class="container-fluid m-2">
-  <div class="row">
-    
-    <div class="col-md-3">
-      {{#each bookings}}
-          <div class="card text-center bg-light shadow card-outline-secondary">
-            <div class="card-header">
-              <img src="/img/booking_header.svg" class="card-img" alt="">
-            </div>
-            <div class="card-body">
-                    <h3 class="card-title text-secondary h5 text-uppercase font-weight-bold">
-                        {{tipo_cancha}}
-                    </h3>
-                <p class="text-light"></p>
-                <p class="text-secondary">Precio: UYU {{price}}</p>
-                <p class="text-secondary">{{timeago date_booking}} ({{date_booking}})</p>
-                <p class="text-secondary">Inicia a las {{start_booking}}</p>
-                <p class="text-secondary">{{timeago create_at}}</p>
-                </p>
-                <a href="/bookings/delete/{{id_booking}}" class="btn btn-danger">Cancelar</a>
-                <a href="" class="btn btn-info">Visualizar</a>
-                <a href="/checkout/{{id_booking}}" class="btn btn-light text-secondary shadow p-2 mt-2 font-weight-bold"></i>Pagar con MercadoPago <span class="text text-secondary"><i class="far fa-handshake m-1"></i></span></a>
-            </div>
-      {{else}}
-        <div class="col-md-12 mx-auto"> 
-          <div class="card card-body text-center">
-            <p>Ooh... parece que no hay reservas aún</p>
-            <a href="/bookings/create" class="btn btn-success">Crear una</a>
-          </div>
-          
-        </div>
-        
+<div class="row d-flex justify-content-center">
+  {{#each bookings}}
+    <div class="col-sm-3">
+    <div class="card text-center shadow-sm">
+      <div class="card-body">
+        <img src="/img/booking_header.svg" class="card-img" alt="">
+        <h5 class="card-title h3 text-dark font-weight-light">{{tipo_cancha}}</h5> 
+        <h6 class="card-subtitle text-success h5">Descripción</h6> <hr class="text-success">
+        <p class="card-text">{{description}}</p>
+        <h6 class="card-subtitle text-success  h5">Datos</h6> <hr class="text-success">
+        <p class="card-text text-secondary">Comienza:  {{timeago date_booking}}<span class="text-success"> ({{dateNormalized date_booking}})</span></p>
+        <div class="row d-flex justify-content-center">
+        <p class="btn-success rounded p-2 text-light col-lg-5 m-2">Inicia:  {{start_booking}}</p>
+         <p class="btn-danger rounded p-2 text-light col-lg-5 m-2">Finaliza: {{end_booking}}</p>
+         <p class="h5 btn-light rounded p-2 col-lg-6">Pagas: UYU${{price}}
+         </p>
+         </div>
+        <a href="#" class="btn btn-primary">Inspeccionar</a>
       </div>
-      {{/each}}
+    </div>
   </div>
-</div>
+  {{else}}
+  <div class="container">
+    <div class="row">
+    <div class="col-12">
+      <div class="card text-center shadow">
+        <div class="card-body">
+          <h5 class="card-title text-danger">Vaya... parece que no tienes reservas</h5>
+          <p class="card-text text-dark">Para realizar una reserva presiona el botón a continuación.</p>
+          <a href="/bookings/create" class="btn btn-light shadow text-success">Reservar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  {{/each}}

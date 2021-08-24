@@ -21,9 +21,15 @@ router.get('/create/new/:id_cancha', isLoggedIn, async (req, res) => {
     res.render('bookings/new', {cancha: cancha, data: data});
 })
 
+router.get('/create/new/', isLoggedIn, async (req, res) => {
+    req.flash('message', 'No has seleccionado una cancha');
+    res.redirect('/bookings/create');
+});
+
 router.get('/', isLoggedIn , async (req, res) => {
    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE user = ?',[req.user.username]);
     res.render('bookings/list', {bookings: bookings});
+    console.log(bookings);
 });
 
 router.post('/create/new', isLoggedIn , async (req, res) => {
@@ -71,8 +77,9 @@ router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
     res.redirect('/bookings');
 });
 
-//ADMIN SIDE ROUTES
 
+
+//ADMIN SIDE ROUTES
 router.get('/admin/list', isAdmin , async (req, res) => {
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha');
     res.render('bookings/admin/list', {bookings: bookings});

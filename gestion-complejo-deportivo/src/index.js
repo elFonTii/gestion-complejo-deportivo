@@ -13,13 +13,14 @@ const notis = require('./lib/notifications');
 const felino = require('./lib/felino_api');
 const mydata = require('./lib/mydata_api');
 const socketio = require('socket.io');
+const { param } = require('./routes');
 // initiazing express
 const app = express();
 require('./lib/passport');
 // settings
 
 //Incializamos el puerto en el que la app se va a ejecutar
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 90));
 
 //Inicializamos el directorio donde se encuentran las plantillas
 app.set('views', path.join(__dirname, 'views'));

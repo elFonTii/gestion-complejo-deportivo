@@ -59,4 +59,9 @@ helpers.timeago = (fecha) => {
 helpers.timeagohour = (fecha, hour) => {
     return format(fecha+' '+hour+':00', 'es_ES');
 }
+
+helpers.dateNormalized = (fecha) => {
+  const date = fecha.split('-');
+  return date[2]+'/'+date[1]+'/'+date[0];
+}
 module.exports = helpers;

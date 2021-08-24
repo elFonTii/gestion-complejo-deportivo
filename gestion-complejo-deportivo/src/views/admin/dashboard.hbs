@@ -1,0 +1,106 @@
+<div class="container-fluid">
+<div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class=" display-4">Panel de administración</h1>
+                    <p>En este apartado podrás ver y administrar información relevante para la gestión de tu complejo deportivo.</p>
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+        <div class="container border-top shadow-lg">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4 mt-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Reservas de hoy</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{todayBookingCount}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-coins fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4 mt-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Dinero obtenido de reservas</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">${{todayGains}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4 mt-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Usuarios registrados hoy</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{usersRegistered}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4 mt-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                    Mis reservas</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo userBooking(1);?></div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-success">Estadísticas</h6>
+                                </div>
+                                <div class="card-body">
+                                    {{#each stats}}
+                                    <h4 class="small font-weight-bold">{{name}}<span
+                                            class="float-right">Complete!</span></h4>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    {{else}}
+                                    <h4 class="h6 font-weight-bold text-center">No hay estadísticas el día de hoy</h4>
+                                    {{/each}}
+                                </div>
+                            </div>
+            </div>
+        </div>
+
+    

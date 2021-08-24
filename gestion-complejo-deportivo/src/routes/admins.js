@@ -4,8 +4,9 @@ const pool = require('../database');
 const { isAdmin } = require('../lib/auth');
 const passport = require('passport');
 const mydata = require('../lib/mydata_api');
-const { getAverageBookingDay } = require('../lib/mydata_api');
+const { getAverageBookingDay, userCount, getTodayBookings } = require('../lib/mydata_api');
 const log = require('../lib/log');
+const { constructor } = require('../lib/stats');
 
 router.get('/', isAdmin , async(req, res) => {
     const admin = await pool.query('SELECT * FROM users WHERE rol = 1');
@@ -62,12 +63,15 @@ router.post('/delete', isAdmin, async(req, res) => {
 
 
 router.get('/dashboard', isAdmin, async(req, res) => {
-    log.message('Dia: ' + await mydata.getAverageBookingDay());
-    log.message('Mes: ' + await mydata.getAverageBookingMonth());
-    log.message('Año: ' + await mydata.getAverageBookingYear());
-    log.message('Mañana: ' + await mydata.getCountByDate('2021-08-21'));    
-    res.send('recibido');
-})
+    const estadisticas = {
+        total_users: await constructor('Total de usuarios', await mydata.userCount(), 'Usuarios'),
+        total_bookings: await constructor('Total de reservas', await mydata.getTodayBookingsCount(), 'Reservas'),
+        today_gains : await constructor('Ganancia diaria', await mydata.administration.gainsPerDay(), 'UYU'),
+    }
+
+    res.render('admin/dashboard', {stats: estadisticas})
+});
+
 module.exports = router;
 
 /*
@@ -76,4 +80,10 @@ module.exports = router;
         avgBookingsDay: mydata.getAverageBookingDay(),
         todayBookings: mydata.getTodayBookings(),
         userCount: mydata.userCount()
+
+
+        userCount: await mydata.userCount(),
+        todayBookingCount: await mydata.getTodayBookingsCount(),
+        todayGains: await mydata.administration.gainsPerDay(),
+        usersRegistered: await mydata.administration.userRegisteredTodayCount(),
 */

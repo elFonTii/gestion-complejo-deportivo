@@ -71,6 +71,12 @@ mydata.getCurrentDay = function () {
     return slice;
 }
 
+mydata.getCurrentDate = function () {
+    const today = new Date();
+    const currentDate = this.normalizeDate(today);
+    return currentDate;
+}
+
 //Get the current active booking from the sql database.
 mydata.getActiveBooking = async function () {
     const today = new Date();
@@ -96,6 +102,13 @@ mydata.getTodayBookings = async function () {
     const currentDate = this.normalizeDate(today);
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [currentDate]);
     return bookings;
+}
+
+mydata.getTodayBookingsCount = async function () {
+    const today = new Date();
+    const currentDate = this.normalizeDate(today);
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [currentDate]);
+    return bookings.length;
 }
 
 mydata.getAllBookings  = async function () {
@@ -135,7 +148,7 @@ mydata.isBusy = async function (booking) {
 }
 
 mydata.userCount = async function (){
-    const count = await pool.query('SELECT COUNT(*) AS user_count FROM user');
+    const count = await pool.query('SELECT COUNT(*) AS user_count FROM users');
     return count[0].user_count;
 };
 
@@ -147,14 +160,6 @@ mydata.bookingsCount = async function (){
 mydata.canchasCount = async function (){
     const count = await pool.query('SELECT COUNT(*) AS cancha_count FROM cancha');
     return count[0].cancha_count;
-};
-
-//Get the average of the booking per day.
-mydata.getAverageBookingDay = async function () {
-    const currentDate = this.getCurrentDay();
-    const bookings = await pool.query('SELECT COUNT(*) AS count FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [currentDate]);
-    const average = bookings[0].count / currentDate;
-    return average;
 };
 
 //Get the average of the booking per month.
@@ -238,6 +243,24 @@ mydata.isAvailable = async function (booking) {
             return true;
         }
     }
+}
+
+mydata.administration = {}
+
+mydata.administration.gainsPerDay = async function () {
+    const gains = await pool.query('SELECT SUM(price) AS total_gains FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [mydata.getCurrentDate()]);
+    return gains[0].total_gains;
+}
+
+mydata.administration.userRegisteredTodayCount = async function () {
+    const currentDate = mydata.getCurrentDate();
+    const count = await pool.query('SELECT COUNT(*) AS registered_today FROM users WHERE created_at = ?', [currentDate]);
+    return count[0].registered_today;
+}
+
+mydata.administration.usersCount = async function () {
+    const count = await pool.query('SELECT COUNT(*) AS registered_users FROM users');
+    return count[0].registered_users;
 }
 
 module.exports = mydata;
