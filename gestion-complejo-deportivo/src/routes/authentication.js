@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-const notis = require('../lib/notifications');
+const dbdata = require('../lib/mydata_api');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 
 router.get('/signup', (req, res) => {
@@ -32,8 +32,14 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile');
+router.get('/profile', isLoggedIn, async(req, res) => {
+    const isProminent = await dbdata.setUserProminent(req.user.username);
+    console.log(isProminent);
+    res.render('profile', {isProminent});
+});
+
+router.get('/profile/modify', isLoggedIn, (req, res) => {
+    res.render('profile/modify');
 });
 
 router.get('/logout', isLoggedIn, (req, res) => {

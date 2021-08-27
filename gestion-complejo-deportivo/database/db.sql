@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-08-2021 a las 09:56:36
+-- Tiempo de generación: 27-08-2021 a las 08:08:08
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -28,15 +28,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `booking` (
-  `id_booking` int(5) NOT NULL,
+  `id_booking` int(11) NOT NULL,
   `date_booking` date NOT NULL,
   `start_booking` varchar(20) NOT NULL,
   `end_booking` varchar(20) NOT NULL,
   `cancha` int(5) NOT NULL,
   `user` varchar(10) DEFAULT NULL,
-  `create_at` timestamp NULL DEFAULT current_timestamp(),
-  `booking_state` int(1) DEFAULT NULL
+  `create_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `booking`
+--
+
+INSERT INTO `booking` (`id_booking`, `date_booking`, `start_booking`, `end_booking`, `cancha`, `user`, `create_at`) VALUES
+(19, '2021-08-26', '14:40', '16:40', 1, 'elfontii', '2021-08-26 17:30:20'),
+(20, '2021-08-26', '20:00', '22:00', 1, 'elfontii', '2021-08-26 18:03:21'),
+(21, '2021-08-26', '18:00', '20:00', 1, 'elfontii', '2021-08-26 18:03:36'),
+(22, '2021-08-26', '22:50', '24:50', 1, 'elfontii', '2021-08-27 01:50:43');
 
 -- --------------------------------------------------------
 
@@ -75,6 +84,13 @@ CREATE TABLE `complejo` (
   `correo_complejo` varchar(30) NOT NULL,
   `telefono_complejo` varchar(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `complejo`
+--
+
+INSERT INTO `complejo` (`nombre_complejo`, `informacion_complejo`, `direccion_complejo`, `correo_complejo`, `telefono_complejo`) VALUES
+('Gestión De Complejo', 'Un complejo deportivo con todas las actividades que efectuas en cualquier otro, solo que este es el propio :P', '18 de Julio, Martinez 1122', 'complejo@gestioncomplejo.com', '091234567');
 
 -- --------------------------------------------------------
 
@@ -182,34 +198,17 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('088kowJu2Q5fgptptBm3QxLO0I3c5-6P', 1629343042, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('S6i8NVTU9BM5TZpj_5uLIcgMyy7jZMo6', 1629343039, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('YDBN7KNC5ZVwclFpzMpOiWOfM8l61RIH', 1629343041, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('_oOKq_O9lcTstmcCOUKBJHYFnMNZtHjS', 1629342595, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('k71t_ZNNEpOFBUwrALgFWmEHKyd7mYML', 1629342206, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"feli\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2021-05-30\",\"direccion\":\"1231231\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"123\",\"rol\":2}}}'),
-('nouvPwhyd64M5ge5rcqqqRGt-8AT2cCP', 1629343814, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"feli\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2021-05-30\",\"direccion\":\"1231231\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"123\",\"rol\":2}}}'),
-('qFKuw5o2ykh2ERDZdR72NhISJTvpCes9', 1629359604, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
-('vFt8mL8Ad7poEmBNDjPg0qsZpxSuhH8y', 1629351804, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"fran_cap15\",\"name\":\"Balter\",\"surname\":\"Velázquez\",\"nacimiento\":\"2003-04-11\",\"direccion\":\"Salto 3165\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"1234\",\"rol\":2}}}'),
-('yNs9N0uZUJVUnSGE5viP3BVni6Ue453Y', 1629342591, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `status`
---
-
-CREATE TABLE `status` (
-  `id_status` int(11) NOT NULL,
-  `estado` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `status`
---
-
-INSERT INTO `status` (`id_status`, `estado`) VALUES
-(0, 'Inactiva'),
-(1, 'Activa');
+('-XE10V6vWI1BUc4vRNBtjcBr1qQsWLUr', 1630125953, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"name\":\"Balter\",\"surname\":\"Velázquez\",\"username\":\"fran_cap15\",\"nacimiento\":\"2003-08-11\",\"direccion\":\"Salto 3165\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$gV2c7AEODnFpKVyNtzwYReTs7Lnp4w1kCo.6XPLR/HuRXEnofayji\",\"rol\":2,\"id\":0}}}'),
+('GYCs3wJUUsMeLdVAADlUFB1gEqT7JKPe', 1630129617, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"fran_cap15\",\"name\":\"Balter\",\"surname\":\"Velázquez\",\"nacimiento\":\"2003-08-11\",\"direccion\":\"Salto 3165\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$gV2c7AEODnFpKVyNtzwYReTs7Lnp4w1kCo.6XPLR/HuRXEnofayji\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-08-27\"}}}'),
+('Jb_iomW9FiKGF0Katt1t4l7VD5R2XIbY', 1630129470, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
+('KoeHtd1AV1Gw60jkGvql0sKW_Of8NRST', 1630125353, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('LpogLLs0wqmFHbOWnsw_dqOthPm-Bslr', 1630130397, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('QwcOj4dUul_APc9RZ-f51evL1OFLD-rN', 1630130676, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('SzSJkK14h3_UDswmIor7k_6XrnxAzxQG', 1630115670, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez 1832\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$Ccl.tJMQ2a/KiN40I3DpYeyrE0QaVwVwoXrYx60Bzzobdz.jkntXW\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-08-21\"}}}'),
+('W6BudJnkBve3W3pLxHVGShF9DZt-XkTw', 1630130405, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
+('mAjjGW8r7Je4gOSpUatTJNEkcaDHqxhD', 1630125352, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('pkbamXjBwFx_jKgNUd72PWeB-AuIqe3J', 1630130748, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
+('qRBZkzySu-SK6PpuqGtFY7mTUoj5LsvD', 1630126053, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez 1832\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$Ccl.tJMQ2a/KiN40I3DpYeyrE0QaVwVwoXrYx60Bzzobdz.jkntXW\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[1]},\"created_at\":\"2021-08-21\"}}}');
 
 -- --------------------------------------------------------
 
@@ -229,6 +228,13 @@ CREATE TABLE `suscripcion` (
   `startDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `suscripcion`
+--
+
+INSERT INTO `suscripcion` (`owner`, `ass_name`, `ass_surname`, `asociated_ci`, `ass_email`, `ass_dir1`, `ass_dir2`, `subscription`, `startDate`) VALUES
+('elfontii', 'asda', 'asda', 53679745, 'feluubotta685@gmail.com', 'asda', 'asda', 2, '2021-08-24');
+
 -- --------------------------------------------------------
 
 --
@@ -243,9 +249,22 @@ CREATE TABLE `users` (
   `direccion` varchar(70) NOT NULL,
   `localidad` varchar(20) NOT NULL,
   `profile` varchar(50) NOT NULL,
-  `password` varchar(16) DEFAULT NULL,
-  `rol` int(11) DEFAULT NULL
+  `password` varchar(60) DEFAULT NULL,
+  `rol` int(11) DEFAULT NULL,
+  `isProminent` bit(1) NOT NULL DEFAULT b'0',
+  `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`username`, `name`, `surname`, `nacimiento`, `direccion`, `localidad`, `profile`, `password`, `rol`, `isProminent`, `created_at`) VALUES
+('admin', 'Administrador', 'Administrador', '2000-01-01', 'Administrador', 'Young', '/img/profile_picture.svg', '$2a$10$qbFVcty4/vohmrvG4Gv6J.t67ng2FVxLGc/YxAXG2tfeC49iHc8bW', 1, b'0', '2021-08-21'),
+('colii24', 'Nicole', 'Camaño', '2004-06-19', 'martiriné viv.9', 'Young', '/img/profile_picture.svg', '$2a$10$OEhjy0bWB/5Js0ZvGDDYnuGlnl2nibiwfJtgE768XyjXZ4mPimPPy', 2, b'0', '2021-08-21'),
+('elfontii', 'Felipe', 'Fontana', '2003-08-30', '18 de Julio, Joaquin Suarez 1832', 'Young', '/img/profile_picture.svg', '$2a$10$Ccl.tJMQ2a/KiN40I3DpYeyrE0QaVwVwoXrYx60Bzzobdz.jkntXW', 2, b'1', '2021-08-21'),
+('fontii', 'Felipe', 'Fontana', '2021-08-30', '18 de Julio, Joaquin Suarez 1832', 'Young', '/img/profile_picture.svg', '$2a$10$lxo/6BAAf1/YraBLCX1D9OVOqSU70OhXMQUOkHPWAPUQebGqwCcM2', 2, b'0', '2021-08-21'),
+('fran_cap15', 'Balter', 'Velázquez', '2003-08-11', 'Salto 3165', 'Young', '/img/profile_picture.svg', '$2a$10$gV2c7AEODnFpKVyNtzwYReTs7Lnp4w1kCo.6XPLR/HuRXEnofayji', 2, b'0', '2021-08-27');
 
 --
 -- Índices para tablas volcadas
@@ -255,10 +274,9 @@ CREATE TABLE `users` (
 -- Indices de la tabla `booking`
 --
 ALTER TABLE `booking`
-  ADD PRIMARY KEY (`date_booking`,`start_booking`,`cancha`),
+  ADD PRIMARY KEY (`id_booking`,`date_booking`,`start_booking`,`cancha`),
   ADD KEY `ref_02` (`user`),
-  ADD KEY `ref_03` (`cancha`),
-  ADD KEY `FK_Status` (`booking_state`);
+  ADD KEY `ref_03` (`cancha`);
 
 --
 -- Indices de la tabla `cancha`
@@ -298,12 +316,6 @@ ALTER TABLE `sessions`
   ADD PRIMARY KEY (`session_id`);
 
 --
--- Indices de la tabla `status`
---
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`id_status`);
-
---
 -- Indices de la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
@@ -321,6 +333,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `profile_img`
@@ -348,7 +366,6 @@ ALTER TABLE `service_type`
 -- Filtros para la tabla `booking`
 --
 ALTER TABLE `booking`
-  ADD CONSTRAINT `FK_Status` FOREIGN KEY (`booking_state`) REFERENCES `status` (`id_status`),
   ADD CONSTRAINT `ref_02` FOREIGN KEY (`user`) REFERENCES `users` (`username`),
   ADD CONSTRAINT `ref_03` FOREIGN KEY (`cancha`) REFERENCES `cancha` (`id_cancha`);
 

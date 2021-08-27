@@ -10,15 +10,20 @@
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                       <img class="card-img-top" src="{{user.profile}}" alt="Card image cap">
-                                      <a href="/profile" class="link-secondary">
-                                      <h4 class="card-title text-center text-secondary mt-3">@{{user.username}}</h4>
+                                      {{#if isProminent}}
+                                      <a href="/profile" class="link-warning">
+                                      <h4 class="card-title text-center text-warning mt-3">@{{user.username}}<i class="ml-2 fas fa-star"></i></h4>
                                       </a>
-                                      <div class="badge badge-primary p-2">
-                                        <p class="p m-0"><i class="fas fa-dumbbell mr-1"></i>Gimnasio</p>
+                                      <div class="d-flex justify-content-center">
+                                        <div class="badge badge-warning p-2">
+                                          <p class="p m-0 font-weight-light"><i class="fas fa-medal mr-1"></i>Cliente destacado</p>
+                                        </div>
                                       </div>
-                                      <div class="badge badge-info p-2">
-                                        <p class="p m-0"><i class="fas fa-dumbbell mr-1"></i>Piscina</p>
-                                      </div>
+                                        {{else}}
+                                        <a href="/profile" class="link-secondary">
+                                      <h4 class="card-title text-center mt-3">@{{user.username}}</h4>
+                                      </a>
+                                      {{/if}}
                                 </div>
                                 <div class="card-body">
                                     <p>Aquí podrás modificar todo lo relacionado contigo (Tus datos personales, métodos de facturación y preferencias)</p>

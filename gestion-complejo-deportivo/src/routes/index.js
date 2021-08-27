@@ -5,7 +5,7 @@ const { isNotLoggedIn } = require('../lib/auth');
 
 router.get('/', isNotLoggedIn , async (req, res) => {
     const complejo = await pool.query('SELECT * FROM complejo')
-    res.render('main/index', { complejo });
+    res.render('main/index', { layout: 'index.hbs', complejo });
 });
 
 module.exports = router;

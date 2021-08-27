@@ -31,11 +31,12 @@ router.get('/', isLoggedIn, async (req, res) => {
             }
         }
         const currentBooking = await dbdata.getActiveBooking();
-        await log.actives();
-        res.render('dashboard/dashboard', {currentBooking, todayBookings});
+        const prominentUser = await dbdata.getAllProminentUsers();
+        res.render('dashboard/dashboard', {currentBooking, todayBookings, prominentUser});
         } else {
+        const prominentUser = await dbdata.getAllProminentUsers();
         console.log('No bookings to update');
-        res.render('dashboard/dashboard', {todayBookings});
+        res.render('dashboard/dashboard', {todayBookings, prominentUser});
     }
 });
 

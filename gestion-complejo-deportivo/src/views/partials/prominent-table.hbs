@@ -1,0 +1,38 @@
+                            
+                            <div class="table-responsive">
+                                <table class="text-center text-dark" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Perfil</th>
+                                            <th>Username</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each prominentUser}}
+                                        <tr class="">
+                                            <td><img src="{{profile}}" style="width: 3em;" class="rounded" alt="Profile"></td>
+                                            <td class="m-4">{{username}}</td>
+                                            <td class="m-4">{{name}}</td>
+                                            <td class="m-4">{{surname}}</td>
+                                        </tr>
+                                        {{else}}
+                                        <div class="table-responsive">
+                                            <table class="text-center text-dark" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><p class="mb-4 text-center text-dark">No hay clientes estrella</p></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>

@@ -58,15 +58,15 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
                 res.redirect('/bookings');
             }else{
                 req.flash('message', 'La cancha no está disponible en ese horario');
-                res.redirect('/bookings/create');
+                res.render('bookings/new');
             }
         } else {
             req.flash('message', 'El horario de la reserva no es válido');
-            res.redirect('/bookings/create');
+            res.render('bookings/new');
         }
     } else {
         req.flash('message', 'La reserva no puede ser en el pasado');
-        res.redirect('/bookings/create');
+        res.render('bookings/new');
     }
 });
 

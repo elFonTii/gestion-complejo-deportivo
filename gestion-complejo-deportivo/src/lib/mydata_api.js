@@ -1,4 +1,3 @@
-const { end } = require('../database');
 const log = require('./log');
 const pool = require('../database');
 
@@ -245,6 +244,25 @@ mydata.isAvailable = async function (booking) {
     }
 }
 
+mydata.setUserProminent = async function (username) {
+    //User is prominent if the number of bookings is greater than 3.
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE user = ?', [username]);
+    if(bookings.length >= 3) {
+        //Alter the user table and set the user as prominent.
+        await pool.query('UPDATE users SET isProminent = 1 WHERE username = ?', [username]);
+        return true;
+    } else{
+        //Alter the user table and set the user as not prominent.
+        await pool.query('UPDATE users SET isProminent = 0 WHERE username = ?', [username]);
+        return false;
+    }
+}
+
+mydata.getAllProminentUsers = async function () {
+    const users = await pool.query('SELECT * FROM users WHERE isProminent = 1');
+    return users;
+}
+
 mydata.administration = {}
 
 mydata.administration.gainsPerDay = async function () {
@@ -262,5 +280,8 @@ mydata.administration.usersCount = async function () {
     const count = await pool.query('SELECT COUNT(*) AS registered_users FROM users');
     return count[0].registered_users;
 }
+
+
+
 
 module.exports = mydata;

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Complejo Deportivo</title>
+    {{!--GOOGLE FONTS--}}
+    {{!-- BOOSTRAP --}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    {{!-- FONTAWESOME --}}
+    <script src="https://kit.fontawesome.com/db4767a18f.js" crossorigin="anonymous"></script>
+    {{!-- CUSTOM --}}
+    <link rel="stylesheet" href="/css/mc-calendar.min.css"/>
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"/>
+    <link rel="icon" href="img/favicon.png">
+</head>
+<body class="text-center bg-light">
+    {{#each complejo}}
+    <nav class="navbar navbar-expand-lg navbar-dark text-light bg-success shadow">
+        <div class="navbar-brand">
+            <i class="fas fa-futbol fa-lg"></i>
+        </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<main role="main" class="mt-5">
+    <div class="container-fluid bg-muted">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="cover-heading">{{nombre_complejo}}</h1>
+                <div class="d-flex justify-content-center">
+                    <div class="col-4">  
+                    <p class="lead">{{informacion_complejo}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="m-5">
+
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-9">
+                    <div class="row">
+                        <div class="col-sm-4 mt-2">
+                            <div class="card">
+                            <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Balter Vergazquez</h5>
+                                <p class="card-text">Desarrollador front-end de la aplicación</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">18 años</li>
+                                <li class="list-group-item">Virgen</li>
+                                <li class="list-group-item">Puto</li>
+                            </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mt-2">
+                            <div class="card">
+                            <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Mateo Fiorelli</h5>
+                                <p class="card-text">Hace como que escribe pero saca todo de google, no tiene idea de lo que es node.</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">18 años</li>
+                                <li class="list-group-item">Inútil</li>
+                                <li class="list-group-item">Nutria</li>
+                            </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mt-2">
+                            <div class="card">
+                            <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Felipe Fontana</h5>
+                                <p class="card-text">Desarrollador back-end de la aplicación, añade algo nuevo todos los dias pero nunca termina nada.</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">17 años</li>
+                                <li class="list-group-item">Toponutria</li>
+                                <li class="list-group-item">Alan otaku de mierda</li>
+                            </ul>
+                            </div>
+                        </div>
+                        </div>
+            </div>
+        </div>
+</main>
+    {{/each}}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/vendor/chart.js/Chart.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script src="/js/chart.js"></script>
+    <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+    <script src="/js/tictac.js"></script>
+    <script src="/js/mc-calendar.min.js"></script>
+    <script src="/js/main.js" type="module"></script>
+</body>
+</html> 
