@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-08-2021 a las 08:08:08
+-- Tiempo de generación: 08-09-2021 a las 04:50:26
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -91,6 +91,28 @@ CREATE TABLE `complejo` (
 
 INSERT INTO `complejo` (`nombre_complejo`, `informacion_complejo`, `direccion_complejo`, `correo_complejo`, `telefono_complejo`) VALUES
 ('Gestión De Complejo', 'Un complejo deportivo con todas las actividades que efectuas en cualquier otro, solo que este es el propio :P', '18 de Julio, Martinez 1122', 'complejo@gestioncomplejo.com', '091234567');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `noti_id` int(11) NOT NULL,
+  `noti_icon` varchar(40) NOT NULL,
+  `noti_title` varchar(100) NOT NULL,
+  `noti_description` varchar(1000) NOT NULL,
+  `noti_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `wasRead` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `notifications`
+--
+
+INSERT INTO `notifications` (`noti_id`, `noti_icon`, `noti_title`, `noti_description`, `noti_date`, `wasRead`) VALUES
+(13, 'fas fa-exclamation', 'Notificación de prueba.', 'Notificación de prueba para todos los usuarios', '2021-09-08 02:09:49', 1);
 
 -- --------------------------------------------------------
 
@@ -198,17 +220,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('-XE10V6vWI1BUc4vRNBtjcBr1qQsWLUr', 1630125953, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"name\":\"Balter\",\"surname\":\"Velázquez\",\"username\":\"fran_cap15\",\"nacimiento\":\"2003-08-11\",\"direccion\":\"Salto 3165\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$gV2c7AEODnFpKVyNtzwYReTs7Lnp4w1kCo.6XPLR/HuRXEnofayji\",\"rol\":2,\"id\":0}}}'),
-('GYCs3wJUUsMeLdVAADlUFB1gEqT7JKPe', 1630129617, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"fran_cap15\",\"name\":\"Balter\",\"surname\":\"Velázquez\",\"nacimiento\":\"2003-08-11\",\"direccion\":\"Salto 3165\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$gV2c7AEODnFpKVyNtzwYReTs7Lnp4w1kCo.6XPLR/HuRXEnofayji\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-08-27\"}}}'),
-('Jb_iomW9FiKGF0Katt1t4l7VD5R2XIbY', 1630129470, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
-('KoeHtd1AV1Gw60jkGvql0sKW_Of8NRST', 1630125353, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('LpogLLs0wqmFHbOWnsw_dqOthPm-Bslr', 1630130397, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('QwcOj4dUul_APc9RZ-f51evL1OFLD-rN', 1630130676, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('SzSJkK14h3_UDswmIor7k_6XrnxAzxQG', 1630115670, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez 1832\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$Ccl.tJMQ2a/KiN40I3DpYeyrE0QaVwVwoXrYx60Bzzobdz.jkntXW\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-08-21\"}}}'),
-('W6BudJnkBve3W3pLxHVGShF9DZt-XkTw', 1630130405, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
-('mAjjGW8r7Je4gOSpUatTJNEkcaDHqxhD', 1630125352, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('pkbamXjBwFx_jKgNUd72PWeB-AuIqe3J', 1630130748, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
-('qRBZkzySu-SK6PpuqGtFY7mTUoj5LsvD', 1630126053, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez 1832\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$Ccl.tJMQ2a/KiN40I3DpYeyrE0QaVwVwoXrYx60Bzzobdz.jkntXW\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[1]},\"created_at\":\"2021-08-21\"}}}');
+('K3niJuA2zLMVx09d33PThkI_PUUIUd2x', 1631154606, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez 1832\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$Ccl.tJMQ2a/KiN40I3DpYeyrE0QaVwVwoXrYx60Bzzobdz.jkntXW\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[1]},\"created_at\":\"2021-08-21\"}}}');
 
 -- --------------------------------------------------------
 
@@ -285,6 +297,12 @@ ALTER TABLE `cancha`
   ADD PRIMARY KEY (`id_cancha`);
 
 --
+-- Indices de la tabla `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`noti_id`);
+
+--
 -- Indices de la tabla `profile_img`
 --
 ALTER TABLE `profile_img`
@@ -339,6 +357,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `booking`
   MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `noti_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `profile_img`
