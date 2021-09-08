@@ -34,7 +34,6 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
 
 router.get('/profile', isLoggedIn, async(req, res) => {
     const isProminent = await dbdata.setUserProminent(req.user.username);
-    console.log(isProminent);
     res.render('profile', {isProminent});
 });
 

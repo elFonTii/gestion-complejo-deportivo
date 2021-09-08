@@ -1,9 +1,9 @@
 <!-- Page Heading -->
 <div class="container-fluid">
-                <div class="container" style="z-index: 1060;">
+                <div class="container-fluid" style="z-index: 1060;">
                     <div class="row">
                         <div class="col-md-12 mx-auto">
-                            <div class="alert alert-secondary text-danger text-center alert-dismissible fade show">
+                            <div class="p-3 alert alert-secondary text-danger text-center alert-dismissible fade show">
                                  Inspeccionando a @{{subject.username}}
                             </div>
                         </div>
@@ -19,15 +19,28 @@
                                       <img class="card-img-top" src="{{subject.profile}}" alt="Card image cap">
                                       <a href="/users/inspect/{{subject.username}}" class="link-dark">
                                       <h4 class="card-title text-center text-danger font-italic mt-3">@{{subject.username}}</h4>
-                                      {{#if (isAdmin subject.rol)}}
-                                        <a class="btn btn-info text-center">Administrador</a>
-                                      </a>
-                                      {{else}}
-                                        <a class="btn btn-info text-center">Usuario</a>
+                                      <div class="d-flex justify-content-center">
+                                        {{#if (isAdmin subject.rol)}}
+                                          <a class="btn btn-info text-center" style="width: 20em;">
+                                            <i class="fas fa-user"></i>
+                                            Administrador</a>
+                                        </a>
+                                        {{else}}
+                                          <a class="btn btn-info text-center" style="width: 20em;">
+                                            <i class="fas fa-user"></i>
+                                            Usuario</a>
+                                        {{/if}}
+                                      </div>
+                                      {{#if isProminent}}
+                                      <div class="d-flex justify-content-center mt-2">
+                                          <a class="btn btn-warning text-center" style="width: 20em;">
+                                            <i class="fas fa-star"></i>
+                                            Destacado</a>
+                                        </a>
+                                      </div>
                                       {{/if}}
                                 </div>
                                 <div class="card-body">
-                                    <p>Aquí podrás modificar todo lo relacionado contigo (Tus datos personales, métodos de facturación y preferencias)</p>
                                     <!-- subject Information -->
                                   <ul class="list-group list-group-flush text-center">
                                     <li class="list-group-item"><code>Reservas realizadas</code></li>
@@ -39,7 +52,6 @@
                                   </ul>
                                 </div>
                             </div>
-
                         </div>
 
                         {{> admin/inspectProfile}}

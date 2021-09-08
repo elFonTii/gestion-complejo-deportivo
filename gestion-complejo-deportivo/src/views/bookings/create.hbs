@@ -11,7 +11,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-borderless table" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -25,7 +25,11 @@
                                     <tbody>
                                         {{#each cancha}}
                                         <tr>
-                                            <td>{{id_cancha}}</td>
+                                            <td>
+                                                <p class="btn btn-circle btn-outline-success">
+                                                {{id_cancha}}
+                                                </p>
+                                            </td>
                                             <td>{{tipo_cancha}}</td>
                                             <td>{{players}}</td>
                                             <td>{{description}}</td>
@@ -38,6 +42,5 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->

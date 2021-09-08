@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../database');
 const { isAdmin } = require('../lib/auth');
 const passport = require('passport');
+const dbdata = require('../lib/mydata_api');
 
 router.get('/', isAdmin ,async (req, res) => {
   //Obtenemos los usuarios desde la base de datos.
@@ -14,11 +15,15 @@ router.get('/inspect/:username', isAdmin, async (req, res) => {
   //Obtenemos los usuarios desde la base de datos.
     const row = await pool.query('SELECT * FROM users WHERE username = ?', [req.params.username]);
     const subject = row[0];
+    
 
     if(subject.username == req.user.username) {
       req.flash('success', '¿No crees que es mejor idea inspeccionar a alguien más?');
         res.redirect('/users');
-    } else { res.render('users/inspect', {subject}); }
+    } else {
+      const isProminent = await dbdata.setUserProminent(subject.username);
+      res.render('users/inspect', {subject, isProminent}); 
+    }
 });
 
 router.get('/insert/', isAdmin, async (req, res) => {

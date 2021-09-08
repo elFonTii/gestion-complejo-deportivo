@@ -11,7 +11,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="text-dark" id="dataTable" width="100%" cellspacing="0">
+                                <table class="text-dark table table-borderless text-center" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Profile</th>
@@ -27,7 +27,7 @@
                                     <tbody>
                                         {{#each users}}
                                         <tr>
-                                            <td><img src="{{profile}}" style="width: 3em;" class="bg-info rounded" alt="User profile"></td>
+                                            <td><img src="{{profile}}" style="width: 5em; height: 5em;" class="btn btn-circle btn-outline-success" alt="User profile"></td>
                                             <td><a class="link-success" href="">@{{username}}</a></td>
                                             <td>{{name}}</td>
                                             <td>{{surname}}</td>

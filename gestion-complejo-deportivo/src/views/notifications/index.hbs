@@ -1,0 +1,101 @@
+{{#if (isAdmin user.rol)}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header text-center text-dark">
+                    <h4 class="font-weight-light">Centro de notificaciones</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-success text-center">Acciones</h6>
+                                </div>
+                                <div class="card-body">
+                                  <ul class="list-group list-group-flush text-center">
+                                    <li class="list-group-item">
+                                        <a href="/notification-center/new" class="btn btn-success btn-block">Nueva notificación</a>
+                                    </li>
+                                  </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-success text-center">Notificaciones</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        {{#each notifications}}
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card col-11 rounded border-left-info mt-2">
+                                                <div class="card-body text-dark d-flex justify-content-between">
+                                                    <div class="col-11">
+                                                    <h5 class="card-title">{{noti_title}}</h5>
+                                                    <p class="card-text">{{noti_description}}</p>
+                                                    <a href="/notification-center/{{noti_id}}/delete" class="btn btn-danger btn-sm">Eliminar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{else}}
+                                        <div class="d-flex justify-content-center">
+                                            <h6 class="m-2 h6">No hay notificaciones actualmente</h6>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{else}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="h2 mb-2 text-gray-800 font-weight-bold text-center">Notificaciones</h1>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                                    <div class="row">
+                                        {{#each notifications}}
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card col-lg-12 rounded border-left-info mt-2">
+                                                <div class="card-body text-dark d-flex justify-content-between">
+                                                    <div class="col-1 m-0">
+                                                        <img src="/img/notification.svg" style="width: 5em;" alt="">
+                                                    </div>
+                                                    <div class="col-11 m-0">
+                                                    <h5 class="card-title font-weight-bold">{{noti_title}}</h5>
+                                                    <p class="card-text">{{noti_description}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{else}}
+                                        <div class="d-flex justify-content-center">
+                                            <h6 class="m-2 h6">No hay notificaciones actualmente</h6>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
