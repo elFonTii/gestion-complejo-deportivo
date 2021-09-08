@@ -8,12 +8,13 @@
                 </div>
                 <div class="sidebar-brand-text mx-3">title<sup>v0.05</sup></div>
             </a>
-                    {{#if (isAdmin user.rol)}}
-                    <li class="nav-item m-0">
-                    <a class="nav-link text-center">
+            
+            {{#if (isAdmin user.rol)}}
+            <li class="nav-item m-0">
+                <a class="nav-link text-center">
                     <span class="bg-warning text-light font-weight-bold rounded p-2">ADMIN SIDE</span></a>        
-                    </li>
-                    {{/if}}
+            </li>
+            {{/if}}
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 

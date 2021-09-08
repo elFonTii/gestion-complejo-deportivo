@@ -17,16 +17,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"/>
     <link rel="icon" href="img/favicon.png">
 </head>
+
 <body class="text-center bg-light">
     {{#each complejo}}
     <nav class="navbar navbar-expand-lg navbar-dark text-light bg-success shadow">
-        <div class="navbar-brand">
-            <i class="fas fa-futbol fa-lg"></i>
-        </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
+<<<<<<< Updated upstream
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="navbar-brand">
@@ -43,73 +39,84 @@
     </form>
   </div>
 </nav>
+=======
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-futbol"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">title<sup>v0.05</sup></div>
+        </a>
 
-<main role="main" class="mt-5">
-    <div class="container-fluid bg-muted">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="cover-heading">{{nombre_complejo}}</h1>
-                <div class="d-flex justify-content-center">
-                    <div class="col-4">  
-                    <p class="lead">{{informacion_complejo}}</p>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-lg-end" id="navbarSupportedContent">
+            <a class="btn btn-light text-dark mr-2" href="/signin">Iniciar sesión</a>
+            <a class="btn btn-light text-dark" href="/signup">Registrarse</a>
+        </div>
+    </nav>
+>>>>>>> Stashed changes
+
+    <main role="main" class="mt-5">
+        <div class="container-fluid bg-muted">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="cover-heading">{{nombre_complejo}}</h1>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-4">  
+                        <p class="lead">{{informacion_complejo}}</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <hr class="m-5">
+        <hr class="m-5">
 
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="col-9">
-                    <div class="row">
-                        <div class="col-sm-4 mt-2">
-                            <div class="card">
-                            <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Balter Vergazquez</h5>
-                                <p class="card-text">Desarrollador front-end de la aplicación</p>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-9">
+                        <div class="row">
+                            <div class="col-sm-4 mt-2 mb-2">
+                                <div class="card">
+                                <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Balter Vergazquez</h5>
+                                    <p class="card-text">Desarrollador front-end de la aplicación.</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">18 años</li>
+                                </ul>
+                                </div>
                             </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">18 años</li>
-                                <li class="list-group-item">Virgen</li>
-                                <li class="list-group-item">Puto</li>
-                            </ul>
+                            <div class="col-sm-4 mt-2">
+                                <div class="card">
+                                <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Mateo Fiorelli</h5>
+                                    <p class="card-text">Trabaja en la documentación de la aplicación.</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">18 años</li>
+                                </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4 mt-2">
-                            <div class="card">
-                            <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Mateo Fiorelli</h5>
-                                <p class="card-text">Hace como que escribe pero saca todo de google, no tiene idea de lo que es node.</p>
+                            <div class="col-sm-4 mt-2">
+                                <div class="card">
+                                <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Felipe Fontana</h5>
+                                    <p class="card-text">Desarrollador back-end de la aplicación.</p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">17 años</li>
+                                </ul>
+                                </div>
                             </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">18 años</li>
-                                <li class="list-group-item">Inútil</li>
-                                <li class="list-group-item">Nutria</li>
-                            </ul>
                             </div>
-                        </div>
-                        <div class="col-sm-4 mt-2">
-                            <div class="card">
-                            <img class="card-img-top p-4" src="/img/profile_picture.svg" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">Felipe Fontana</h5>
-                                <p class="card-text">Desarrollador back-end de la aplicación, añade algo nuevo todos los dias pero nunca termina nada.</p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">17 años</li>
-                                <li class="list-group-item">Toponutria</li>
-                                <li class="list-group-item">Alan otaku de mierda</li>
-                            </ul>
-                            </div>
-                        </div>
-                        </div>
+                </div>
             </div>
-        </div>
-</main>
+    </main>
     {{/each}}
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
