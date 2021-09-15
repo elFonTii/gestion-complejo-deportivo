@@ -1,0 +1,99 @@
+<!-- Page Heading -->
+<div class="container-fluid">
+                    <h1 class="h3 mb-4 text-gray-800">Perfil</h1>
+
+                    <div class="row">
+
+                        <div class="col-lg-3">
+
+                            <!-- Circle Buttons -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                      <img class="card-img-top" src="{{user.profile}}" alt="Card image cap">
+                                      {{#if isProminent}}
+                                      <a href="/profile" class="link-warning">
+                                      <h4 class="card-title text-center text-warning mt-3">@{{user.username}}<i class="ml-2 fas fa-star"></i></h4>
+                                      </a>
+                                      <div class="d-flex justify-content-center">
+                                        <div class="badge badge-warning p-2">
+                                          <p class="p m-0 font-weight-light"><i class="fas fa-medal mr-1"></i>Cliente destacado</p>
+                                        </div>
+                                      </div>
+                                        {{else}}
+                                        <a href="/profile" class="link-secondary">
+                                      <h4 class="card-title text-center mt-3">@{{user.username}}</h4>
+                                      </a>
+                                      {{/if}}
+                                </div>
+                                <div class="card-body">
+                                    <p>Aquí podrás visualizar tus datos personales, métodos de facturación y preferencias.</p>
+                                    <!-- User Information -->
+                                  <ul class="list-group list-group-flush text-center">
+                                    <li class="list-group-item">{{user.name}}</li>
+                                    <li class="list-group-item">{{user.surname}}</li>
+                                    <li class="list-group-item"> {{user.nacimiento}} </li>
+                                    <li class="list-group-item"> {{user.direccion}} </li>
+                                    <li class="list-group-item"> {{user.localidad}} </li>
+                                  </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+<div class="col-lg-9 ">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-secondary">Mis datos</h6>
+        </div>
+        <div class="card-body">
+            {{#if isProminent}}
+            <h2>¡Hola <span class="font-weight-bold text-warning mb-5">{{user.name}}</span>!</h2>
+            {{else}}
+            <h2>¡Hola <span class="font-weight-bold mb-5">{{user.name}}</span>!</h2>
+            {{/if}}
+            <p class="ml-3">Aquí tendrás el control de tu perfil, sientete libre de cambiarlo y personalizarlo.</p>
+            <div class="my-2 "></div>
+                                    <div class="row">
+                                        <div class="col-lg-4 d-flex justify-content-center">
+                                            <div class="card shadow mt-2">
+                                                <div class="card-body bg-light">
+                                                    <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100" action="/profile/edit" method="POST">
+                                                        <p class="small mb-1">Nombre</p>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control bg-light small" name="name" value="{{user.name}}" required>
+                                                        </div>
+                                                        <p class="small mb-1">Apellido</p>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control bg-light small" name="surname" value="{{user.surname}}" required>
+                                                        </div>
+                                                        <p class="small mb-1 mt-2">Nacimiento</p>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control bg-light small" value="{{user.nacimiento}}" readonly>
+                                                        </div>
+                                                        <p class="small mb-1 mt-2">Dirección</p>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control bg-light small" name="direccion" value="{{user.direccion}}" required>
+                                                        </div>
+                                                        
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="input-group mt-3">
+                                                            <button class="btn btn-success">Guardar</button>
+                                                            <a class="btn btn-danger" href="/profile">Cancelar</a>
+                                                        </div>
+                                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                    </div>
+
+  </div>
+
+</div>
+<!-- End of Main Content -->

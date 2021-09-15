@@ -16,7 +16,7 @@
                                         <div class="col-lg-4 d-flex justify-content-center">
                                             <div class="card shadow mt-2">
                                                 <div class="card-body bg-light">
-                                                    <form action="/editUser" class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100">
+                                                    <div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100">
                                                         <p class="small mb-1">Nombre</p>
                                                         <div class="input-group">
                                                             <input type="text" class="form-control bg-light small" value="{{user.name}}" readonly>
@@ -27,23 +27,19 @@
                                                         </div>
                                                         <p class="small mb-1 mt-2">Nacimiento</p>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control bg-light small text-info" value="{{user.nacimiento}}" readonly>
+                                                            <input type="text" class="form-control bg-light small" value="{{user.nacimiento}}" readonly>
                                                         </div>
                                                         <p class="small mb-1 mt-2">Dirección</p>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control bg-light small text-info" value="{{user.direccion}}" readonly>
-                                                        </div>
-                                                        <p class="small mb-1 mt-2">Telefono</p>
-                                                        <div class="input-group mb-4">
-                                                            <input type="text" class="form-control bg-light small text-info" value="user.telefono" readonly>
+                                                            <input type="text" class="form-control bg-light small" value="{{user.direccion}}" readonly>
                                                         </div>
                                                         
-                                                        <div class="input-group mb-4">
-                                                            <button class="btn btn-secondary">
+                                                        <div class="input-group mt-3">
+                                                            <a class="btn btn-secondary" href="/profile/edit">
                                                                 Editar información <i class="fas fa-pencil-alt fa-sm"></i>
-                                                            </button>
+                                                            </a>
                                                         </div>
-                                                    </form>
+                                                    </div>
                             </div>
                         </div>
                     </div>

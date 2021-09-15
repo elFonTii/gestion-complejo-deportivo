@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../database');
+const { isAdmin } = require('../lib/auth');
 
-router.get('/register', (req, res) => {
+//registrar un complejo
+router.get('/register', isAdmin , (req, res) => {
     res.render('complejo/register');
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', isAdmin , async (req, res) => {
     const { nombre_complejo, informacion_complejo, direccion_complejo, correo_complejo, telefono_complejo } = req.body;
     const newComplejo = {
         nombre_complejo,
@@ -26,11 +28,12 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.get('/edit', (req, res) =>{
+//editar complejo
+router.get('/edit', isAdmin , (req, res) =>{
     res.render('complejo/edit');
 });
 
-router.post('/edit', async (req, res) =>{
+router.post('/edit', isAdmin ,async (req, res) =>{
     const { nombre_complejo, informacion_complejo, direccion_complejo, correo_complejo, telefono_complejo } = req.body;
     const updateComplejo = {
         nombre_complejo,
