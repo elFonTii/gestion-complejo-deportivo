@@ -1,0 +1,27 @@
+<div class="container-fluid">
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-dark" id="dataTable" width="100%" cellspacing="5">
+                                    <thead>
+                                        <tr>
+                                            {{#each keys}}
+                                            <th>{{this}}</th>
+                                            {{/each}}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{#each data}}
+                                        <tr>
+                                            <td>{{ID}}</td>
+                                            <td>{{Nombre}}</td>
+                                            <td>{{Apellido}}</td>
+                                            <td>{{Codigo}}</td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>

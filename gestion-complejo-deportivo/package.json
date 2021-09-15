@@ -28,6 +28,7 @@
     "express-session": "^1.17.2",
     "express-validator": "^6.12.0",
     "firmata-party": "^2.0.1",
+    "fs": "0.0.1-security",
     "johnny-five": "^2.1.0",
     "mercadopago": "^1.5.8",
     "mime-types": "^2.1.32",

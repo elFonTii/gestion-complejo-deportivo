@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const mime = require('mime-types');
 const sheets = require('../lib/sheets');
+const { isLoggedIn, isAdmin } = require('../lib/auth');
 
 const storage = multer.diskStorage({
     destination: path.join(__dirname, '../uploads/'),
@@ -16,18 +17,37 @@ const upload = multer({
     storage: storage,
 });
 
-router.get('/', (req, res) => {
+router.get('/', isAdmin,(req, res) => {
     res.render('tools/tools');
 });
 
-router.get('/sheets', (req, res) => {
-    res.render('tools/sheets/sheets');
-    const datos = sheets.read('sheet-1631678597870.xlsx');
-    console.log(sheets.data(datos, 'Nombre'));
+router.get('/sheets', isAdmin,(req, res) => {
+    //LAYOUT FILES
+    const files = sheets.scan();
+    console.log(files);
+
+    res.render('tools/sheets/sheets', {
+        layout: 'sheetsLayout',
+        files: files,
+    });
 });
 
-router.post('/sheets/upload', upload.single('sheet'), (req, res) => {
-    res.send('Uploaded');
+router.get('/sheets/:file', isAdmin,(req, res) => {
+    //LAYOUT FILES
+    const files = sheets.scan();
+    const data = sheets.read(req.params.file);
+    const keys = sheets.getObjectKey(req.params.file);
+    res.render('tools/sheets/render', {
+        layout: 'sheetsLayout',
+        files: files,
+        data: data,
+        keys: keys,
+    });
+});
+
+router.post('/sheets/upload', upload.single('sheet'), isAdmin,(req, res) => {
+    req.flash('success', 'Archivo subido correctamente');
+    res.redirect('/tools/sheets');
 });
 
 module.exports = router;
