@@ -1,0 +1,34 @@
+    <!-- Upload Modal-->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModal"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="uploadModal">Subir plantilla</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">Seleccione un archivo de su dispositivo para cargarlo en el sistema.</div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-10">
+                        <form action="/tools/sheets/upload/" method="post" enctype="multipart/form-data" class="m-3">
+                            <div class="form-group">
+                                <input class="form-control" name="sheet" type="file" accept=".xlsx"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input class="btn btn-success btn-block" type="submit" value="Subir">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button class="btn btn-danger btn-block" type="button" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
