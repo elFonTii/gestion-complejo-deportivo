@@ -1,0 +1,51 @@
+    <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion darkmode-ignore" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-table"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">DATA<sup>v0.1</sup></div>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span></a>
+                    
+            </li>
+                    
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                ARCHIVOS
+            </div>
+            {{#each files}}
+                <li class="nav-item">
+                    <a class="nav-link" href="/tools/sheets/{{name}}">
+                        <i class="fas fa-file"></i>
+                        <span class="text-light">
+                            {{name}}
+                        </span>
+                            <br>
+                        <span class="small text-gray-500">
+                            {{size}} KB
+                        </span>
+                    </a>
+                </li>
+            {{/each}}
+
+            <li class="nav-item">
+                <a class="nav-link btn" href="/tools/sheets/">
+                    <i class="fas fa-table"></i>
+                    <span>Ver todas</span></a>        
+            </li>
+
+            <hr class="sidebar-divider d-none d-md-block">
+        </ul>
