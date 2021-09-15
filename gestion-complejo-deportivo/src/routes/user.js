@@ -54,4 +54,9 @@ router.get('/delete/:username', isAdmin, async (req, res) => {
     }
 });
 
+//edit user
+router.get('/editUser', (req, res) =>{
+  res.render('profile/editUser');
+});
+
 module.exports = router;
