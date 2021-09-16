@@ -10,6 +10,16 @@ helpers.isAdmin = (rol) => {
     return rol == '1';
 };
 
+helpers.isMan = (gen) => {
+  //Verificar si el usuario es administrador.
+  return gen == '1';
+};
+
+helpers.isGirl = (gen) => {
+  //Verificar si el usuario es administrador.
+  return gen == '2';
+};
+
 helpers.isActiveBooking = (value) => {
     return value == true;
 };

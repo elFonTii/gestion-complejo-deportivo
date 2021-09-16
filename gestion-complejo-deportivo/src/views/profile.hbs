@@ -1,50 +1,54 @@
 <!-- Page Heading -->
 <div class="container-fluid">
-                    <h1 class="h3 mb-4 text-gray-800">Perfil</h1>
+  <h1 class="h3 mb-4 text-gray-800">Perfil</h1>
 
-                    <div class="row">
+  <div class="row">
 
-                        <div class="col-lg-3">
+    <div class="col-lg-3">
 
-                            <!-- Circle Buttons -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                      <img class="card-img-top" src="{{user.profile}}" alt="Card image cap">
-                                      {{#if isProminent}}
-                                      <a href="/profile" class="link-warning">
-                                      <h4 class="card-title text-center text-warning mt-3">@{{user.username}}<i class="ml-2 fas fa-star"></i></h4>
-                                      </a>
-                                      <div class="d-flex justify-content-center">
-                                        <div class="badge badge-warning p-2">
-                                          <p class="p m-0 font-weight-light"><i class="fas fa-medal mr-1"></i>Cliente destacado</p>
-                                        </div>
-                                      </div>
-                                        {{else}}
-                                        <a href="/profile" class="link-secondary">
-                                      <h4 class="card-title text-center mt-3">@{{user.username}}</h4>
-                                      </a>
-                                      {{/if}}
-                                </div>
-                                <div class="card-body">
-                                    <p>Aquí podrás visualizar tus datos personales, métodos de facturación y preferencias.</p>
-                                    <!-- User Information -->
-                                  <ul class="list-group list-group-flush text-center">
-                                    <li class="list-group-item">{{user.name}}</li>
-                                    <li class="list-group-item">{{user.surname}}</li>
-                                    <li class="list-group-item"> {{user.nacimiento}} </li>
-                                    <li class="list-group-item"> {{user.direccion}} </li>
-                                    <li class="list-group-item"> {{user.localidad}} </li>
-                                  </ul>
-                                </div>
-                            </div>
+      <!-- Circle Buttons -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          {{#if (isMan user.gen)}}
+          <img class="card-img-top" src="/img/profile_picture.svg" alt="Card image cap">
+          {{else}}
+          <img class="card-img-top" src="/img/profile_picture_girl2.svg" alt="Card image cap">
+          {{/if}}
+          {{#if isProminent}}
+          <a href="/profile" class="link-warning">
+            <h4 class="card-title text-center text-warning mt-3">@{{user.username}}<i class="ml-2 fas fa-star"></i></h4>
+          </a>
+          <div class="d-flex justify-content-center">
+            <div class="badge badge-warning p-2">
+              <p class="p m-0 font-weight-light"><i class="fas fa-medal mr-1"></i>Cliente destacado</p>
+            </div>
+          </div>
+          {{else}}
+          <a href="/profile" class="link-secondary">
+            <h4 class="card-title text-center mt-3">@{{user.username}}</h4>
+          </a>
+          {{/if}}
+        </div>
+        <div class="card-body">
+          <p>Aquí podrás visualizar tus datos personales, métodos de facturación y preferencias.</p>
+          <!-- User Information -->
+          <ul class="list-group list-group-flush text-center">
+            <li class="list-group-item">{{user.name}}</li>
+            <li class="list-group-item">{{user.surname}}</li>
+            <li class="list-group-item"> {{user.nacimiento}} </li>
+            <li class="list-group-item"> {{user.direccion}} </li>
+            <li class="list-group-item"> {{user.localidad}} </li>
+          </ul>
+        </div>
+      </div>
 
-                        </div>
+    </div>
 
-                        {{> user/alterProfile}}
-
-                      </div>
+    {{> user/alterProfile}}
 
   </div>
+
+</div>
 
 </div>
 <!-- End of Main Content -->
