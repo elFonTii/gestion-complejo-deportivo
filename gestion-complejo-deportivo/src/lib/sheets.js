@@ -14,17 +14,21 @@ sheets.read = function (file) {
     return data;
 }
 
-sheets.data = function (data, param) {
-    const result = [];
-    for (const item of data) {
-        if (item[param]) {
-            result.push(item[param]);
-        } else {
-            result.push('');
+sheets.data = function (data) {
+    //Get the data from the sheet and save it into a object
+    const obj = {};
+    const keys = Object.keys(data[0]);
+    for (const key of keys) {
+        obj[key] = [];
+    }
+    for (const row of data) {
+        for (const key of keys) {
+            obj[key].push(row[key]);
         }
     }
-    return result;
+    return obj;
 }
+
 
 sheets.scan = function () {
     const dir = path.join(__dirname, '../uploads/');

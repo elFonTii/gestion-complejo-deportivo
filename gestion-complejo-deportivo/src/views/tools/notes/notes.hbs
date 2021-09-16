@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <a href="/tools/notes/new" class="btn btn-outline-success float-right">Nueva nota</a>
+    
+        <h1 class="h2 mb-2 text-gray-800 font-weight-bold text-center">Notas</h1>
+    <div class="row">
+        {{#each notas}}
+            <div class="col-2">
+                <a href="/tools/notes/{{title}}" class="btn btn-muted text-primary">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-center">
+                            <img class="card-img" src="/img/notes.svg" style="width: 11em;" alt="">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="h6 font-weight-bold">{{this.title}}</h5>
+                        <p class="small font-italic">size: {{size}}kb</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+{{> modals/upload }}

@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="/tools/notes/new">
+                        {{!-- Title input --}}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="title">Titulo</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" id="title" name="title"
+                                    value="{{title}}" readonly>
+                            </div>
+                        </div>
+                        {{!-- Body input --}}
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="body">Contenido</label>
+                            <div class="col-md-12">
+                                <textarea class="form-control font-italic text-dark" id="body" name="body" placeholder="Contenido de la nota"
+                                    rows="19" readonly>{{content}}</textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
