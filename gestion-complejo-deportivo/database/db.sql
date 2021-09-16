@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-09-2021 a las 04:50:26
+-- Tiempo de generación: 16-09-2021 a las 08:44:21
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -36,16 +36,6 @@ CREATE TABLE `booking` (
   `user` varchar(10) DEFAULT NULL,
   `create_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `booking`
---
-
-INSERT INTO `booking` (`id_booking`, `date_booking`, `start_booking`, `end_booking`, `cancha`, `user`, `create_at`) VALUES
-(19, '2021-08-26', '14:40', '16:40', 1, 'elfontii', '2021-08-26 17:30:20'),
-(20, '2021-08-26', '20:00', '22:00', 1, 'elfontii', '2021-08-26 18:03:21'),
-(21, '2021-08-26', '18:00', '20:00', 1, 'elfontii', '2021-08-26 18:03:36'),
-(22, '2021-08-26', '22:50', '24:50', 1, 'elfontii', '2021-08-27 01:50:43');
 
 -- --------------------------------------------------------
 
@@ -95,6 +85,25 @@ INSERT INTO `complejo` (`nombre_complejo`, `informacion_complejo`, `direccion_co
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `generos`
+--
+
+CREATE TABLE `generos` (
+  `id_gen` int(11) NOT NULL,
+  `gen_name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `generos`
+--
+
+INSERT INTO `generos` (`id_gen`, `gen_name`) VALUES
+(1, 'Hombre'),
+(2, 'Mujer');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `notifications`
 --
 
@@ -112,7 +121,8 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`noti_id`, `noti_icon`, `noti_title`, `noti_description`, `noti_date`, `wasRead`) VALUES
-(13, 'fas fa-exclamation', 'Notificación de prueba.', 'Notificación de prueba para todos los usuarios', '2021-09-08 02:09:49', 1);
+(13, 'fas fa-exclamation', 'Notificación de prueba.', 'Notificación de prueba para todos los usuarios', '2021-09-08 02:09:49', 1),
+(14, 'fas fa-exclamation', '¿Qué sale?', 'Para mi que pinta jugar unos cs a fondo.', '2021-09-08 03:28:43', 1);
 
 -- --------------------------------------------------------
 
@@ -180,9 +190,7 @@ INSERT INTO `service` (`service_id`, `service_name`, `service_price`, `service_t
 (1, 'Gimnasio', 700, 1, 'Proporciona acceso total a todas las \"Atracciones\" del complejo, desde maquinas para hacer ejercicio hasta sesiones de yoga'),
 (2, 'Piscina', 1100, 1, 'Proporciona acceso total a la piscina del complejo, desde natación libre hasta clases por profesionales.'),
 (3, 'Golf', 1200, 1, 'Predio con golf insta'),
-(4, 'asdasd', 0, 1, 'asdasda'),
-(5, 'Gym2', 200, 2, 'asdasdasda'),
-(6, 'Tenis', 900, 1, 'Añade acceso al tenis del complejo.');
+(5, 'Gym2', 200, 2, 'asdasdasda');
 
 -- --------------------------------------------------------
 
@@ -220,7 +228,14 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('K3niJuA2zLMVx09d33PThkI_PUUIUd2x', 1631154606, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"name\":\"Felipe\",\"surname\":\"Fontana\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez 1832\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$Ccl.tJMQ2a/KiN40I3DpYeyrE0QaVwVwoXrYx60Bzzobdz.jkntXW\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[1]},\"created_at\":\"2021-08-21\"}}}');
+('WNv3shHwwMtICLUlh6_1zlJyHADfXLlh', 1631826634, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"admin\",\"name\":\"Administrador\",\"surname\":\"Administrador\",\"nacimiento\":\"2000-01-01\",\"direccion\":\"18 julio, José Artigas 2211\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$qbFVcty4/vohmrvG4Gv6J.t67ng2FVxLGc/YxAXG2tfeC49iHc8bW\",\"rol\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-08-21\"}}}'),
+('YeE4R6tolTPtUSAkOlTFg7-NMTEVODcB', 1631860753, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"admin\",\"name\":\"Administrador\",\"surname\":\"Administrador\",\"nacimiento\":\"2000-07-16\",\"direccion\":\"asd\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$eGnvO5lZ7kejeB1ze20t1.GJ7PchD5QAlFP1VUsTlURyJCxuLgLZ2\",\"rol\":1,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-09-16\"}}}'),
+('bu9_3Jlk_tT5rp1i3yy1tbK3_06Hyulr', 1631852735, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('imNfu4NIpEmYGOk-KhcxanvrO2CKHnbx', 1631848006, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('itNNpZHWD4TwHKuuWdPh7M2uEOM44oQb', 1631785535, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"fran_cap15\",\"name\":\"Balter\",\"surname\":\"Velázquez\",\"nacimiento\":\"2003-04-11\",\"direccion\":\"Salto 3165\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$gV2c7AEODnFpKVyNtzwYReTs7Lnp4w1kCo.6XPLR/HuRXEnofayji\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-08-27\"}}}'),
+('svGPvpv7ecBYyfw9JUsOex6JuHVT0ONY', 1631847999, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('w1lRv2IJOm3xa6NlcIgEwXIMBRqZ8c0A', 1631835960, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"admin\",\"name\":\"Administrador\",\"surname\":\"Administrador\",\"nacimiento\":\"2000-01-01\",\"direccion\":\"18 julio, José Artigas 2211\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$qbFVcty4/vohmrvG4Gv6J.t67ng2FVxLGc/YxAXG2tfeC49iHc8bW\",\"rol\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-08-21\"}}}'),
+('yA7nLAVUmngmJWL2Eqm2GimCg_0ww_Kt', 1631788417, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"fran_cap15\",\"name\":\"Balter\",\"surname\":\"Velázquez\",\"nacimiento\":\"2003-04-11\",\"direccion\":\"Salto 3165\",\"localidad\":\"Young\",\"profile\":\"/img/profile_picture.svg\",\"password\":\"$2a$10$gV2c7AEODnFpKVyNtzwYReTs7Lnp4w1kCo.6XPLR/HuRXEnofayji\",\"rol\":2,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-08-27\"}}}');
 
 -- --------------------------------------------------------
 
@@ -240,13 +255,6 @@ CREATE TABLE `suscripcion` (
   `startDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `suscripcion`
---
-
-INSERT INTO `suscripcion` (`owner`, `ass_name`, `ass_surname`, `asociated_ci`, `ass_email`, `ass_dir1`, `ass_dir2`, `subscription`, `startDate`) VALUES
-('elfontii', 'asda', 'asda', 53679745, 'feluubotta685@gmail.com', 'asda', 'asda', 2, '2021-08-24');
-
 -- --------------------------------------------------------
 
 --
@@ -263,6 +271,7 @@ CREATE TABLE `users` (
   `profile` varchar(50) NOT NULL,
   `password` varchar(60) DEFAULT NULL,
   `rol` int(11) DEFAULT NULL,
+  `gen` int(11) NOT NULL,
   `isProminent` bit(1) NOT NULL DEFAULT b'0',
   `created_at` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -271,12 +280,10 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`username`, `name`, `surname`, `nacimiento`, `direccion`, `localidad`, `profile`, `password`, `rol`, `isProminent`, `created_at`) VALUES
-('admin', 'Administrador', 'Administrador', '2000-01-01', 'Administrador', 'Young', '/img/profile_picture.svg', '$2a$10$qbFVcty4/vohmrvG4Gv6J.t67ng2FVxLGc/YxAXG2tfeC49iHc8bW', 1, b'0', '2021-08-21'),
-('colii24', 'Nicole', 'Camaño', '2004-06-19', 'martiriné viv.9', 'Young', '/img/profile_picture.svg', '$2a$10$OEhjy0bWB/5Js0ZvGDDYnuGlnl2nibiwfJtgE768XyjXZ4mPimPPy', 2, b'0', '2021-08-21'),
-('elfontii', 'Felipe', 'Fontana', '2003-08-30', '18 de Julio, Joaquin Suarez 1832', 'Young', '/img/profile_picture.svg', '$2a$10$Ccl.tJMQ2a/KiN40I3DpYeyrE0QaVwVwoXrYx60Bzzobdz.jkntXW', 2, b'1', '2021-08-21'),
-('fontii', 'Felipe', 'Fontana', '2021-08-30', '18 de Julio, Joaquin Suarez 1832', 'Young', '/img/profile_picture.svg', '$2a$10$lxo/6BAAf1/YraBLCX1D9OVOqSU70OhXMQUOkHPWAPUQebGqwCcM2', 2, b'0', '2021-08-21'),
-('fran_cap15', 'Balter', 'Velázquez', '2003-08-11', 'Salto 3165', 'Young', '/img/profile_picture.svg', '$2a$10$gV2c7AEODnFpKVyNtzwYReTs7Lnp4w1kCo.6XPLR/HuRXEnofayji', 2, b'0', '2021-08-27');
+INSERT INTO `users` (`username`, `name`, `surname`, `nacimiento`, `direccion`, `localidad`, `profile`, `password`, `rol`, `gen`, `isProminent`, `created_at`) VALUES
+('admin', 'Administrador', 'Administrador', '2000-07-16', 'asd', 'Young', '/img/profile_picture.svg', '$2a$10$eGnvO5lZ7kejeB1ze20t1.GJ7PchD5QAlFP1VUsTlURyJCxuLgLZ2', 1, 1, b'0', '2021-09-16'),
+('ani123', 'Anastasia', 'Gómez', '2002-06-16', 'A fondo', 'Young', '/img/profile_picture.svg', '$2a$10$jWhDSkWwdjbl0QrzqPwzhe4wplWpQZzDOsOvHik9DT2A83ZTymHVG', 2, 2, b'0', '2021-09-16'),
+('fran_cap15', 'Balter', 'Velázquez', '2003-04-11', 'Salto 3165', 'Young', '/img/profile_picture.svg', '$2a$10$nzu7SHVvg7Nc5d17celtpurUgfFPQnU3d6XZ7Zk9wUdkaju77KE0i', 2, 1, b'0', '2021-09-16');
 
 --
 -- Índices para tablas volcadas
@@ -295,6 +302,12 @@ ALTER TABLE `booking`
 --
 ALTER TABLE `cancha`
   ADD PRIMARY KEY (`id_cancha`);
+
+--
+-- Indices de la tabla `generos`
+--
+ALTER TABLE `generos`
+  ADD PRIMARY KEY (`id_gen`);
 
 --
 -- Indices de la tabla `notifications`
@@ -346,7 +359,8 @@ ALTER TABLE `suscripcion`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`username`),
   ADD KEY `ref_01` (`rol`),
-  ADD KEY `profile` (`profile`);
+  ADD KEY `profile` (`profile`),
+  ADD KEY `gen` (`gen`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -356,13 +370,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT de la tabla `generos`
+--
+ALTER TABLE `generos`
+  MODIFY `id_gen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `noti_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `noti_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `profile_img`
@@ -374,7 +394,7 @@ ALTER TABLE `profile_img`
 -- AUTO_INCREMENT de la tabla `service`
 --
 ALTER TABLE `service`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `service_type`
@@ -410,7 +430,8 @@ ALTER TABLE `suscripcion`
 -- Filtros para la tabla `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `ref_01` FOREIGN KEY (`rol`) REFERENCES `roles` (`id_rol`);
+  ADD CONSTRAINT `ref_01` FOREIGN KEY (`rol`) REFERENCES `roles` (`id_rol`),
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gen`) REFERENCES `generos` (`id_gen`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

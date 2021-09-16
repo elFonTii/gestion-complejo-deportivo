@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const pool = require('../database');
 
 const dbdata = require('../lib/mydata_api');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
@@ -47,8 +48,22 @@ router.get('/logout', isLoggedIn, (req, res) => {
     req.flash('success', 'Sesión cerrada correctamente.');
 });
 
-router.get('/profile/personal', isLoggedIn , (req, res) => {
-    res.render('user/personal-info')
+//edit user
+router.get('/profile/edit', (req, res) =>{
+    res.render('users/editUser');
+});
+
+router.post('/profile/edit', async (req, res) =>{
+    const username = req.user.username;
+    const { name, surname, direccion } = req.body;
+    const updateUsuario = {
+        name,
+        surname,
+        direccion
+    };
+    await pool.query('UPDATE users SET ? WHERE username = ?', [updateUsuario, username]);
+        req.flash('success', 'Usuario actualizado.')
+        res.redirect('/profile');
 });
 
 module.exports = router;

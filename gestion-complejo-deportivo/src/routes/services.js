@@ -44,7 +44,6 @@ router.post('/add', isAdmin, async (req, res) => {
         res.redirect('/services/add');
     }
 
-
 });
 
 /*SERVICE ADD SUBSCRIPTION (USER)*/
@@ -86,6 +85,53 @@ router.post('/subscription/:service_id', isLoggedIn, async(req,res) => {
         req.flash('message', 'Ya tienes una suscripción activa a este servicio');
         res.redirect('/services');
     }
+});
+
+//Editar servicios
+router.get('/', isLoggedIn, async (req, res) => {
+    const services = await pool.query('SELECT * FROM service INNER JOIN service_type ON service.service_type = service_type.service_type_id');
+    const quantity = services.length;
+    res.render('services/list', {services, quantity});
+});
+
+router.get('/edit', isAdmin, async (req, res) => {
+    const service_type = await pool.query('SELECT * FROM service_type');
+    res.render('services/edit', {service_type});
+});
+
+router.post('/edit', isAdmin, async (req, res) => {
+    const {service_name, service_price, service_description, type} = req.body;
+
+    //Verify the type of service
+    if(type === 'Mensual'){
+        const updateService = {
+            service_name,
+            service_price,
+            service_description,
+            service_type: 1,
+        };
+        await pool.query('UPDATE service SET ?', updateService);
+        req.flash('success', 'Servicio actualizado');
+        res.redirect('/services');
+    } else if(type === 'Anual'){
+        const updateService = {
+            service_name,
+            service_price,
+            service_description,
+            service_type: 2,
+        };
+        await pool.query('UPDATE service SET ?', updateService);
+        req.flash('success', 'Servicio actualizado.');
+        res.redirect('/services');
+    }
+});
+
+//Eliminar servicio
+router.get('/delete/:service_id', isAdmin , async (req, res) => {
+    const service_id = req.params.service_id;
+    await pool.query('DELETE FROM service WHERE service_id = ?', [service_id]);
+    req.flash('success', 'Servicio eliminado correctamente');
+    res.redirect('/services');
 });
 
 module.exports = router;

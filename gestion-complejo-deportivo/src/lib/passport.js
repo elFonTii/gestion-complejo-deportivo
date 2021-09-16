@@ -31,7 +31,7 @@ passport.use('local.signup', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, username, password, done) => {
-  const { name, surname, localidad, direccion, nacimiento } = req.body;
+  const { name, surname, localidad, direccion, nacimiento, gen } = req.body;
   const get_img = await pool.query('SELECT src FROM profile_img WHERE id_img = 1');
   
   //Verify if the user already exists
@@ -49,6 +49,7 @@ passport.use('local.signup', new LocalStrategy({
     localidad,
     profile,
     password,
+    gen,
     rol: 2
   };
   newUser.password = await helpers.encryptPassword(password);
