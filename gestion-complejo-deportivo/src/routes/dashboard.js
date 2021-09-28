@@ -30,9 +30,8 @@ router.get('/', isLoggedIn, async (req, res) => {
                 todayBookings[i].isActive = false;
             }
         }
-        const currentBooking = await dbdata.getActiveBooking();
         const prominentUser = await dbdata.getAllProminentUsers();
-        res.render('dashboard/dashboard', {currentBooking, todayBookings, prominentUser});
+        res.render('dashboard/dashboard', {todayBookings, prominentUser});
         } else {
         const prominentUser = await dbdata.getAllProminentUsers();
         console.log('No bookings to update');

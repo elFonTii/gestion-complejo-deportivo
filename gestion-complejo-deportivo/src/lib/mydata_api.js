@@ -77,7 +77,7 @@ mydata.getCurrentDate = function () {
 }
 
 //Get the current active booking from the sql database.
-mydata.getActiveBooking = async function () {
+mydata.get = async function () {
     const today = new Date();
     const currentDate = this.normalizeDate(today);
     const currentTime = this.normalizeHour(today.getHours() + ":" + today.getMinutes());
@@ -261,6 +261,18 @@ mydata.setUserProminent = async function (username) {
 mydata.getAllProminentUsers = async function () {
     const users = await pool.query('SELECT * FROM users WHERE isProminent = 1');
     return users;
+}
+
+mydata.getBookingCountByUser = async function (username) {
+    const bookings = await pool.query('SELECT COUNT(*) as count FROM booking WHERE user = ?', [username]);
+    return bookings[0].count;
+}
+
+mydata.getBookingsPerMonthByUser = async function (username) {
+    //Get the current month.
+    const currentDate = this.getCurrentDate();
+    const bookings = await pool.query('SELECT COUNT(*) as count FROM booking WHERE user = ? AND date_booking = ?', [username, currentMonth]);
+    return bookings[0].count;
 }
 
 mydata.administration = {}

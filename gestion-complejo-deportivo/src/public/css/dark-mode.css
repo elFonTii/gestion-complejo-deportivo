@@ -1,0 +1,47 @@
+/*!
+ * Dark Mode Switch v1.0.1 (https://github.com/coliff/dark-mode-switch)
+ * Copyright 2021 C.Oliff
+ * Licensed under MIT (https://github.com/coliff/dark-mode-switch/blob/main/LICENSE)
+ */
+
+[data-theme="dark"] {
+  background-color: rgb(53, 53, 53) !important;
+  color: #eee;
+}
+
+[data-theme="dark"] .bg-black {
+  background-color: #fff !important;
+}
+
+[data-theme="dark"] .bg-dark {
+  background-color: rgb(53, 53, 53) !important;
+}
+
+[data-theme="dark"] .bg-light {
+  background-color: rgb(53, 53, 53) !important;
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: rgb(53, 53, 53) !important;
+}
+
+[data-theme="dark"] .card-header {
+  background-color: rgb(53, 53, 53) !important;
+}
+
+[data-theme="dark"] .card-body {
+  background-color: rgb(53, 53, 53) !important;
+}
+
+[data-theme="dark"] .card-body .list-group-item {
+  background-color: rgb(53, 53, 53) !important;
+  color: #eee;
+}
+
+[data-theme="dark"] main {
+  background-color: rgb(53, 53, 53) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+  color: rgb(255, 255, 255) !important;
+}
