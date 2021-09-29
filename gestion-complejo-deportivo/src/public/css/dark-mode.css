@@ -1,12 +1,9 @@
-/*!
- * Dark Mode Switch v1.0.1 (https://github.com/coliff/dark-mode-switch)
- * Copyright 2021 C.Oliff
- * Licensed under MIT (https://github.com/coliff/dark-mode-switch/blob/main/LICENSE)
- */
-
-[data-theme="dark"] {
-  background-color: rgb(53, 53, 53) !important;
-  color: #eee;
+:root {
+  --bgdark: rgb(33, 33, 33);
+  --bgextradark: #191c1f;
+  --inputdark: #191c1f;
+  --input-dark-border: #232527;
+  --bglight: #8185aa;
 }
 
 [data-theme="dark"] .bg-black {
@@ -14,34 +11,82 @@
 }
 
 [data-theme="dark"] .bg-dark {
-  background-color: rgb(53, 53, 53) !important;
+  background-color: var(--bgextradark) !important;
 }
 
 [data-theme="dark"] .bg-light {
-  background-color: rgb(53, 53, 53) !important;
+  background-color: var(--bgdark) !important;
 }
 
 [data-theme="dark"] .bg-white {
-  background-color: rgb(53, 53, 53) !important;
+  background-color: var(--bgextradark) !important;
 }
 
-[data-theme="dark"] .card-header {
-  background-color: rgb(53, 53, 53) !important;
+[data-theme="dark"] .card{
+  background-color: var(--bgdark) !important;
+  border: none;
 }
 
-[data-theme="dark"] .card-body {
-  background-color: rgb(53, 53, 53) !important;
+[data-theme="dark"] .table{
+  background-color: var(--bgextradark) !important;
+  border: 1px var(--input-dark-border) solid;
 }
 
-[data-theme="dark"] .card-body .list-group-item {
-  background-color: rgb(53, 53, 53) !important;
-  color: #eee;
+[data-theme="dark"] .card-header{
+  background-color: var(--bgdark) !important;
 }
 
-[data-theme="dark"] main {
-  background-color: rgb(53, 53, 53) !important;
+[data-theme="dark"] .bg-success{
+  background-color: var(--bglight) !important;
+}
+
+[data-theme="dark"] .text-success{
+  color: var(--bglight) !important;
+}
+
+[data-theme="dark"] .table-responsive{
+  background-color: var(--bgextradark) !important;
+  border: none;
+}
+
+[data-theme="dark"] .card li{
+  background-color: var(--bgdark) !important;
+}
+
+[data-theme="dark"] input[type="text"]{
+  background-color: var(--bgdark) !important;
+  border: 1px solid var(--input-dark-border) !important;
+}
+
+[data-theme="dark"] textarea{
+  background-color: var(--bgdark) !important;
+  border: 1px solid var(--input-dark-border) !important;
+}
+
+[data-theme="dark"] .bg-gradient-secondary{
+  background-color: var(--bgdark) !important;
+}
+
+[data-theme="dark"] .jumbotron{
+  background-color: var(--bgextradark) !important;
+}
+
+[data-theme="dark"] .h1, .h2, .h3, .h4, .h5, .p, .a, .small{
+  color: var(--textdark) !important;
+}
+
+[data-theme="dark"] .container {
+  background-color: var(--bgextradark) !important;
+}
+
+[data-theme="dark"] .container-fluid {
+  background-color: var(--bgextradark) !important;
+}
+
+[data-theme="dark"] #content-wrapper {
+  background-color: var(--bgextradark) !important;
 }
 
 [data-theme="dark"] .text-secondary {
-  color: rgb(255, 255, 255) !important;
+  color: var(--textdark) !important;
 }
