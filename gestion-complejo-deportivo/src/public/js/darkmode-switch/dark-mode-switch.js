@@ -15,6 +15,17 @@ window.addEventListener("load", function () {
   }
 });
 
+var osSwitch = document.getElementById("osThemeSwitch");
+window.addEventListener("load", function () {
+  if (osSwitch.checked) {
+    console.log("OS Theme Switch is ready!");
+    getDeviceTheme();
+    osSwitch.addEventListener("change", function () {
+      resetTheme();
+    });
+  }
+});
+
 /**
  * Summary: function that adds or removes the attribute 'data-theme' depending if
  * the switch is 'on' or 'off'.
@@ -44,6 +55,17 @@ function initTheme() {
  */
 function resetTheme() {
   if (darkSwitch.checked) {
+    document.body.setAttribute("data-theme", "dark");
+    localStorage.setItem("darkSwitch", "dark");
+  } else {
+    document.body.removeAttribute("data-theme");
+    localStorage.removeItem("darkSwitch");
+  }
+}
+
+function getDeviceTheme() {
+  const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+  if (darkThemeMq.matches) {
     document.body.setAttribute("data-theme", "dark");
     localStorage.setItem("darkSwitch", "dark");
   } else {

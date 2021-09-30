@@ -1,0 +1,46 @@
+/*
+Color variables
+*/
+
+:root {
+  --header: #00a0635b;
+  --translucent: rgba(0, 0, 0, 0.383);
+  --btn-translucent: rgba(255, 255, 255, 0.383);
+  --btn-custom: #8383835b;
+  --btn-custom-text: #ffffff;
+}
+
+
+/*CODING*/
+
+.bg-success-lite {
+  background-color: var(--header);
+}
+
+.btn-transparent {
+  background-color: #ffffffd0;
+  color: rgb(117, 117, 117);
+}
+
+.bg-translucent{
+  background-color: var(--translucent);
+}
+
+.btn-translucent{
+  background-color: var(--btn-translucent);
+}
+
+.bg-landing {
+  background-image: url('/img/futbol.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-cover {
+  background-color: #00a06375;
+}
+
+.btn-custom {
+background-color: var(--btn-custom);
+color: var(--btn-custom-text);
+}
