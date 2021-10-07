@@ -4,6 +4,13 @@ const log = require('./log');
 
 //Creamos un objeto con las funciones que contendrá las funciones de la api programada.
 const felino = {}
+
+/*
+  Felino API: Es una api que realiza conexiones con placas arduino, puede enviar y recibir
+  información por puerto y también mediante el protocolo http/https.
+
+  DEPENDENCIAS: JHONNY-FIVE - ETHERPORT-CLIENT
+*/
 // arduino.test realiza una prueba de funcionamiento de la placa arduino.
 felino.test = function(arduino){
     arduino = new five.Board();
@@ -63,11 +70,3 @@ felino.remote = function(host, port){
 
 
 module.exports = felino;
-
-/*
-  var lcd = new five.LCD({
-    controller: "PCF8574",
-    rows: 4,
-    cols: 20,
-  });
-*/

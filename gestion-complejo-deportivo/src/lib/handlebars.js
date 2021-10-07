@@ -4,6 +4,11 @@ const notis = require('../lib/notifications');
 
 
 const helpers = {};
+/*
+  REGISTRO DE HELPERS HANDLEBARS
+  
+  Son utiles para implementar funciones en el front-end
+*/
 
 helpers.isAdmin = (rol) => {
     //Verificar si el usuario es administrador.

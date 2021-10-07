@@ -2,7 +2,7 @@ const log = require('./log');
 const pool = require('../database');
 
 const mydata = {};
-
+/*Normaliza la fecha para ser legible y almacenarla en la base de datos*/
 mydata.normalizeDate = function (date) {
     const date01 = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
@@ -18,8 +18,8 @@ mydata.normalizeDate = function (date) {
 
     return normalizedDate;
 }
-
-mydata.getDifference = async function (start, end) {
+/*Devuelve la diferencia entre dos fechas*/
+mydata.getDifference = function (start, end) {
     //The start and end are in the format HH:MM.
     const start_splitted = start.split(":");
     const end_splitted = end.split(":");
@@ -37,7 +37,7 @@ mydata.getDifference = async function (start, end) {
 
     return difference_hour;
 }
-
+/*Normaliza la hora a una hora legible para poder mostrarla y almacenarla en la base de datos*/
 mydata.normalizeHour = function (hour) {
     const split = hour.split(":");
     const hour_splitted = split[0];
@@ -55,28 +55,36 @@ mydata.getCurrentYear = function () {
     const currentYear = new Date().getFullYear();
     return currentYear;
 }
-
+/*
+Devuelve solo el mes actual
+*/
 mydata.getCurrentMonth = function () {
     const currentMonth = new Date().getMonth() + 1;
 
     const slice = ("0" + currentMonth).slice(-2);
     return slice;
 }
-
+/*
+Devuelve solo el día actual
+*/
 mydata.getCurrentDay = function () {
     const currentDay = new Date().getDate();
 
     const slice = ("0" + currentDay).slice(-2);
     return slice;
 }
-
+/*
+Devuelve la fecha actual
+*/
 mydata.getCurrentDate = function () {
     const today = new Date();
     const currentDate = this.normalizeDate(today);
     return currentDate;
 }
 
-//Get the current active booking from the sql database.
+/*
+Devuelve reservas que estan siendo ejecutadas en este momento
+*/
 mydata.get = async function () {
     const today = new Date();
     const currentDate = this.normalizeDate(today);
@@ -96,13 +104,14 @@ mydata.get = async function () {
     }
 }
 
+/*Obtiene todas las reservas que son de este dia, sin importar si están siendo ejecutadas*/
 mydata.getTodayBookings = async function () {
     const today = new Date();
     const currentDate = this.normalizeDate(today);
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [currentDate]);
     return bookings;
 }
-
+/*Devuelve el conteo de reservas que son de este dia.*/
 mydata.getTodayBookingsCount = async function () {
     const today = new Date();
     const currentDate = this.normalizeDate(today);
@@ -110,13 +119,15 @@ mydata.getTodayBookingsCount = async function () {
     return bookings.length;
 }
 
+/*Devuelve todas las reservas, sin importar el dia ni si han sido ejecutadas o no */
 mydata.getAllBookings  = async function () {
         const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha');
         return bookings;
 }
 
-//When the date_booking and the start_booking are equal, it means that the booking is active.
+/*Solicita una reserva por parámetro y devuelve un verdadero o falso en caso de si la reserva está siendo ejecutada en este momento*/
 mydata.isActiveBooking = async function (booking) {
+    //Cuando la fecha, y la hora de la reserva son iguales a la hora y fecha actual entonces la reserva es activa.
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ? AND start_booking = ? AND end_booking = ?', [booking.date_booking, booking.start_booking, booking.end_booking]);
     if(bookings.length > 0) {
         return true;
@@ -125,17 +136,14 @@ mydata.isActiveBooking = async function (booking) {
     }
 }
 
+/*Devuelve un int con la cantidad de reservas que están activas*/
 mydata.activeCount = async function () {
     const currentTime = new Date().getHours() + ":" + new Date().getMinutes();
     const count = await pool.query('SELECT COUNT(*) AS count FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE start_booking = ?', [currentTime]);
     return count[0].count;
 }
 
-mydata.count = async function () {
-    const count = await pool.query('SELECT COUNT(*) AS count FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha');
-    return count[0].count;
-}
-
+/*Solicita una reserva por parámetro y devuelve verdadero o falso si la reserva está siendo ejecutada en este momento*/
 mydata.isBusy = async function (booking) {
     //Verify if exists other booking with the same date and time.
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ? AND start_booking = ? AND end_booking = ?', [booking.date_booking, booking.start_booking, booking.end_booking]);
@@ -146,22 +154,26 @@ mydata.isBusy = async function (booking) {
     }
 }
 
+/*Devuelve el conteo de usuarios registrados en el programa*/
 mydata.userCount = async function (){
     const count = await pool.query('SELECT COUNT(*) AS user_count FROM users');
     return count[0].user_count;
 };
 
+/*Devuelve un conteo de las reservas*/
 mydata.bookingsCount = async function (){
     const count = await pool.query('SELECT COUNT(*) AS booking_count FROM booking');
     return count[0].booking_count;
 };
 
+
+/*Devuelve un conteo de las canchas*/
 mydata.canchasCount = async function (){
     const count = await pool.query('SELECT COUNT(*) AS cancha_count FROM cancha');
     return count[0].cancha_count;
 };
 
-//Get the average of the booking per month.
+/*Devuelve un promedio de reservas por mes*/
 mydata.getAverageBookingMonth = async function () {
     const currentMonth = this.getCurrentMonth();
     const bookings = await pool.query('SELECT COUNT(*) AS count FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [currentMonth]);
@@ -169,6 +181,7 @@ mydata.getAverageBookingMonth = async function () {
     return average;
 };
 
+/*Devuelve un promedio de reservas por año*/
 mydata.getAverageBookingYear = async function () {
     const currentYear = this.getCurrentYear();
     const bookings = await pool.query('SELECT COUNT(*) AS count FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [currentYear]);
@@ -176,11 +189,13 @@ mydata.getAverageBookingYear = async function () {
     return average;
 };
 
+/*Solicita una fecha por parámetro y devuelve el conteo de reservas para esa fecha*/
 mydata.getByDate = async function (date) {
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [date]);
     return bookings;
 }
 
+/*Solicita una fecha por parámetro y devuelve el conteo de reservas para esa fecha*/
 mydata.getCountByDate = async function (date) {
     const timestamp = new Date(date);
     const normalizedTimestamp = this.normalizeDate(timestamp);
@@ -189,7 +204,10 @@ mydata.getCountByDate = async function (date) {
     return bookings[0].count;
 }
 
-//Verify if the booking date is higher or equal than the current date.
+/*
+Obtiene una reserva por parámetro y devuelve si la fecha de la reserva es una fecha válida
+es decir, que está a futuro.
+*/
 mydata.isFuture = function (booking) {
     const today = new Date();
     const currentDate = this.normalizeDate(today);
@@ -200,7 +218,10 @@ mydata.isFuture = function (booking) {
     }
 }
 
-//Verify if the booking time is higher or equal than the current time.
+/*
+Obtiene una reserva por parámetro y verifica si la hora de la reserva es válida
+es decir, que la hora no ha pasado.
+*/
 mydata.isFutureTime = function (booking) {
     const currentTime = new Date().getHours() + ":" + new Date().getMinutes();
     const normalizedHour = this.normalizeHour(currentTime);
@@ -211,7 +232,10 @@ mydata.isFutureTime = function (booking) {
     }
 }
 
-//set the end time of the booking.
+/*
+Obtiene la reserva por parámetro y setea la hora en la que finaliza.
+*/
+//TO DO: Pasar la hora por parámetro
 mydata.setEndTime = function (booking) {
     const startTime = booking.start_booking.split(':');
     //Add 2 hours to the start time to get the end time.
@@ -292,8 +316,4 @@ mydata.administration.usersCount = async function () {
     const count = await pool.query('SELECT COUNT(*) AS registered_users FROM users');
     return count[0].registered_users;
 }
-
-
-
-
 module.exports = mydata;

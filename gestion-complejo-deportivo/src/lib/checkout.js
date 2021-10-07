@@ -1,7 +1,10 @@
 const mercadopago = require('mercadopago');
 const checkout = {}
+/*
+CHECKOUT MODULE: Módulo que realiza la implementación con Mercado pago.
 
-//Function to create a new product
+createProduct: Obtiene el titulo y precio por parámetro y retorna el producto.
+*/
 checkout.createProduct = function(title, price) {
     let item = {
         items: [

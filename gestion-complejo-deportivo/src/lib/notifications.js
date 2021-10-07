@@ -5,6 +5,9 @@ const pool = require('../database');
 
 const notification = {};
 
+/*
+    NO
+*/
 notification.create = async (notificationData) => {
     await pool.query('INSERT INTO notifications SET ?', notificationData);
 }

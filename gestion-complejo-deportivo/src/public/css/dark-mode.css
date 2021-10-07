@@ -76,6 +76,7 @@
   background-color: var(--bgdark) !important;
 }
 
+
 [data-theme="dark"] .jumbotron{
   background-color: var(--bgextradark) !important;
 }
@@ -119,7 +120,7 @@
 }
 
 [data-theme="dark"] .btn-success, .btn-primary, .btn-secondary, .btn-danger, .btn-warning, .btn-info, .btn-light, .btn-dark {
-  background-color: var(--bgextradark) !important;
+  background-color: var(--bgdark);
   color: #fff;
   border: rgb(126, 126, 126) solid 2px;
 }

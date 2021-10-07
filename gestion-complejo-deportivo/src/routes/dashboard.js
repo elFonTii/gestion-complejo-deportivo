@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { isLoggedIn } = require('../lib/auth');
 const notis = require('../lib/notifications');
-const { charts } = require('../lib/chart');
 const pool = require('../database');
 const log = require('../lib/log');
 const dbdata = require('../lib/mydata_api');
