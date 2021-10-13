@@ -42,7 +42,7 @@ router.post('/create/new', isLoggedIn , async (req, res) => {
         user,
         cancha,
         date_booking,
-        start_booking,
+        start_booking: start_booking + ':00',
         end_booking: null,
     };
     //Set the end time of the booking

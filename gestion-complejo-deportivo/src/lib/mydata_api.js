@@ -237,9 +237,9 @@ Obtiene la reserva por parámetro y setea la hora en la que finaliza.
 */
 //TO DO: Pasar la hora por parámetro
 mydata.setEndTime = function (booking) {
-    const startTime = booking.start_booking.split(':');
+    const startTime = booking.start_booking + ':00';
     //Add 2 hours to the start time to get the end time.
-    const endTime = parseInt(startTime[0]) + 2 + ":" + startTime[1];
+    const endTime = parseInt(startTime[0]) + 1 + ":" + '00';
     const normalizedEndTime = this.normalizeHour(endTime);
     booking.end_booking = normalizedEndTime;
 
@@ -252,7 +252,7 @@ mydata.isAvailable = async function (booking) {
     //To know if theres a booking runing in the same time, we need to check the difference between the start and end time of the selected booking.
     //If the difference is less than 2 hours, theres a booking running in the same time.
     const startTime = booking.start_booking.split(':');
-    const endTime = parseInt(startTime[0]) + 2 + ":" + startTime[1];
+    const endTime = parseInt(startTime[0]) + 1 + ":" + startTime[1];
     const normalizedEndTime = this.normalizeHour(endTime);
     const normalizedStartTime = this.normalizeHour(booking.start_booking);
     const difference = this.getDifference(normalizedStartTime, normalizedEndTime);
@@ -295,6 +295,7 @@ mydata.getBookingCountByUser = async function (username) {
 mydata.getBookingsPerMonthByUser = async function (username) {
     //Get the current month.
     const currentDate = this.getCurrentDate();
+    const currentMonth = this.getCurrentMonth();
     const bookings = await pool.query('SELECT COUNT(*) as count FROM booking WHERE user = ? AND date_booking = ?', [username, currentMonth]);
     return bookings[0].count;
 }

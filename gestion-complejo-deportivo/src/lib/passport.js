@@ -32,14 +32,17 @@ passport.use('local.signup', new LocalStrategy({
   passReqToCallback: true
 }, async (req, username, password, done) => {
   const { name, surname, localidad, direccion, nacimiento, gen } = req.body;
-  const get_img = await pool.query('SELECT src FROM profile_img WHERE id_img = 1');
   
   //Verify if the user already exists
   const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
   if (rows.length > 0) {
     return done(null, false, req.flash('message', 'El usuario ' + username + ' ya existe, por favor, elige otro.'));
   } else {
-  const profile = get_img[0].src;
+    if(gen == 1)
+      profile = 'profile_picture_2.svg';
+    else
+      profile = 'profile_picture_girl';
+      
   let newUser = {
     name,
     surname,
