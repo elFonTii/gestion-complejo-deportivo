@@ -46,7 +46,7 @@ mydata.normalizeHour = function (hour) {
     const slice_hour = ("0" + (parseInt(hour_splitted))).slice(-2);
     const slice_minute = ("0" + (parseInt(minute_splitted))).slice(-2);
 
-    const normalizedHour = slice_hour + ":" + slice_minute;
+    const normalizedHour = slice_hour + ":" + '00';
 
     return normalizedHour;
 }
@@ -104,7 +104,7 @@ mydata.get = async function () {
     }
 }
 
-/*Obtiene todas las reservas que son de este dia, sin importar si están siendo ejecutadas*/
+/*Devuelve todas las reservas que son de este dia, sin importar si están siendo ejecutadas*/
 mydata.getTodayBookings = async function () {
     const today = new Date();
     const currentDate = this.normalizeDate(today);

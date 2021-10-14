@@ -8,17 +8,19 @@ const notis = require('../lib/notifications');
 //Referencia a la conexión a la base de datos
 const pool = require('../database');
 const mydata = require('../lib/mydata_api');
+const Booking = require('../lib/booking');
+const { normalizeDate } = require('../lib/mydata_api');
 
 
-router.get('/create', isLoggedIn , async (req, res) => {
+router.get('/create', isLoggedIn, async (req, res) => {
     const cancha = await pool.query('SELECT * FROM cancha');
-    res.render('bookings/create', {cancha: cancha});
+    res.render('bookings/create', { cancha: cancha });
 });
 
 router.get('/create/new/:id_cancha', isLoggedIn, async (req, res) => {
     const cancha = req.params.id_cancha;
     const data = await pool.query('SELECT * FROM cancha WHERE id_cancha = ?', [cancha]);
-    res.render('bookings/new', {cancha: cancha, data: data});
+    res.render('bookings/new', { cancha: cancha, data: data });
 })
 
 router.get('/create/new/', isLoggedIn, async (req, res) => {
@@ -26,52 +28,35 @@ router.get('/create/new/', isLoggedIn, async (req, res) => {
     res.redirect('/bookings/create');
 });
 
-router.get('/', isLoggedIn , async (req, res) => {
-   const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE user = ?',[req.user.username]);
-    res.render('bookings/list', {bookings: bookings});
-    console.log(bookings);
+router.get('/', isLoggedIn, async (req, res) => {
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE user = ?', [req.user.username]);
+    res.render('bookings/list', { bookings: bookings });
 });
 
-router.post('/create/new', isLoggedIn , async (req, res) => {
+router.post('/create/new', isLoggedIn, async (req, res) => {
     //Request the data from the form and the global variables.
     const { date_booking, start_booking, cancha } = req.body;
     const user = req.user.username;
-    //Objeto de la reserva
-    const newBooking = {
-        //Los nombres de las variables del objeto 'newBooking' deben ser coincidentes con los de la tabla 'booking'.
-        user,
-        cancha,
-        date_booking,
-        start_booking: start_booking + ':00',
-        end_booking: null,
-    };
-    //Set the end time of the booking
-    dbdata.setEndTime(newBooking);
-    
-    if(dbdata.isFuture(newBooking)){
-        if(dbdata.isFutureTime(newBooking)){
-            if(await dbdata.isAvailable(newBooking)){
-                //Insert the booking in the database
-                await pool.query('INSERT INTO booking set ?', [newBooking]);
-                //Redirect to the list of bookings
-                req.flash('success', 'La reserva fue ingresada correctamente');
-                res.redirect('/bookings');
-            }else{
-                req.flash('message', 'La cancha no está disponible en ese horario');
-                res.render('bookings/new');
-            }
-        } else {
-            req.flash('message', 'El horario de la reserva no es válido');
-            res.render('bookings/new');
-        }
+    const _booking = new Booking(date_booking, start_booking + ':00', cancha, user);
+    const bookings = await pool.query('SELECT * FROM booking WHERE date_booking = ? AND start_booking = ? AND cancha = ?', [_booking.date_booking, _booking.start_booking, _booking.cancha]);
+
+    //The booking can't be in the past.
+    if (_booking.date_booking < mydata.normalizeDate(new Date()) && _booking.start_booking < mydata.normalizeHour(new Date().getHours() + ':00')) {
+        req.flash('message', 'La fecha de la reserva no puede ser en el pasado');
+        res.redirect('/bookings/create');
+    } else if (bookings.length > 0) {
+        //The booking can't be in the same time of another booking.
+        req.flash('message', 'La cancha ya está reservada en ese horario');
+        res.redirect('/bookings/create');
     } else {
-        req.flash('message', 'La reserva no puede ser en el pasado');
-        res.render('bookings/new');
+        _booking.insert();
+        req.flash('message', 'Reserva creada con éxito');
+        res.redirect('/bookings');
     }
 });
 
 
-router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
+router.get('/delete/:id_booking', isLoggedIn, async (req, res) => {
     const id_booking = req.params.id_booking;
     await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
     req.flash('success', 'Reserva eliminada correctamente');
@@ -81,9 +66,9 @@ router.get('/delete/:id_booking', isLoggedIn , async (req, res) => {
 
 
 //ADMIN SIDE ROUTES
-router.get('/admin/list', isAdmin , async (req, res) => {
+router.get('/admin/list', isAdmin, async (req, res) => {
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha');
-    res.render('bookings/admin/list', {bookings: bookings});
+    res.render('bookings/admin/list', { bookings: bookings });
 });
 
 module.exports = router;
