@@ -57,7 +57,7 @@
   color: var(--textdark) !important;
 }
 
-[data-theme="dark"] input[type="text"], input[type="number"], input[type="time"], input[type="date"]{
+[data-theme="dark"] input[type="text"]{
   background-color: var(--bgdark) !important;
   border: 3px solid var(--input-dark-border) !important;
 }
@@ -119,7 +119,7 @@
   border: #353535 solid 3px;
 }
 
-[data-theme="dark"] .btn-success, .btn-primary, .btn-secondary, .btn-danger, .btn-warning, .btn-info, .btn-light, .btn-dark {
+[data-theme="dark"] .btn{
   background-color: var(--bgdark);
   color: #fff;
   border: rgb(126, 126, 126) solid 2px;

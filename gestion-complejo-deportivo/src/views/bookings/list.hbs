@@ -1,36 +1,31 @@
-<div class="row d-flex justify-content-center">
+<div class="row d-flex justify-content-left m-2">
   {{#each bookings}}
-    <div class="col-sm-3">
-    <div class="card text-center shadow-sm">
+  <div class="col-sm-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex justify-content-center">
+          <img class="card-img" src="/img/bookingHeader.png" style="width: 11em;" alt="Bookings header">
+        </div>
+      </div>
       <div class="card-body">
-        <img src="/img/booking_header.svg" class="card-img" alt="">
-        <h5 class="card-title h3 text-dark font-weight-light">{{tipo_cancha}}</h5> 
-        <h6 class="card-subtitle text-success h5">Descripción</h6> <hr class="text-success">
-        <p class="card-text">{{description}}</p>
-        <h6 class="card-subtitle text-success  h5">Datos</h6> <hr class="text-success">
-        <p class="card-text text-secondary">Comienza:  {{timeago date_booking}}<span class="text-success"> ({{dateNormalized date_booking}})</span></p>
-        <div class="row d-flex justify-content-center">
-        <p class="btn-success rounded p-2 text-light col-lg-5 m-2">Inicia:  {{start_booking}}</p>
-         <p class="btn-danger rounded p-2 text-light col-lg-5 m-2">Finaliza: {{end_booking}}</p>
-         <p class="h5 btn-light rounded p-2 col-lg-6">Pagas: UYU${{price}}
-         </p>
-         </div>
-        <a href="#" class="btn btn-primary">Inspeccionar</a>
+        <h5 class="h6 font-weight-bold">{{tipo_cancha}}</h5>
+        <p class="small font-italic">Fecha: {{dateNormalized date_booking}}</p>
+        <p class="small font-italic">Hora: {{start_booking}} Fin:</p>
       </div>
     </div>
   </div>
   {{else}}
   <div class="container">
     <div class="row">
-    <div class="col-12">
-      <div class="card text-center shadow">
-        <div class="card-body">
-          <h5 class="card-title text-danger">Vaya... parece que no tienes reservas</h5>
-          <p class="card-text text-dark">Para realizar una reserva presiona el botón a continuación.</p>
-          <a href="/bookings/create" class="btn btn-light shadow text-success">Reservar</a>
+      <div class="col-12">
+        <div class="card text-center shadow">
+          <div class="card-body">
+            <h5 class="card-title text-danger">Vaya... parece que no tienes reservas</h5>
+            <p class="card-text text-dark">Para realizar una reserva presiona el botón a continuación.</p>
+            <a href="/bookings/create" class="btn btn-light shadow text-success">Reservar</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
   {{/each}}

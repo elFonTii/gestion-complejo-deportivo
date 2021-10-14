@@ -39,19 +39,19 @@ router.post('/create/new', isLoggedIn, async (req, res) => {
     const user = req.user.username;
     const _booking = new Booking(date_booking, start_booking + ':00', cancha, user);
     const bookings = await pool.query('SELECT * FROM booking WHERE date_booking = ? AND start_booking = ? AND cancha = ?', [_booking.date_booking, _booking.start_booking, _booking.cancha]);
-
-    //The booking can't be in the past.
-    if (_booking.date_booking < mydata.normalizeDate(new Date()) && _booking.start_booking < mydata.normalizeHour(new Date().getHours() + ':00')) {
-        req.flash('message', 'La fecha de la reserva no puede ser en el pasado');
-        res.redirect('/bookings/create');
-    } else if (bookings.length > 0) {
-        //The booking can't be in the same time of another booking.
-        req.flash('message', 'La cancha ya está reservada en ese horario');
-        res.redirect('/bookings/create');
+    const isBusy = await _booking.isBusy();
+    if(_booking.isInDate()){
+        if(isBusy){
+            req.flash('message', 'La cancha seleccionada está ocupada en la fecha y hora seleccionada.');
+            res.redirect('/bookings/create');
+        } else {
+            await _booking.insert();
+            req.flash('message', 'Reserva creada correctamente');
+            res.redirect('/bookings');
+        }
     } else {
-        _booking.insert();
-        req.flash('message', 'Reserva creada con éxito');
-        res.redirect('/bookings');
+        req.flash('message', 'La fecha seleccionada no es válida');
+        res.redirect('/bookings/create');
     }
 });
 
