@@ -32,7 +32,7 @@ sheets.data = function (data) {
 
 sheets.scan = function () {
     const dir = path.join(__dirname, '../uploads/');
-        const files = fs.readdirSync(dir);
+    const files = fs.readdirSync(dir);
     const result = [];
     const size = [];
     for (const file of files) {

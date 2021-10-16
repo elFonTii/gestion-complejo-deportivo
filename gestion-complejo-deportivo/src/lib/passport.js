@@ -31,12 +31,12 @@ passport.use('local.signup', new LocalStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, username, password, done) => {
-  const { name, surname, localidad, direccion, nacimiento, gen } = req.body;
+  const { email, name, surname, localidad, direccion, nacimiento, gen } = req.body;
   
   //Verify if the user already exists
-  const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
-  if (rows.length > 0) {
-    return done(null, false, req.flash('message', 'El usuario ' + username + ' ya existe, por favor, elige otro.'));
+  const users = await pool.query('SELECT * FROM users WHERE username = ? OR email = ?', [username, email]);
+  if (users.length > 0) {
+    return done(null, false, req.flash('message', 'Ya existe un usuario con ese usuario o correo.'));
   } else {
     if(gen == 1)
       profile = 'profile_picture_2.svg';
@@ -44,6 +44,7 @@ passport.use('local.signup', new LocalStrategy({
       profile = 'profile_picture_girl';
       
   let newUser = {
+    email,
     name,
     surname,
     username,

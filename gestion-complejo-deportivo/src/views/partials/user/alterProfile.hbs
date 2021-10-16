@@ -1,6 +1,6 @@
 <div class="col-lg-9">
 
-    <div class="card shadow mb-4 border-0">
+    <div class="card mb-4 border-0">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-secondary">Mis datos</h6>
         </div>
@@ -12,34 +12,121 @@
             {{/if}}
             <p class="ml-3">Aquí tendrás el control de tu perfil, sientete libre de cambiarlo y personalizarlo.</p>
             <div class="my-2"></div>
-                                    <div class="row">
-                                        <div class="col-lg-4 d-flex justify-content-center">
-                                            <div class="card shadow mt-2 border-0">
-                                                <div class="card-body bg-light">
-                                                    <div class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100">
-                                                        <p class="small mb-1">Nombre</p>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control bg-light small border-0" value="{{user.name}}" readonly>
-                                                        </div>
-                                                        <p class="small mb-1">Apellido</p>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control bg-light small border-0" value="{{user.surname}}" readonly>
-                                                        </div>
-                                                        <p class="small mb-1 mt-2">Nacimiento</p>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control bg-light small border-0" value="{{user.nacimiento}}" readonly>
-                                                        </div>
-                                                        <p class="small mb-1 mt-2">Dirección</p>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control bg-light small border-0" value="{{user.direccion}}" readonly>
-                                                        </div>
-                                                        
-                                                        <div class="input-group mt-3">
-                                                            <a class="btn btn-secondary" href="/profile/edit">
-                                                                Editar información <i class="fas fa-pencil-alt fa-sm"></i>
-                                                            </a>
-                                                        </div>
-                                                    </div>
+            <div class="row">
+                <h5 class="text text-dark font-weight-bold">Datos de cuenta</h5>
+                <div class="col-lg-7">
+                    <div class="form-group p-2">
+                        <div class="row border-0 bg-gray-200 p-2 rounded">
+                            <div class="col-sm-4">
+                                <h6 class="text text-dark">Usuario</h6>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="text-uppercase">{{user.username}}</h6>
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="text text-dark font-weight-bold">Datos personales</h5>
+                <div class="col-lg-7">
+                    <div class="form-group p-2">
+                        <div class="row border-0 bg-gray-200 p-2 rounded">
+                            <div class="col-sm-4">
+                                <h6 class="text text-dark">Nombre</h6>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="text-uppercase">{{user.name}}</h6>
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group p-2">
+                        <div class="row border-0 bg-gray-200 p-2 rounded">
+                            <div class="col-sm-4">
+                                <h6 class="text text-dark">Apellido</h6>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="text-uppercase">{{user.surname}}</h6>
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group p-2">
+                        <div class="row border-0 bg-gray-200 p-2 rounded">
+                            <div class="col-sm-4">
+                                <h6 class="text text-dark">Fecha de nacimiento</h6>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="text-uppercase">{{user.nacimiento}}</h6>
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group p-2">
+                        <div class="row border-0 bg-gray-200 p-2 rounded">
+                            <div class="col-sm-4">
+                                <h6 class="text text-dark">Género</h6>
+                            </div>
+                            <div class="col-sm-7">
+                                {{#if (isMan user.gen)}}
+                                <h6 class="text">Masculino</h6>
+                                {{else}}
+                                <h6 class="text">Femenino</h6>
+                                {{/if}}
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="text text-dark font-weight-bold">Datos de facturación</h5>
+                <div class="col-lg-7">
+                    <div class="form-group p-2">
+                        <div class="row border-0 bg-gray-200 p-2 rounded">
+                            <div class="col-sm-4">
+                                <h6 class="text text-dark">Dirección</h6>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="text-uppercase">{{user.direccion}}</h6>
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group p-2">
+                        <div class="row border-0 bg-gray-200 p-2 rounded">
+                            <div class="col-sm-4">
+                                <h6 class="text text-dark">Localidad</h6>
+                            </div>
+                            <div class="col-sm-7">
+                                <h6 class="text-uppercase">{{user.localidad}}</h6>
+                            </div>
+                            <div class="col-sm-1">
+                                <a href="">
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -47,4 +134,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

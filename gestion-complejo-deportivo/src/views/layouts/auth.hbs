@@ -24,59 +24,40 @@
 
 <body id="page-top">
     <main>
-        <div id="wrapper">
 
-            {{#if user}}
-
-            {{#if (isUser user.rol)}}
-            {{> navigation }}
-            <div id="content-wrapper">
-                {{> header }}
-                {{/if}}
-
-                {{#if (isAdmin user.rol)}}
-                {{> admin-navigation }}
-                <div id="content-wrapper">
-                    {{> header }}
-                    {{/if}}
-                    {{/if}}
-                    <!-- Navigation -->
-                    <div class="container p-4">
-                        <div class="row">
-                            <div class="col-md-4 mx-auto">
-                                <div class="alert alert-light alert-dissmissible fade show border-left-danger" role="alert">
-                                    Esto es una alerta de prueba
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <i class="fas fa-times text-danger"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+        {{#if message}}
+        <div class="container p-2">
+            <div class="row">
+                <div class="col-md-5 mx-auto">
+                    <div class="alert alert-light alert-dissmissible fade show border-left-danger" role="alert">
+                        {{message}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <i class="fas fa-times text-danger"></i>
+                        </button>
                     </div>
-
-                    {{#if success}}
-                    <div class="container mt-3">
-                        <div class="row">
-                            <div class="col-md-6 mx-auto">
-                                <div class="d-flex justify-content-center">
-                                    <div class="border-left-success shadow rounded text-dark bg-light">
-                                        <div class="card-body">
-                                            {{success}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{/if}}
-
-
-                    {{!--Sintaxis de handlebars, el texto entre tres llaves es el contenido de la plantilla (El
-                    contenido
-                    que va a variar, el resto es estático). --}}
-                    {{{ body }}}
                 </div>
             </div>
+        </div>
+        {{/if}}
+
+        {{#if success}}
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="d-flex justify-content-center">
+                        <div class="border-left-success shadow rounded text-dark bg-light">
+                            <div class="card-body">
+                                {{success}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        {{!--Sintaxis de handlebars, el texto entre tres llaves es el contenido de la plantilla (El contenido que va a
+        variar, el resto es estático). --}}
+        {{{ body }}}
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
