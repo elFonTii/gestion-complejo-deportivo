@@ -21,7 +21,6 @@ router.get('/inspect/:username', isAdmin, async (req, res) => {
       bookings_per_month: await dbdata.getBookingsPerMonthByUser(req.params.username)
     }
     
-
     if(subject.username == req.user.username) {
       req.flash('success', '¿No crees que es mejor idea inspeccionar a alguien más?');
         res.redirect('/users');

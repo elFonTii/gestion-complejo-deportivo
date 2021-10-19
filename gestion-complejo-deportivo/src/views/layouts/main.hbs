@@ -40,12 +40,13 @@
                     {{> header }}
                     {{/if}}
                     {{/if}}
+                    {{#if message}}
                     <!-- Navigation -->
                     <div class="container p-4">
                         <div class="row">
                             <div class="col-md-4 mx-auto">
                                 <div class="alert alert-light alert-dissmissible fade show border-left-danger" role="alert">
-                                    Esto es una alerta de prueba
+                                    {{message}}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <i class="fas fa-times text-danger"></i>
                                     </button>
@@ -53,6 +54,7 @@
                             </div>
                         </div>
                     </div>
+                    {{/if}}                    
 
                     {{#if success}}
                     <div class="container mt-3">
