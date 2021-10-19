@@ -15,16 +15,16 @@ router.get('/inspect/:username', isAdmin, async (req, res) => {
   //Obtenemos los usuarios desde la base de datos.
     const row = await pool.query('SELECT * FROM users WHERE username = ?', [req.params.username]);
     const subject = row[0];
-
-    const subject_data = {
-      booking_count: await dbdata.getBookingCountByUser(req.params.username),
-      bookings_per_month: await dbdata.getBookingsPerMonthByUser(req.params.username)
-    }
     
     if(subject.username == req.user.username) {
       req.flash('success', '¿No crees que es mejor idea inspeccionar a alguien más?');
         res.redirect('/users');
     } else {
+      const subject_data = {
+        booking_count: await dbdata.getBookingCountByUser(req.params.username),
+        bookings_per_month: await dbdata.getBookingsPerMonthByUser(req.params.username)
+      }
+      
       const isProminent = await dbdata.setUserProminent(subject.username);
       res.render('users/inspect', {subject, isProminent, subject_data}); 
     }

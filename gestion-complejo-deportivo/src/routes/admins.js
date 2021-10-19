@@ -9,8 +9,7 @@ const log = require('../lib/log');
 const { constructor } = require('../lib/stats');
 
 router.get('/', isAdmin , async(req, res) => {
-    const admin = await pool.query('SELECT * FROM users WHERE rol = 1');
-    res.render('admin/admins', {admin});
+    res.status(404).send('Error 404: Not found');
 })
 
 router.get('/make', isAdmin, (req, res) => {

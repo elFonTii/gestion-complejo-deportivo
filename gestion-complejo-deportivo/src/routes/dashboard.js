@@ -5,10 +5,11 @@ const notis = require('../lib/notifications');
 const pool = require('../database');
 const log = require('../lib/log');
 const dbdata = require('../lib/mydata_api');
+const mydata = require('../lib/mydata_api');
 
 //Create a new route with the name 'dashboard'.
 router.get('/', isLoggedIn, async (req, res) => {
-    const todayBookings = await dbdata.getTodayBookings();
+    const todayBookings = await dbdata.getTodayBookings(5);
     const today = new Date();
     // get the current hour and minutes of the day
     const currentTime = today.getHours() + ':' + today.getMinutes()+30;
@@ -30,7 +31,10 @@ router.get('/', isLoggedIn, async (req, res) => {
             }
         }
         const prominentUser = await dbdata.getAllProminentUsers();
-        res.render('dashboard/dashboard', {todayBookings, prominentUser});
+        const metadata = {
+            bookingsCount: await mydata.getBookingCountByUser(req.user.username),
+        }
+        res.render('dashboard/dashboard', {todayBookings, prominentUser, metadata});
         } else {
         const prominentUser = await dbdata.getAllProminentUsers();
         console.log('No bookings to update');

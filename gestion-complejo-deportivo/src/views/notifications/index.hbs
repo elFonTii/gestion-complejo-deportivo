@@ -8,94 +8,95 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3">
-                            <div class="card shadow mb-4 border-0">
-                                <div class="card-header py-3 border-0">
-                                    <h6 class="m-0 font-weight-bold text-success text-center">Acciones</h6>
-                                </div>
-                                <div class="card-body">
-                                  <ul class="list-group list-group-flush text-center">
-                                    <li class="list-group-item">
-                                        <a href="/notification-center/new" class="btn btn-success btn-block">Nueva notificación</a>
-                                    </li>
-                                  </ul>
+                        <!-- Card begins -->
+                        <div class="card border-0">
+                            <!-- Card header -->
+                            <div class="card-header border-0">
+                                <div class="row d-flex">
+                                    <div class="col-sm-3">
+                                        <h6 class="m-0 font-weight-bold text-dark text-center">Acciones</h6>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <h6 class="m-0 font-weight-bold text-dark text-center">Notificaciones</h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="card shadow mb-4 border-0">
-                                <div class="card-header py-3 border-0">
-                                    <h6 class="m-0 font-weight-bold text-success text-center">Notificaciones</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        {{#each notifications}}
-                                        <div class="d-flex justify-content-center">
-                                            <div class="card col-11 rounded border-left-info mt-2 border-0">
-                                                <div class="card-body text-dark d-flex justify-content-between">
-                                                    <div class="col-11">
-                                                    <h5 class="card-title text-dark">{{noti_title}}</h5>
-                                                    <p class="card-text text-secondary">{{noti_description}}</p>
-                                                    <a href="/notification-center/{{noti_id}}/delete" class="btn btn-danger btn-sm">Eliminar</a>
+                            <!-- Card header end -->
+                            <!-- Card body begins -->
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <ul class="list-group list-group-flush text-center">
+                                            <li class="list-group-item">
+                                                <a href="/notification-center/new"
+                                                    class="btn btn-outline-light border-2 text-dark btn-block">Nueva
+                                                    notificación</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div class="row">
+                                            {{#each notifications}}
+                                            <div class="d-flex justify-content-center">
+                                                <div class="card col-11 rounded border-left-success mt-2 border-0">
+                                                    <div class="card-body text-dark d-flex justify-content-between">
+                                                        <div class="col-11">
+                                                            <h5 class="card-title text-dark">{{noti_title}}</h5>
+                                                            <p class="card-text text-secondary">{{noti_description}}</p>
+                                                            <a href="/notification-center/{{noti_id}}/delete"
+                                                                class="btn btn-danger btn-sm">Eliminar</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            {{else}}
+                                            <div class="d-flex justify-content-center">
+                                                <h6 class="m-2 h6">No hay notificaciones actualmente</h6>
+                                            </div>
+                                            {{/each}}
                                         </div>
-                                        {{else}}
-                                        <div class="d-flex justify-content-center">
-                                            <h6 class="m-2 h6">No hay notificaciones actualmente</h6>
-                                        </div>
-                                        {{/each}}
                                     </div>
                                 </div>
-                                </div>
                             </div>
+                            <!-- Card body end -->
                         </div>
-                        </div>
+                        <!-- Card end -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-{{else}}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="h2 mb-2 text-gray-800 font-weight-bold text-center">Notificaciones</h1>
-                <div class="card-body">
+
+        {{else}}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-lg-12">
-                                    <div class="row">
-                                        {{#each notifications}}
-                                        <div class="d-flex justify-content-center">
-                                            <div class="card col-lg-12 rounded border-left-info mt-2">
-                                                <div class="card-body text-dark d-flex justify-content-between">
-                                                    <div class="col-1 m-0">
-                                                        <img src="/img/notification.svg" style="width: 5em;" alt="">
-                                                    </div>
-                                                    <div class="col-11 m-0">
-                                                    <h5 class="card-title font-weight-bold">{{noti_title}}</h5>
-                                                    <p class="card-text">{{noti_description}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{else}}
-                                        <div class="d-flex justify-content-center">
-                                            <h6 class="m-2 h6">No hay notificaciones actualmente</h6>
-                                        </div>
-                                        {{/each}}
+                        {{#each notifications}}
+                        <div class="d-flex justify-content-center">
+                            <div class="card col-11 rounded border-left-success mt-2 border-0">
+                                <div class="card-body text-dark d-flex justify-content-between">
+                                    <div class="col-11">
+                                        <h5 class="card-title text-dark">{{noti_title}}</h5>
+                                        <p class="card-text text-secondary">{{noti_description}}</p>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
+                        {{else}}
+                        <div class="d-flex justify-content-center">
+                            <h6 class="m-2 h6">No hay notificaciones actualmente</h6>
                         </div>
+                        {{/each}}
                     </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center p-2">
+                <div class="col-sm-1">
+                    <a class="btn btn-outline-success" href="/dashboard">
+                    <i class="fas fa-chevron-left"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-{{/if}}
+    {{/if}}

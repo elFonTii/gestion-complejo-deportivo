@@ -1,29 +1,127 @@
-
-<div class="d-flex justify-content-center">
+<div class="container-fluid">
+  <div class="d-flex justify-content-center">
     <h1 class="h2 mb-2 text-dark font-weight-bold">Mis suscripciones</h1>
     <p class="mb-4"></p>
-</div>
-<div class="row">
-{{#each subscriptions}}
-  <div class="col-sm-3 m-2">
-    <div class="card shadow">
-        <img src="/img/gym_banner.svg" class="card-img-top" alt="">
-      <div class="card-body">
-        <h5 class="card-title text-dark  text-center">{{service_name}}</h5>
-        <p class="card-text text-center">{{service_description}}</p>
-        <h6 class="card-title text-dark  text-center">Estado: <span class="text-success">Activa</span></h6>
-        <h6 class="card-title text-dark  text-center">Información asociada:</h6>
-        <h6 class="card-title text-dark  text-center">Nombre: <span class="text-secondary">{{ass_name}}</span></h6>
-        <h6 class="card-title text-dark  text-center">Apellido: <span class="text-secondary">{{ass_surname}}</span></h6>
-        <h6 class="card-title text-dark  text-center">Cédula: <span class="text-secondary">{{asociated_ci}}</span></h6>
-        <h6 class="card-title text-dark  text-center">e-mail: <span class="text-secondary">{{ass_email}}</span></h6>
-        <h6 class="card-title text-dark  text-center">Dirección 1: <span class="text-secondary">{{ass_dir1}}</span></h6>
-        <h6 class="card-title text-dark  text-center">Dirección 2: <span class="text-secondary">{{ass_dir2}}</span></h6>
-        <h6 class="card-title text-dark  text-center">Realizada: <span class="text-secondary">{{timeago startDate}}</span></h6>
-        <div class="d-flex justify-content-center">
+  </div>
+  <div class="row d-flex justify-content-center">
+    {{#each subscriptions}}
+    <div class="col-lg-10">
+
+      <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#{{service_name}}" class="d-block card-header py-3" data-toggle="collapse" role="button"
+          aria-expanded="true" aria-controls="{{service_name}}">
+          <h6 class="m-0 font-weight-bold text-dark">{{service_name}} - Suscripción</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse show" id="{{service_name}}">
+          <div class="card-body">
+            <div class="col-lg-12">
+              <div class="card-body">
+                <h2>Suscripción a <span class="font-weight-bold mb-5">{{service_name}}</span></h2>
+                <p class="ml-3">Visualiza el estado de tu suscripción a {{service_name}}.
+                </p>
+                <div class="my-2"></div>
+                <div class="row">
+                  <h5 class="text text-dark font-weight-bold">Datos de contacto</h5>
+                  <div class="col-lg-8">
+                    <div class="form-group p-2">
+                      <div class="row border-0 bg-gray-200 p-2 rounded">
+                        <div class="col-sm-4">
+                          <h6 class="text text-dark">Nombre</h6>
+                        </div>
+                        <div class="col-sm-7">
+                          <h6 class="text-uppercase">{{ass_name}}</h6>
+                        </div>
+                        <div class="col-sm-1">
+                          <a href="">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-8">
+                    <div class="form-group p-2">
+                      <div class="row border-0 bg-gray-200 p-2 rounded">
+                        <div class="col-sm-4">
+                          <h6 class="text text-dark">Apellido</h6>
+                        </div>
+                        <div class="col-sm-7">
+                          <h6 class="text-uppercase">{{ass_surname}}</h6>
+                        </div>
+                        <div class="col-sm-1">
+                          <a href="">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group p-2">
+                      <div class="row border-0 bg-gray-200 p-2 rounded">
+                        <div class="col-sm-4">
+                          <h6 class="text text-dark">Cédula de identidad</h6>
+                        </div>
+                        <div class="col-sm-7">
+                          <h6 class="text-uppercase">{{asociated_ci}}</h6>
+                        </div>
+                        <div class="col-sm-1">
+                          <a href="">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group p-2">
+                      <div class="row border-0 bg-gray-200 p-2 rounded">
+                        <div class="col-sm-4">
+                          <h6 class="text text-dark">Correo electrónico</h6>
+                        </div>
+                        <div class="col-sm-7">
+                          <h6 class="text-uppercase">{{ass_email}}</h6>
+                        </div>
+                        <div class="col-sm-1">
+                          <a href="">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <h5 class="text text-dark font-weight-bold">Datos de facturación</h5>
+                  <div class="col-lg-8">
+                    <div class="form-group p-2">
+                      <div class="row border-0 bg-gray-200 p-2 rounded">
+                        <div class="col-sm-4">
+                          <h6 class="text text-dark">Linea de dirección 1</h6>
+                        </div>
+                        <div class="col-sm-7">
+                          <h6 class="text-uppercase">{{ass_dir1}}</h6>
+                        </div>
+                        <div class="col-sm-1">
+                          <a href="">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group p-2">
+                      <div class="row border-0 bg-gray-200 p-2 rounded">
+                        <div class="col-sm-4">
+                          <h6 class="text text-dark">Linea de dirección 2</h6>
+                        </div>
+                        <div class="col-sm-7">
+                          <h6 class="text-uppercase">{{ass_dir2}}</h6>
+                        </div>
+                        <div class="col-sm-1">
+                          <a href="">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    {{/each}}
   </div>
-{{/each}}
 </div>

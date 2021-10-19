@@ -1,30 +1,31 @@
 <div class="row d-flex justify-content-left m-2">
   {{#each bookings}}
-  <div class="col-sm-2">
-    <div class="card">
-      <div class="card-header">
-        <div class="d-flex justify-content-center">
-          <img class="card-img" src="/img/bookingHeader.png" style="width: 11em;" alt="Bookings header">
-        </div>
-      </div>
-      <div class="card-body">
-        <h5 class="h6 font-weight-bold">{{tipo_cancha}}</h5>
-        <p class="small font-italic">Fecha: {{dateNormalized date_booking}}</p>
-        <p class="small font-italic">Hora: {{start_booking}} Fin:</p>
-      </div>
-    </div>
-  </div>
-  {{else}}
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <div class="card text-center shadow">
-          <div class="card-body">
-            <h5 class="card-title text-danger">Vaya... parece que no tienes reservas</h5>
-            <p class="card-text text-dark">Para realizar una reserva presiona el botón a continuación.</p>
-            <a href="/bookings/create" class="btn btn-light shadow text-success">Reservar</a>
+  <div class="col-lg-3">
+
+    <!-- Dropdown Card Example -->
+    <div class="card shadow mb-4">
+      <!-- Card Header - Dropdown -->
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-dark"></h6>
+        <div class="dropdown no-arrow">
+          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+            <div class="dropdown-header">Dropdown Header:</div>
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
           </div>
         </div>
+      </div>
+      <!-- Card Body -->
+      <div class="card-body">
+        Dropdown menus can be placed in the card header in order to extend the functionality
+        of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
+        icon in the card header can be clicked on in order to toggle a dropdown menu.
       </div>
     </div>
   </div>

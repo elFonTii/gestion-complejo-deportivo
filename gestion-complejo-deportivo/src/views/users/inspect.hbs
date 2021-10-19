@@ -1,64 +1,166 @@
-<!-- Page Heading -->
 <div class="container-fluid">
-                <div class="container-fluid" style="z-index: 1060;">
-                    <div class="row">
-                        <div class="col-md-12 mx-auto">
-                            <div class="p-3 alert alert-secondary text-danger text-center alert-dismissible fade show">
-                                 Inspeccionando a @{{subject.username}}
-                            </div>
-                        </div>
-                    </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="card mb-4 border-0">
+        <div class="card-header py-3">
+          {{#if (isMan subject.gen)}}
+          <img class="card-img-top" src="/img/profile_picture.svg" alt="Card image cap">
+          {{else}}
+          <img class="card-img-top" src="/img/profile_picture_girl2.svg" alt="Card image cap">
+          {{/if}}
+          <a href="/profile" class="link-secondary">
+            <h4 class="card-title text-center mt-3">@{{subject.username}}</h4>
+          </a>
+        </div>
+        <div class="card-body">
+          
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+
+      <div class="card mb-4 border-0">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-secondary">En inspección</h6>
+        </div>
+        <div class="card-body">
+          <h2>Datos de <span class="font-weight-bold mb-5">{{subject.name}}</span></h2>
+          <p class="ml-3">Visualiza los datos y estadísticas de {{subject.name}}.</p>
+          <div class="my-2"></div>
+          <div class="row">
+            <h5 class="text text-dark font-weight-bold">Datos de cuenta</h5>
+            <div class="col-lg-7">
+              <div class="form-group p-2">
+                <div class="row border-0 bg-gray-200 p-2 rounded">
+                  <div class="col-sm-4">
+                    <h6 class="text text-dark">Usuario</h6>
+                  </div>
+                  <div class="col-sm-7">
+                    <h6 class="text-uppercase">{{subject.username}}</h6>
+                  </div>
+                  <div class="col-sm-1">
+                    <a href="">
+
+                    </a>
+                  </div>
                 </div>
-                    <div class="row">
-
-                        <div class="col-lg-3">
-
-                            <!-- Circle Buttons -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                      <img class="card-img-top" src="{{subject.profile}}" alt="Card image cap">
-                                      <a href="/users/inspect/{{subject.username}}" class="link-dark">
-                                      <h4 class="card-title text-center text-danger font-italic mt-3">@{{subject.username}}</h4>
-                                      <div class="d-flex justify-content-center">
-                                        {{#if (isAdmin subject.rol)}}
-                                          <a class="btn btn-info text-center" style="width: 20em;">
-                                            <i class="fas fa-user"></i>
-                                            Administrador</a>
-                                        </a>
-                                        {{else}}
-                                          <a class="btn btn-info text-center" style="width: 20em;">
-                                            <i class="fas fa-user"></i>
-                                            Usuario</a>
-                                        {{/if}}
-                                      </div>
-                                      {{#if isProminent}}
-                                      <div class="d-flex justify-content-center mt-2">
-                                          <a class="btn btn-warning text-center" style="width: 20em;">
-                                            <i class="fas fa-star"></i>
-                                            Destacado</a>
-                                        </a>
-                                      </div>
-                                      {{/if}}
-                                </div>
-                                <div class="card-body">
-                                    <!-- subject Information -->
-                                  <ul class="list-group list-group-flush text-center">
-                                    <li class="list-group-item"><code>Reservas totales: {{subject_data.booking_count}}</code></li>
-                                    <li class="list-group-item"><code>Reservas en el último mes: {{subject_data.bookings_per_month}}</code> </li>
-                                    <a class="btn btn-danger text-center" data-toggle="modal" data-target="#deleteModal">Eliminar</a></li>
-                                  </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{> admin/inspectProfile}}
-
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
-
+              </div>
             </div>
+            <h5 class="text text-dark font-weight-bold">Datos personales</h5>
+            <div class="col-lg-7">
+              <div class="form-group p-2">
+                <div class="row border-0 bg-gray-200 p-2 rounded">
+                  <div class="col-sm-4">
+                    <h6 class="text text-dark">Nombre</h6>
+                  </div>
+                  <div class="col-sm-7">
+                    <h6 class="text-uppercase">{{subject.name}}</h6>
+                  </div>
+                  <div class="col-sm-1">
+                    <a href="">
 
-            {{> modals/delete-user }}
-            <!-- End of Main Content -->
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-2">
+                <div class="row border-0 bg-gray-200 p-2 rounded">
+                  <div class="col-sm-4">
+                    <h6 class="text text-dark">Apellido</h6>
+                  </div>
+                  <div class="col-sm-7">
+                    <h6 class="text-uppercase">{{subject.surname}}</h6>
+                  </div>
+                  <div class="col-sm-1">
+                    <a href="">
+
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-2">
+                <div class="row border-0 bg-gray-200 p-2 rounded">
+                  <div class="col-sm-4">
+                    <h6 class="text text-dark">Fecha de nacimiento</h6>
+                  </div>
+                  <div class="col-sm-7">
+                    <h6 class="text-uppercase">{{subject.nacimiento}}</h6>
+                  </div>
+                  <div class="col-sm-1">
+                    <a href="">
+
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-2">
+                <div class="row border-0 bg-gray-200 p-2 rounded">
+                  <div class="col-sm-4">
+                    <h6 class="text text-dark">Género</h6>
+                  </div>
+                  <div class="col-sm-7">
+                    {{#if (isMan subject.gen)}}
+                    <h6 class="text">Masculino</h6>
+                    {{else}}
+                    <h6 class="text">Femenino</h6>
+                    {{/if}}
+                  </div>
+                  <div class="col-sm-1">
+                    <a href="">
+
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h5 class="text text-dark font-weight-bold">Datos de facturación</h5>
+            <div class="col-lg-7">
+              <div class="form-group p-2">
+                <div class="row border-0 bg-gray-200 p-2 rounded">
+                  <div class="col-sm-4">
+                    <h6 class="text text-dark">Dirección</h6>
+                  </div>
+                  <div class="col-sm-7">
+                    <h6 class="text-uppercase">{{subject.direccion}}</h6>
+                  </div>
+                  <div class="col-sm-1">
+                    <a href="">
+
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-2">
+                <div class="row border-0 bg-gray-200 p-2 rounded">
+                  <div class="col-sm-4">
+                    <h6 class="text text-dark">Localidad</h6>
+                  </div>
+                  <div class="col-sm-7">
+                    <h6 class="text-uppercase">{{subject.localidad}}</h6>
+                  </div>
+                  <div class="col-sm-1">
+                    <a href="">
+
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group p-2">
+                <a href="/users" class="btn btn-primary btn-block font-weight-light">
+                  <div class="row justify-content-between">
+                    <div class="col-sm-1">
+                      <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="col-sm-11 text-center">
+                      Volver
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

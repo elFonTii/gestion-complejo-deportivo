@@ -1,45 +1,58 @@
+<!-- Begin Page Content -->
 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Lista de usuarios</h1>
-                    <p class="mb-4">En este apartado podrás ver los usuarios registrados en la plataforma, además podras administrarlos (Ver, editar, eliminar y restringir)</p>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+    <p class="mb-4">Tabla de todos los usuarios registrados en el sistema y su información.</p>
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-secondary">Listado de usuarios</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="text-dark table table-borderless text-center" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Fecha de nacimiento</th>
-                                            <th>Dirección</th>
-                                            <th>Localidad</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{#each users}}
-                                        <tr>
-                                            <td><a class="link-success" href="">@{{username}}</a></td>
-                                            <td>{{name}}</td>
-                                            <td>{{surname}}</td>
-                                            <td>{{nacimiento}}</td>
-                                            <td>{{direccion}}</td>
-                                            <td>{{localidad}}</td>
-                                            <td><a href="/users/inspect/{{username}}" class="btn btn-info">Inspeccionar</a></td>
-                                        </tr>
-                                        {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- /.container-fluid -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-dark">Usuarios</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>e-mail</th>
+                            <th>Dirección</th>
+                            <th>Localidad</th>
+                            <th>Género</th>
+                            <th>Rol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each users}}
+                        <tr>
+                            <td>
+                                <a href="/users/inspect/{{username}}">
+                                    {{username}}
+                                </a>
+                            </td>
+                            <td>{{name}}</td>
+                            <td>{{surname}}</td>
+                            <td>{{email}}</td>
+                            <td>{{direccion}}</td>
+                            <td>{{localidad}}</td>
+                            {{#if (isMan gen)}}
+                            <td>Masculino</td>
+                            {{else}}
+                            <td>Femenino</td>
+                            {{/if}}
+                            {{#if (isAdmin rol)}}
+                            <td>Administrador</td>
+                            {{else}}
+                            <td>Usuario</td>
+                            {{/if}}
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

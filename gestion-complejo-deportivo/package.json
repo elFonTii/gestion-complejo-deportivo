@@ -21,6 +21,7 @@
     "bindings": "^1.5.0",
     "bootstrap": "^5.1.1",
     "chart.js": "^3.5.0",
+    "ciuy": "^1.0.0",
     "connect-flash": "^0.1.1",
     "darkmode-js": "^1.5.7",
     "debug": "^4.3.2",

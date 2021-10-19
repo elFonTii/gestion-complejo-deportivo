@@ -105,10 +105,10 @@ mydata.get = async function () {
 }
 
 /*Devuelve todas las reservas que son de este dia, sin importar si están siendo ejecutadas*/
-mydata.getTodayBookings = async function () {
+mydata.getTodayBookings = async function (limit) {
     const today = new Date();
     const currentDate = this.normalizeDate(today);
-    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ?', [currentDate]);
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ? LIMIT ?', [currentDate, limit]);
     return bookings;
 }
 /*Devuelve el conteo de reservas que son de este dia.*/

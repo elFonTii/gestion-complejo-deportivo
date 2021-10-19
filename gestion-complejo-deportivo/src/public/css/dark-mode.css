@@ -105,18 +105,8 @@
   background-color: var(--nav-dark) !important;
 }
 
-[data-theme="dark"] .btn-outline-success{
-  border: 3px solid var(--border-dark) !important;
-}
-
 [data-theme="dark"] .link-success{
   color: var(--bglight) !important;
-}
-
-[data-theme="dark"] .btn-outline-success, .btn-outline-primary, .btn-outline-secondary, .btn-outline-danger, .btn-outline-warning, .btn-outline-info, .btn-outline-light, .btn-outline-dark {
-  background-color: var(--bgextradark) !important;
-  color: #fff;
-  border: #353535 solid 3px;
 }
 
 [data-theme="dark"] .btn{
