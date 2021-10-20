@@ -6,7 +6,7 @@ router.get('/runner', (req, res) => {
 })
 
 router.get('/tic-tac', (req, res) => {
-    res.render('games/tic-tac')
+    res.render('games/tic-tac', {layout: 'tic-tac'})
 })
 
 module.exports = router;

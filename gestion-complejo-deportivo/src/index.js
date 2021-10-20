@@ -99,6 +99,7 @@ var players = {},
         socket.emit('connected',{msg:"hello"})
         joinGame(socket);
 
+            io.emit('player', app.locals.user);
         if (getOpponent(socket)) {
             socket.emit("game.begin", {
               symbol: players[socket.id].symbol,
@@ -115,6 +116,14 @@ var players = {},
             socket.emit("move.made", data);
             getOpponent(socket).emit("move.made", data);
           });
+
+          socket.on("reset.game", function() {
+            if (!getOpponent(socket)) {
+              return;
+            }
+            socket.emit("game.reset");
+            getOpponent(socket).emit("game.reset");
+          })
         
           socket.on("disconnect", function () {
             if (getOpponent(socket)) {
