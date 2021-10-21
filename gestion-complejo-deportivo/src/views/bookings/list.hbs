@@ -24,101 +24,35 @@
       </div>
       <!-- Card Body -->
       <div class="card-body">
-        <img src="/img/bookingHeader.png" class="img-fluid" alt="Booking header">
-      </div>
-    </div>
-  </div>
-  <!-- Logout Modal-->
-  <div class="modal fade" id="booking_{{id_booking}}_modal" tabindex="-1" role="dialog"
-    aria-labelledby="booking_{{id_booking}}_modal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h6 class="modal-title text-dark font-weight-bold" id="booking_{{id_booking}}_modal">Reserva - {{tipo_cancha}}
-          </h6>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-xl-12 col-md-12 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-between">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Inicia</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{start_booking}}</div>
-                    </div>
-                    <div class="col-auto">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Finaliza</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{end_booking}}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-6 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Inicia</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{start_booking}}</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clock fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-6 col-md-6 mb-4">
-              <div class="card border-left-danger shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Finaliza</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">{{end_booking}}</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-clock fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <p class="text-dark">
+              <strong>Fecha:</strong> {{date_booking}}
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <p class="text-dark">
+              <strong>Cancha:</strong> {{tipo_cancha}}
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <p class="text-dark">
+              <strong>Inicio:</strong> {{start_booking}}
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <p class="text-dark">
+              <strong>Fin:</strong> {{end_booking}}
+            </p>
+          </div>
+          <div class="col-lg-12">
+            <a href="/bookings/inspect/{{id_booking}}" class="btn btn-success btn-block">Inspeccionar</a>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="modal fade" id="delete_{{id_booking}}_booking" tabindex="-1" role="dialog"
-    aria-labelledby="delete_{{id_booking}}_booking" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-danger" id="delete_{{id_booking}}_booking">Eliminar {{tipo_cancha}}</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body text-center">Estás a punto de borrar una reserva,<br>
-          <p class="text-center">¿Realmente desea hacerlo?</p>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-          <a class="btn btn-danger" href="/bookings/delete/{{id_booking}}">Eliminar</a>
-        </div>
-      </div>
-    </div>
-  </div>
   {{else}}
-  <h1>ashe</h1>
+  <h1>No hay reservas</h1>
   {{/each}}
 </div>

@@ -3,13 +3,14 @@ const router = express.Router();
 const pool = require('../database');
 const { isAdmin } = require('../lib/auth');
 const passport = require('passport');
+const mp = require('mercadopago');
 
 /* LISTAR CANCHAS */
 
-router.get('/', isAdmin, async(req, res) => {
+router.get('/', isAdmin, async (req, res) => {
     const cancha = await pool.query('SELECT * FROM cancha');
     const quantity = cancha.length;
-    res.render('fields/list', {cancha, quantity});
+    res.render('fields/list', { cancha, quantity });
 });
 
 /* AÑADIR NUEVA CANCHA */
@@ -17,32 +18,53 @@ router.get('/add', isAdmin, (req, res) => {
     res.render('fields/add');
 });
 
-router.post('/add', isAdmin, async(req, res) => {
+router.post('/add', isAdmin, async (req, res) => {
     const { tipo_cancha, description, price, players } = req.body;
-    const cancha = {
-        tipo_cancha,
-        price,
-        players,
-        description
+    /* MERCADO PAGO PREFERENCE */
+    var preference_id = null;
+    let preference = {
+        items: [
+            {
+                title: tipo_cancha,
+                unit_price: parseInt(price),
+                quantity: 1,
+            }
+        ],
+        back_urls: {
+            success: 'http://gestionate.ddns.net:90/bookings/',
+            pending: 'http://gestionate.ddns.net:90/bookings/',
+            failure: 'http://gestionate.ddns.net:90/bookings/'
+        }
     };
-    console.log(cancha);
-    await pool.query('INSERT INTO cancha set ?', [cancha]);
-    req.flash('success', 'Cancha agregada correctamente');
-    res.redirect('/field');
+    mp.preferences.create(preference).then(async function (response) {
+        preference_id = response.response.id;
+        const cancha = {
+            preference_id,
+            tipo_cancha,
+            price,
+            players,
+            description
+        };
+        await pool.query('INSERT INTO cancha set ?', [cancha]);
+        req.flash('success', 'Cancha agregada correctamente');
+        res.redirect('/field');
+    }).catch(function (error) {
+        console.log(error);
+    });
 
 });
 
 /* EDITAR CANCHA */
 
-router.get('/edit/:id_cancha', isAdmin, async(req, res) => {
+router.get('/edit/:id_cancha', isAdmin, async (req, res) => {
     const id_cancha = req.params.id_cancha;
     const cancha = await pool.query('SELECT * FROM cancha WHERE id_cancha = ?', [id_cancha]);
-    res.render('fields/edit', {cancha});
+    res.render('fields/edit', { cancha });
 });
 
-router.post('/edit/:id_cancha', isAdmin, async(req, res) => {
+router.post('/edit/:id_cancha', isAdmin, async (req, res) => {
     const id_cancha = req.params.id_cancha;
-    const {tipo_cancha, price, players, description} = req.body;
+    const { tipo_cancha, price, players, description } = req.body;
     //update the cancha with the new values
     await pool.query('UPDATE cancha SET tipo_cancha = ?, price = ?, players = ?, description = ? WHERE id_cancha = ?', [tipo_cancha, price, players, description, id_cancha]);
 
@@ -52,7 +74,7 @@ router.post('/edit/:id_cancha', isAdmin, async(req, res) => {
 
 
 /* ELIMINAR CANCHA */
-router.get('/delete/:id_cancha', isAdmin, async(req, res) => {
+router.get('/delete/:id_cancha', isAdmin, async (req, res) => {
     const id_cancha = req.params.id_cancha;
     await pool.query('DELETE FROM cancha WHERE id_cancha = ?', [id_cancha]);
     req.flash('success', 'La cancha ha sido eliminada correctamente.');

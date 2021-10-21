@@ -10,6 +10,9 @@ const pool = require('../database');
 const mydata = require('../lib/mydata_api');
 const Booking = require('../lib/booking');
 const { normalizeDate } = require('../lib/mydata_api');
+const mercadopago = require('mercadopago');
+const checkout = require('../lib/checkout');
+const { check } = require('express-validator');
 
 
 router.get('/create', isLoggedIn, async (req, res) => {
@@ -40,8 +43,8 @@ router.post('/create/new', isLoggedIn, async (req, res) => {
     const _booking = new Booking(date_booking, start_booking + ':00', cancha, user);
     const bookings = await pool.query('SELECT * FROM booking WHERE date_booking = ? AND start_booking = ? AND cancha = ?', [_booking.date_booking, _booking.start_booking, _booking.cancha]);
     const isBusy = await _booking.isBusy();
-    if(_booking.isInDate()){
-        if(isBusy){
+    if (_booking.isInDate()) {
+        if (isBusy) {
             req.flash('message', 'La cancha seleccionada está ocupada en la fecha y hora seleccionada.');
             res.redirect('/bookings/create');
         } else {
@@ -70,5 +73,38 @@ router.get('/admin/list', isAdmin, async (req, res) => {
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha');
     res.render('bookings/admin/list', { bookings: bookings });
 });
+
+router.get('/inspect/:id_booking', isLoggedIn, async (req, res) => {
+    const id_booking = req.params.id_booking;
+    const select = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE id_booking = ?;', [id_booking]);
+    const booking = select[0];
+
+    if (booking.user != req.user.username) {
+        req.flash('message', 'No tienes permisos para realizar esta acción');
+        res.redirect('/dashboard');
+    } else {
+        
+        let preference = {
+            items: [
+              {
+                title: 'Mi producto',
+                unit_price: 100,
+                quantity: 1,
+              }
+            ]
+          };
+          
+          mercadopago.preferences.create(preference)
+          .then(function(response){
+          // Este valor reemplazará el string "<%= global.id %>" en tu HTML
+            global.id = response.body.id;
+            console.log('Para pagar, haga click en el botón de abajo');
+            res.render('bookings/inspect', { booking: booking });
+          }).catch(function(error){
+            console.log(error);
+          });
+    }
+
+})
 
 module.exports = router;

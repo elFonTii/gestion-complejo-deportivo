@@ -12,17 +12,17 @@ router.get('/', isLoggedIn, async (req, res) => {
     const todayBookings = await dbdata.getTodayBookings(5);
     const today = new Date();
     // get the current hour and minutes of the day
-    const currentTime = today.getHours() + ':' + today.getMinutes()+30;
-    const endHour = today.getHours()+1 + ':' + today.getMinutes()+30;
-    if(todayBookings != null) {
+    const currentTime = today.getHours() + ':' + today.getMinutes() + 30;
+    const endHour = today.getHours() + 1 + ':' + today.getMinutes() + 30;
+    if (todayBookings != null) {
         //for each booking, check if the booking is active
-        for(let i = 0; i < todayBookings.length; i++) {
+        for (let i = 0; i < todayBookings.length; i++) {
             const booking = todayBookings[i];
             const startTime = booking.start_booking.split(':');
             const endTime = booking.end_booking.split(':');
             const startHour = startTime[0] + ':' + startTime[1];
             const endHour = endTime[0] + ':' + endTime[1];
-            if(startHour <= currentTime && endHour >= currentTime) {
+            if (startHour <= currentTime && endHour >= currentTime) {
                 // if the booking is active, add it to the array
                 todayBookings[i].isActive = true;
             } else {
@@ -33,12 +33,14 @@ router.get('/', isLoggedIn, async (req, res) => {
         const prominentUser = await dbdata.getAllProminentUsers();
         const metadata = {
             bookingsCount: await mydata.getBookingCountByUser(req.user.username),
+            subscriptionsCount: await mydata.getSubscriptionCountByUser(req.user.username),
         }
-        res.render('dashboard/dashboard', {todayBookings, prominentUser, metadata});
-        } else {
+
+        res.render('dashboard/dashboard', { todayBookings, prominentUser, metadata });
+    } else {
         const prominentUser = await dbdata.getAllProminentUsers();
         console.log('No bookings to update');
-        res.render('dashboard/dashboard', {todayBookings, prominentUser});
+        res.render('dashboard/dashboard', { todayBookings, prominentUser });
     }
 });
 

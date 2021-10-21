@@ -68,7 +68,6 @@ app.use((req, res, next) => {
     app.use('/users', require('./routes/user'));
     app.use('/admin', require('./routes/admins'));
     app.use('/field', require('./routes/fields'));
-    app.use('/checkout', require('./routes/checkout'));
     app.use('/services', require('./routes/services'));
     app.use('/games', require('./routes/games'));
     app.use('/complejo', require('./routes/complejo'));
@@ -76,11 +75,9 @@ app.use((req, res, next) => {
     //TOOLS
     app.use('/tools', require('./routes/tools'));
 
-//Mercadopago Integration
-
-//Seteamos credenciales
-mercadopago.configure({
-    access_token: 'APP_USR-4340992889929344-080505-41c84725d553566484820ee3153552d7-195962628'
+    //Mercado pago//
+    mercadopago.configure({
+      access_token: 'APP_USR-4340992889929344-080505-41c84725d553566484820ee3153552d7-195962628'
   });
 
 

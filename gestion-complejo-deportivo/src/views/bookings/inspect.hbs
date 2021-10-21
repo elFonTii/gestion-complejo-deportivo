@@ -1,0 +1,128 @@
+<div class="container-fluid">
+    {{#if booking}}
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-dark text-center">{{booking.tipo_cancha}}</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="text text-dark font-weight-bold text-center">Datos de la reserva</h5>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="far fa-circle text-dark fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold">Cancha</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h6 class="text-uppercase">{{booking.tipo_cancha}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="far fa-circle text-dark fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold">Jugadores</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h6 class="text-uppercase">{{booking.players}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="far fa-circle text-success fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold">Inicia</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h6 class="text-uppercase">{{booking.start_booking}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="far fa-circle text-danger fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold">Finaliza</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h6 class="text-uppercase">{{booking.end_booking}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="fas fa-dollar-sign text-success fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold">Precio</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h6 class="text-uppercase text-success">UYU {{booking.price}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="preference_id" style="display: none;">{{booking.preference_id}}</p>
+                        <div class="col-lg-12 d-flex justify-content-center">
+                            <div class="checkout-container"></div>
+                            <script>
+                                preference_id = document.getElementById('preference_id').innerHTML;
+                                
+                                // Agrega credenciales de SDK
+                                const mp = new MercadoPago('APP_USR-06d842ec-bc3c-4a2a-bb77-a442f0da5d42', {
+                                    locale: 'es-UY'
+                                });
+
+                                // Inicializa el checkout
+                                mp.checkout({
+                                    preference: {
+                                        id: preference_id
+                                    },
+                                    render: {
+                                        container: '.checkout-container', // Indica el nombre de la clase donde se mostrará el botón de pago
+                                        label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+                                    }
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>

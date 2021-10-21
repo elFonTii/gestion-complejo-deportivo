@@ -292,6 +292,11 @@ mydata.getBookingCountByUser = async function (username) {
     return bookings[0].count;
 }
 
+mydata.getSubscriptionCountByUser = async function (username) {
+    const subscriptions = await pool.query('SELECT COUNT(*) as count FROM suscripcion WHERE owner = ?', [username]);
+    return subscriptions[0].count;
+}
+
 mydata.getBookingsPerMonthByUser = async function (username) {
     //Get the current month.
     const currentDate = this.getCurrentDate();
