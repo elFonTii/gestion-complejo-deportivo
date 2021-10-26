@@ -17,20 +17,6 @@ module.exports = class Booking {
         await pool.query(query, values);
     }
 
-    isValid(){ 
-        const actual_hour = new Date().getHours + ':00';
-
-        if(this.date_booking < normalizeDate(new Date())){
-            return false;
-        } else {
-            if(this.start_booking < normalizeHour(actual_hour)){
-                return false;
-            } else {
-                return true;
-            }
-        }
-    }
-
     async isBusy(){
         //Select count of booking in the same time
         const query = `SELECT count(*) as count FROM booking WHERE date_booking = ? AND start_booking = ? AND end_booking = ? AND cancha = ?`;

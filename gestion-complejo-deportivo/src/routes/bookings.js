@@ -40,21 +40,15 @@ router.post('/create/new', isLoggedIn, async (req, res) => {
     //Request the data from the form and the global variables.
     const { date_booking, start_booking, cancha } = req.body;
     const user = req.user.username;
-    const _booking = new Booking(date_booking, start_booking + ':00', cancha, user);
-    const bookings = await pool.query('SELECT * FROM booking WHERE date_booking = ? AND start_booking = ? AND cancha = ?', [_booking.date_booking, _booking.start_booking, _booking.cancha]);
-    const isBusy = await _booking.isBusy();
-    if (_booking.isInDate()) {
-        if (isBusy) {
-            req.flash('message', 'La cancha seleccionada está ocupada en la fecha y hora seleccionada.');
-            res.redirect('/bookings/create');
-        } else {
-            await _booking.insert();
-            req.flash('message', 'Reserva creada correctamente');
-            res.redirect('/bookings');
-        }
-    } else {
-        req.flash('message', 'La fecha seleccionada no es válida');
+    const _booking = new Booking(date_booking, start_booking, cancha, user);
+
+    if (await _booking.isBusy()) {
+        req.flash('message', 'La cancha seleccionada está ocupada');
         res.redirect('/bookings/create');
+    } else {
+        await _booking.insert();
+        req.flash('message', 'Reserva ingresada correctamente');
+        res.redirect('/bookings');
     }
 });
 
@@ -83,26 +77,26 @@ router.get('/inspect/:id_booking', isLoggedIn, async (req, res) => {
         req.flash('message', 'No tienes permisos para realizar esta acción');
         res.redirect('/dashboard');
     } else {
-        
+
         let preference = {
             items: [
-              {
-                title: 'Mi producto',
-                unit_price: 100,
-                quantity: 1,
-              }
+                {
+                    title: 'Mi producto',
+                    unit_price: 100,
+                    quantity: 1,
+                }
             ]
-          };
-          
-          mercadopago.preferences.create(preference)
-          .then(function(response){
-          // Este valor reemplazará el string "<%= global.id %>" en tu HTML
-            global.id = response.body.id;
-            console.log('Para pagar, haga click en el botón de abajo');
-            res.render('bookings/inspect', { booking: booking });
-          }).catch(function(error){
-            console.log(error);
-          });
+        };
+
+        mercadopago.preferences.create(preference)
+            .then(function (response) {
+                // Este valor reemplazará el string "<%= global.id %>" en tu HTML
+                global.id = response.body.id;
+                console.log('Para pagar, haga click en el botón de abajo');
+                res.render('bookings/inspect', { booking: booking });
+            }).catch(function (error) {
+                console.log(error);
+            });
     }
 
 })
