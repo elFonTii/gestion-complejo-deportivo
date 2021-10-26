@@ -1,64 +1,111 @@
-<div class="container">
+<div class="container-fluid">
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
 
-            <div class="col-xl-5 col-lg-12 col-md-9">
+        <div class="col-xl-8 col-lg-12 col-md-9">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Ingresar reserva</h1>
-                                        <p class="text text-gray-900 mb-1">Estás a punto de ingresar una reserva, a continuación ingrese la fecha y hora de la reserva</p>
-                                        <p class="text text-danger mb-4">Mantenga presente que la duración de la reserva es en todos los casos de 90 minutos.</p>
-                                    </div>
-                                    {{#each data}}
-                                    <div class="card text-center">
-                                    <div class="card-body">
-                                        <a href="/bookings/create" class="card-title  link-dark h5">{{tipo_cancha}}</a>
-                                        <p class="card-text mb-2">{{description}}</p>
-                                        <p class="text text-secondary m-1">Precio:</p>
-                                        <h6 class="card-subtitle text-light mb-2 bg-secondary rounded p-2">UYU{{price}}</h6>
-                                    </div>
-                                    </div>
-                                    {{/each}}
-                                    <form class="user" action="/bookings/create/new" target="_blank" method="POST">
-                                        <div class="form-group">
-                                            <input type="hidden" class="form-control form-control-user"
-                                                name="cancha" value="{{cancha}}" required>
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-header">
+                    <h6 class="text-center font-weight-bold text-dark">Ingresando nueva reserva</h6>
+                </div>
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="p-5">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-lg-8">
+                                        <div class="text-center">
+                                            <p class="text text-gray-900 mb-1">Estás a punto de ingresar una reserva, a
+                                                continuación seleccione una hora y fecha para la realización de su
+                                                reserva.</p>
                                         </div>
-                                        <div class="form-group">
-                                            <p class="text text-secondary small m-1">Fecha de reserva <span class=" text text-danger">(Requerido)</span></p>
-                                            <input type="date" class="form-control form-control-user text-uppercase"
-                                                name="date_booking"  required>
-                                        </div>
-                                        <div class="form-group">
-                                            <p class="text text-secondary small m-1">Hora de reserva <span class=" text text-danger">(Requerido)</span></p>
-                                            <input type="number" min="0" max="24" class="form-control form-control-user text-uppercase"
-                                                name="start_booking"  required>
-                                        </div>
-                                        <button type="submit" class="btn btn-success btn-user btn-block">
-                                            <i class="fas fa-check fa-fw"></i> Reservar
-                                        </button>
-                                        <button class="btn btn-danger btn-user btn-block">
-                                            <i class="fas fa-times"></i> Cancelar
-                                        </button>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                            <a href="/bookings/create" class="small text text-secondary">Volver a lista de reservas</a>
                                     </div>
                                 </div>
+                                {{#each data}}
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-lg-4">
+                                        <div class="card text-center">
+                                            <p class="card-title  text-dark h5 mt-3">{{tipo_cancha}}</p>
+                                            <p class="card-text mb-3">{{description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-lg-8">
+                                    <form class="user" action="/bookings/create/new" id="form_booking" method="POST">
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control form-control-user" name="cancha"
+                                                value="{{cancha}}" required>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group p-2">
+                                                    <label for="#date_booking" class="small">Fecha de la reserva</label>
+                                                    <input type="date" class="form-control" name="date_booking"
+                                                        id="date_booking">
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group p-2">
+                                                    <label for="#start_booking" class="small">Hora de la reserva</label>
+                                                    <input type="text" class="form-control" name="start_booking"
+                                                        id="start_booking" placeholder="Ej: 15:00">
+                                                </div>
+                                            </div>
+                                                <small class="text-center text-danger mb-3 font-weight-bold" id="form_alert"></small>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button class="btn btn-danger btn-user btn-block">
+                                                    <i class="fas fa-times"></i> Cancelar
+                                                </button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" id="confirm"
+                                                    class="btn btn-success btn-user btn-block">
+                                                    <i class="fas fa-check fa-fw"></i> Reservar
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="text-center">
+                                <a href="/bookings/create" class="small text text-secondary">Volver a lista de
+                                    reservas</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
+    <!-- Date Selector Modal-->
+    <div class="modal fade" id="dateSelector" tabindex="-1" role="dialog" aria-labelledby="dateSelectorLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title text-dark font-weight-bold" id="dateSelectorLabel">Seleccionando fecha de
+                        reserva</h6>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-danger" href="/logout">Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

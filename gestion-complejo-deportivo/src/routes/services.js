@@ -11,11 +11,13 @@ router.get('/', isLoggedIn, async (req, res) => {
     res.render('services/list', { services, quantity });
 });
 
+//RENDER ADD SERVICE FORM
 router.get('/add', isAdmin, async (req, res) => {
     const service_type = await pool.query('SELECT * FROM service_type');
     res.render('services/add', { service_type });
 });
 
+//ADD SERVICE
 router.post('/add', isAdmin, async (req, res) => {
     const { service_name, service_price, service_description, type } = req.body;
 
@@ -47,7 +49,7 @@ router.post('/add', isAdmin, async (req, res) => {
 
 });
 
-/*SERVICE ADD SUBSCRIPTION (USER)*/
+/*RENDER SUBSCRIPTION OF A SERVICE FORM*/
 router.get('/subscription/:service_id', isLoggedIn, async (req, res) => {
     const service_id = req.params.service_id;
     const username = req.user.username;
@@ -55,6 +57,7 @@ router.get('/subscription/:service_id', isLoggedIn, async (req, res) => {
     res.render('services/confirm', { service });
 });
 
+// SUBMIT SUBSCRIPTION OF A SERVICE
 router.post('/subscription/:service_id', isLoggedIn, async (req, res) => {
     const subscription = req.params.service_id;
     console.log(subscription);
@@ -95,18 +98,21 @@ router.post('/subscription/:service_id', isLoggedIn, async (req, res) => {
     }
 });
 
-//Editar servicios
+//EDIT AND SEE ALL THE SERVICES AVALIABLE
 router.get('/', isLoggedIn, async (req, res) => {
     const services = await pool.query('SELECT * FROM service INNER JOIN service_type ON service.service_type = service_type.service_type_id');
     const quantity = services.length;
     res.render('services/list', { services, quantity });
 });
 
+//RENDER EDIT SERVICE FORM
 router.get('/edit', isAdmin, async (req, res) => {
     const service_type = await pool.query('SELECT * FROM service_type');
     res.render('services/edit', { service_type });
 });
 
+
+//EDIT SERVICE
 router.post('/edit', isAdmin, async (req, res) => {
     const { service_name, service_price, service_description, type } = req.body;
 
@@ -134,7 +140,7 @@ router.post('/edit', isAdmin, async (req, res) => {
     }
 });
 
-//Eliminar servicio
+//DELETE SERVICE CALLBACK
 router.get('/delete/:service_id', isAdmin, async (req, res) => {
     const service_id = req.params.service_id;
     await pool.query('DELETE FROM service WHERE service_id = ?', [service_id]);

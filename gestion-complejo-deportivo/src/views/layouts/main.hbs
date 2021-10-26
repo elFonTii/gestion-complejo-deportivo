@@ -17,7 +17,7 @@
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/dark-mode.css">
     <script src="https://sdk.mercadopago.com/js/v2"></script>
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="icon" href="img/favicon.png">
 </head>
 
@@ -73,6 +73,21 @@
                     </div>
                     {{/if}}
 
+                    {{#if neutral}}
+                    <div class="container p-4">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="alert alert-light alert-dissmissible fade show border-left-info"
+                                    role="alert">
+                                    {{neutral}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="fas fa-times text-info"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
 
                     {{!--Sintaxis de handlebars, el texto entre tres llaves es el contenido de la plantilla (El
                     contenido
@@ -100,6 +115,7 @@
     <script src="/js/main.js" type="module"></script>
 
     <script src="/js/demo/datatables-demo.js"></script>
+    <script src="/js/bookings.js"></script>
 </body>
 
 </html>

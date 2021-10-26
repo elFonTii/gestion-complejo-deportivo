@@ -2,6 +2,15 @@ const fs = require('fs');
 const path = require('path');
 const notes = {};
 
+/* 
+    The notes module exports an object with the following methods:
+    new(title, content) - Create a new note
+    delete(title) - Delete a note
+    read(title) - Read the content of a note
+    scan() - Scan the notes directory and return an object with the title, content, timestamp and size of each note
+    getSize(title) - Get the size on kb of a note
+
+*/
 notes.new = function(title, content) {
     //Create a new file in the notes directory with the title and actual time as the filename
     const filePath = path.join(__dirname, '../notes/', title + '.txt');

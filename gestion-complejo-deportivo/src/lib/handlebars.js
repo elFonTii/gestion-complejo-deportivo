@@ -1,7 +1,7 @@
 const { format, register } = require('timeago.js');
 const pool = require('../database');
 const notis = require('../lib/notifications');
-
+const handlebars = require('handlebars');
 
 const helpers = {};
 /*
@@ -38,6 +38,33 @@ helpers.isUser = (rol) => {
     return rol == '2';
 };
 
+
+helpers.ifCond = (v1, operator, v2, options) => {
+  switch (operator) {
+      case '==':
+          return (v1 == v2) ? options.fn(this) : options.inverse(this);
+      case '===':
+          return (v1 === v2) ? options.fn(this) : options.inverse(this);
+      case '!=':
+          return (v1 != v2) ? options.fn(this) : options.inverse(this);
+      case '!==':
+          return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+      case '<':
+          return (v1 < v2) ? options.fn(this) : options.inverse(this);
+      case '<=':
+          return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+      case '>':
+          return (v1 > v2) ? options.fn(this) : options.inverse(this);
+      case '>=':
+          return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+      case '&&':
+          return (v1 && v2) ? options.fn(this) : options.inverse(this);
+      case '||':
+          return (v1 || v2) ? options.fn(this) : options.inverse(this);
+      default:
+          return options.inverse(this);
+  }
+}
 helpers.discount = (discount, amount) => {
     return discount += amount;
 }
@@ -80,4 +107,6 @@ helpers.dateNormalized = (fecha) => {
   const date = fecha.split('-');
   return date[2]+'/'+date[1]+'/'+date[0];
 }
+
+handlebars.registerHelper('ifCond', helpers.ifCond);
 module.exports = helpers;

@@ -6,16 +6,18 @@ const passport = require('passport');
 const mydata = require('../lib/mydata_api');
 const { getAverageBookingDay, userCount, getTodayBookings } = require('../lib/mydata_api');
 const log = require('../lib/log');
-const { constructor } = require('../lib/stats');
 
+// GET THE ADMIN ROUTE
 router.get('/', isAdmin , async(req, res) => {
     res.status(404).send('Error 404: Not found');
 })
 
+// RENDER MAKE ADMIN ROUTE
 router.get('/make', isAdmin, (req, res) => {
     res.render('admin/make');
 });
 
+// MAKE A NEW ADMIN POST ROUTE
 router.post('/make', isAdmin, async(req, res) => {
     const { username } = req.body;
     //Make the admin a user and redirect to the admin page
@@ -36,10 +38,12 @@ router.post('/make', isAdmin, async(req, res) => {
     }
 });
 
+// RENDER THE DELETE ADMIN ROUTE
 router.get('/delete', isAdmin, (req, res) => {
     res.render('admin/delete');
 });
 
+// DELETE AN ADMIN POST ROUTE
 router.post('/delete', isAdmin, async(req, res) => {
     const { username } = req.body;
     //Make the admin a user and redirect to the admin page
@@ -62,13 +66,8 @@ router.post('/delete', isAdmin, async(req, res) => {
 
 
 router.get('/dashboard', isAdmin, async(req, res) => {
-    const estadisticas = {
-        total_users: await constructor('Total de usuarios', await mydata.userCount(), 'Usuarios'),
-        total_bookings: await constructor('Total de reservas', await mydata.getTodayBookingsCount(), 'Reservas'),
-        today_gains : await constructor('Ganancia diaria', await mydata.administration.gainsPerDay(), 'UYU'),
-    }
 
-    res.render('admin/dashboard', {stats: estadisticas})
+    res.render('admin/dashboard')
 });
 
 module.exports = router;

@@ -22,7 +22,7 @@
                                             <h6 class="text text-dark font-weight-bold">Cancha</h6>
                                         </div>
                                         <div class="col-sm-7">
-                                            <h6 class="text-uppercase">{{booking.tipo_cancha}}</h6>
+                                            <h6 class="text-uppercase text-dark">{{booking.tipo_cancha}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                                             <h6 class="text text-dark font-weight-bold">Jugadores</h6>
                                         </div>
                                         <div class="col-sm-7">
-                                            <h6 class="text-uppercase">{{booking.players}}</h6>
+                                            <h6 class="text-uppercase text-dark">{{booking.players}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                             <h6 class="text text-dark font-weight-bold">Inicia</h6>
                                         </div>
                                         <div class="col-sm-7">
-                                            <h6 class="text-uppercase">{{booking.start_booking}}</h6>
+                                            <h6 class="text-uppercase text-dark">{{booking.start_booking}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -73,12 +73,14 @@
                                             <h6 class="text text-dark font-weight-bold">Finaliza</h6>
                                         </div>
                                         <div class="col-sm-7">
-                                            <h6 class="text-uppercase">{{booking.end_booking}}</h6>
+                                            <h6 class="text-uppercase text-dark">{{booking.end_booking}}</h6>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {{#if payment}}
+                        {{else}}
                         <div class="col-lg-12">
                             <div class="col-lg-12">
                                 <div class="form-group p-2">
@@ -86,6 +88,7 @@
                                         <div class="col-sm-1">
                                             <i class="fas fa-dollar-sign text-success fa-sm"></i>
                                         </div>
+
                                         <div class="col-sm-4">
                                             <h6 class="text text-dark font-weight-bold">Precio</h6>
                                         </div>
@@ -96,12 +99,18 @@
                                 </div>
                             </div>
                         </div>
+                        {{/if}}
+
                         <p id="preference_id" style="display: none;">{{booking.preference_id}}</p>
                         <div class="col-lg-12 d-flex justify-content-center">
+                            {{#ifCond booking.paymentStatus '==' null}}
                             <div class="checkout-container"></div>
+                            {{/ifCond}}
+
+
                             <script>
                                 preference_id = document.getElementById('preference_id').innerHTML;
-                                
+
                                 // Agrega credenciales de SDK
                                 const mp = new MercadoPago('APP_USR-06d842ec-bc3c-4a2a-bb77-a442f0da5d42', {
                                     locale: 'es-UY'
@@ -114,11 +123,96 @@
                                     },
                                     render: {
                                         container: '.checkout-container', // Indica el nombre de la clase donde se mostrará el botón de pago
-                                        label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+                                        label: 'Pagar reserva', // Cambia el texto del botón de pago (opcional)
                                     }
                                 });
                             </script>
                         </div>
+                        {{#if payment}}
+                        <div class="col-lg-12">
+                            <h5 class="text text-dark font-weight-bold text-center">Datos del pago</h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="fas fa-user text-info fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold">
+                                                {{payment.body.card.cardholder.identification.type}}</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h6 class="text-uppercase text-dark">
+                                                {{payment.body.card.cardholder.identification.number}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="fas fa-credit-card text-info fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold text-uppercase">
+                                                {{payment.body.payment_method_id}}</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h6 class="text-uppercase text-dark">{{payment.body.card.last_four_digits}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="fas fa-question-circle text-success fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold">Estado</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            {{#ifCond payment.body.status '==' 'approved'}}
+                                            <h6 class="text-uppercase text-success">Aprobado</h6>
+                                            {{/ifCond}}
+                                            {{#ifCond payment.body.status '==' 'pending'}}
+                                            <h6 class="text-uppercase text-info">Pendiente</h6>
+                                            {{/ifCond}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-12">
+                                <div class="form-group p-2">
+                                    <div class="row border-0 bg-gray-200 p-2 rounded">
+                                        <div class="col-sm-1">
+                                            <i class="fas fa-dollar-sign text-success fa-sm"></i>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6 class="text text-dark font-weight-bold">Pagaste</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <h6 class="text-uppercase text-success">UYU {{booking.price}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="preference_id" style="display: none;">{{booking.preference_id}}</p>
+                        <div class="col-lg-12 d-flex justify-content-center">
+
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>

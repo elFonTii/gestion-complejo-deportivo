@@ -1,10 +1,10 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-
 const pool = require('../database');
 const helpers = require('./helpers');
 const notis = require('./notifications');
 
+//========================================================= PASSPORT LOCAL LOGIN =========================================================
 passport.use('local.signin', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
@@ -26,6 +26,7 @@ passport.use('local.signin', new LocalStrategy({
   }
 }));
 
+// ========================================================= PASSPORT LOCAL REGISTRATION =========================================================
 passport.use('local.signup', new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password',
@@ -64,10 +65,12 @@ passport.use('local.signup', new LocalStrategy({
   }
 }));
 
+// Serialize the user to the session
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
+// Deserialize the user from the session
 passport.deserializeUser(function(user, done) {
   done(null, user);
 });

@@ -1,6 +1,11 @@
 const dbdata = require('./mydata_api');
 const log  = {}
 
+/*
+    The log module exports the log object, which contains the error, warn and arduino functions.
+*/
+
+
 log.message = function(msg) {
   console.log("\x1b[35m", msg)
 }
