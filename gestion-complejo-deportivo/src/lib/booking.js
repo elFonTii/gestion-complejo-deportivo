@@ -10,13 +10,14 @@ module.exports = class Booking {
         this.end_booking = normalizeHour(endNormalized);
         this.cancha = cancha;
         this.user = user;
+        this.paymentStatus = 'No paga';
     }
 
 
     //INSERT THE BOOKING INTO THE DATABASE
-    async insert() {
-        const query = `INSERT INTO booking (date_booking, start_booking, end_booking, cancha, user) VALUES (?, ?, ?, ?, ?)`;
-        const values = [this.date_booking, this.start_booking, this.end_booking, this.cancha, this.user];
+    async insert(){
+        const query = `INSERT INTO booking (date_booking, start_booking, end_booking, cancha, user, paymentStatus) VALUES (?, ?, ?, ?, ?, ?)`;
+        const values = [this.date_booking, this.start_booking, this.end_booking, this.cancha, this.user, this.paymentStatus];
         await pool.query(query, values);
     }
 

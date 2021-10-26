@@ -6,20 +6,11 @@
     <div class="card shadow mb-4">
       <!-- Card Header - Dropdown -->
       <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <h6 class="m-0 font-weight-bold text-dark">{{tipo_cancha}}</h6>
+        <h6 class="m-0 font-weight-bold text-dark">{{tipo_cancha}} - <span class="text-info">{{paymentStatus}}</span></h6>
         <div class="dropdown no-arrow">
-          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+          <a class="dropdown-toggle">
+            <i class="fas fa-futbol fa-sm fa-fw text-gray-400"></i>
           </a>
-          <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-            <div class="dropdown-header">Reserva:</div>
-            <a class="dropdown-item" href="#" data-toggle="modal"
-              data-target="#booking_{{id_booking}}_modal">Visualizar</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item text-danger" data-toggle="modal"
-              data-target="#delete_{{id_booking}}_booking">Eliminar</a>
-          </div>
         </div>
       </div>
       <!-- Card Body -->
