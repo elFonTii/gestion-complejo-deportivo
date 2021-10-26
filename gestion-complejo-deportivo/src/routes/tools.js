@@ -18,21 +18,16 @@ const upload = multer({
     storage: storage,
 });
 
-router.get('/', isAdmin,(req, res) => {
+router.get('/', isAdmin, (req, res) => {
     res.render('tools/tools');
 });
 
-router.get('/sheets', isAdmin,(req, res) => {
-    //LAYOUT FILES
-    const files = sheets.scan();
-
-    res.render('tools/sheets/sheets', {
-        layout: 'sheetsLayout',
-        files: files,
-    });
+/* ROUTE OF A DEPRECATED MODULE */
+    router.get('/sheets', isAdmin,(req, res) => {
+        res.send('This route is deprecated.');
 });
 
-router.get('/sheets/:file', isAdmin,(req, res) => {
+router.get('/sheets/:file', isAdmin, (req, res) => {
     //LAYOUT FILES
     const files = sheets.scan();
     const data = sheets.read(req.params.file);
@@ -59,21 +54,21 @@ router.get('/sheets/:file', isAdmin,(req, res) => {
     });
 })
 
-router.post('/sheets/upload', upload.single('sheet'), isAdmin,(req, res) => {
+router.post('/sheets/upload', upload.single('sheet'), isAdmin, (req, res) => {
     req.flash('success', 'Archivo subido correctamente');
     res.redirect('/tools/sheets');
 });
 
-router.get('/notes', isAdmin,(req, res) => {
+router.get('/notes', isAdmin, (req, res) => {
     const notas = notes.scan();
 
     const keys = Object.keys(notas);
-    res.render('tools/notes/notes', {layout: 'notesLayout', notas: notas});
+    res.render('tools/notes/notes', { layout: 'notesLayout', notas: notas });
 })
 
 router.get('/notes/new', isAdmin, (req, res) => {
     const notas = notes.scan();
-    res.render('tools/notes/new', {layout: 'notesLayout', notas: notas});
+    res.render('tools/notes/new', { layout: 'notesLayout', notas: notas });
 })
 
 router.post('/notes/new', isAdmin, (req, res) => {
@@ -87,7 +82,7 @@ router.get('/notes/:title', isAdmin, (req, res) => {
     const notas = notes.scan();
     const content = (notes.read(req.params.title));
     const title = req.params.title;
-    res.render('tools/notes/read', {layout: 'notesLayout', content: content, title: title, notas: notas});
+    res.render('tools/notes/read', { layout: 'notesLayout', content: content, title: title, notas: notas });
 });
 
 module.exports = router;

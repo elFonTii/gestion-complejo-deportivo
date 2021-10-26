@@ -27,13 +27,14 @@ router.post('/add', isAdmin, async (req, res) => {
             {
                 title: tipo_cancha,
                 unit_price: parseInt(price),
+                description: description,
                 quantity: 1,
             }
         ],
         back_urls: {
-            success: 'http://gestionate.ddns.net:90/bookings/',
-            pending: 'http://gestionate.ddns.net:90/bookings/',
-            failure: 'http://gestionate.ddns.net:90/bookings/'
+            success: 'localhost:90/checkout/success',
+            pending: 'localhost:90/checkout',
+            failure: 'localhost:90/checkout/callback/back_urls/type:failure'
         }
     };
     mp.preferences.create(preference).then(async function (response) {

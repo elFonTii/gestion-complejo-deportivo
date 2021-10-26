@@ -3,6 +3,19 @@ const path = require('path');
 const fs = require('fs');
 const sheets = {};
 
+// THIS MODULE WAS DEPRECATED
+// The idea is to have a module that can read and write excel files but the excel grid system is not working fine.
+// The module should be able to read and write to a file
+// I decided to deprecate this module because it takes so much time to make and i don't want to spend time on it.
+
+/* DEPRECATED */
+/* DEPRECATED */
+/* DEPRECATED */
+/* DEPRECATED */
+/* DEPRECATED */
+
+
+/*
 sheets.read = function (file) {
     const dir = path.join(__dirname, '../uploads/', file);
 
@@ -59,5 +72,6 @@ sheets.getObjectKey = function (file) {
     const keys = Object.keys(data[0]);
     return keys;
 }
+*/
 
 module.exports = sheets;

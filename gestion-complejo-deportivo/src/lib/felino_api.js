@@ -11,7 +11,7 @@ const felino = {}
 
   DEPENDENCIAS: JHONNY-FIVE - ETHERPORT-CLIENT
 */
-// arduino.test realiza una prueba de funcionamiento de la placa arduino.
+// felino.test makes a test to the board
 felino.test = function(arduino){
     arduino = new five.Board();
     arduino.on('ready', function() {
@@ -21,10 +21,12 @@ felino.test = function(arduino){
         console.log('Arduino error: ' + err.message);
     });
 }
+
+//Init a new board
 felino.init = function(){
     return new five.Board();
 }
-//arduino.print imprime un mensaje en la pantalla LCD conectada
+//felino.print prints a message on an arduino board
 felino.print = function(arduino, type, msg){
     arduino.on('ready', function() {
             lcd = new five.LCD({
@@ -44,7 +46,8 @@ felino.print = function(arduino, type, msg){
     });
 }
 
-felino.lcd = function(arduino, type, secs, pin){
+//felino.led turns on, off or blink a led
+felino.led = function(arduino, type, secs, pin){
   arduino.on('ready', function() {
     const led = new five.LCD(pin)
     if(type == 'blink'){
@@ -57,6 +60,7 @@ felino.lcd = function(arduino, type, secs, pin){
   });
 }
 
+//felino.remote return a remote connection trougth etherport
 felino.remote = function(host, port){
   const board = new five.Board({
     port: new EtherPortClient({

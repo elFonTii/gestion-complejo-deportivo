@@ -19,31 +19,6 @@
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="icon" href="img/favicon.png">
-    <link href='/vendor/fullcalendar/main.css' rel='stylesheet' />
-    <script src='/vendor/fullcalendar/main.js'></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('date_calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                themeSystem: 'bootstrap',
-                initialView: 'dayGridMonth',
-                selectable: true,
-                selectMirror: true,
-                initialDate: new Date(),
-                select: function(dateSelected){
-                    var eventName = prompt('Event Name:');
-                    if(eventName){
-                        calendar.addEvent({
-                            title: eventName,
-                            start: dateSelected,
-                            allDay: true
-                        });
-                    }
-                }
-            });
-            calendar.render();
-        });
-    </script>
 </head>
 
 <body id="page-top">

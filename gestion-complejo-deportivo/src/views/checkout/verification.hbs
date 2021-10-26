@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-dark text-center">Verificando un pago</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-8 bg-gray-200 rounded-3 m-3">
+                                <h6 class="text text-secondary font-weight-bold text-center">Instrucciones</h6>
+                                <p class="text text-secondary text-justify">
+                                    <span class="font-weight-bold">1 - </span>
+                                    <span>Ve a la casilla de correo con el cual realizastes el pago de la
+                                        reserva.</span>
+                                    <hr> <br>
+                                    <span class="font-weight-bold">2 - </span>
+                                    <span>Busca en la casilla de entrada el correo de verificación del pago <b>(Remite
+                                            MercadoPago)</b>.</span>
+                                    <hr> <br>
+                                    <span class="font-weight-bold">3 - </span>
+                                    <span>Dentro del contenido del correo busca la sección <b>"Referencia de pago"</b> y
+                                        posteriormente ingresa el número a continuación</span> <br>
+                                </p>
+                                <div class="row text-center m-2">
+                                    <a class="small" href="https://youtube.com/FeluuWATAFAK">¿Necesitas más ayuda?</a>
+                                </div>
+                            </div>
+                            <form action="/checkout/verification/{{booking.id_booking}}" method="post">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-8">
+                                        <div class="form-group">
+                                            <label for="payment_id" class="small">Referencia de pago</label>
+                                            <input type="text" name="payment_id" id="payment_id" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                        <button type="submit" class="btn btn-block">
+                                            <i class="fas fa-check"></i>
+                                            <span>Verificar</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

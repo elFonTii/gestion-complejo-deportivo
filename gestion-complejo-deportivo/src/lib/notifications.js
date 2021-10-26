@@ -5,9 +5,6 @@ const pool = require('../database');
 
 const notification = {};
 
-/*
-    NO
-*/
 notification.create = async (notificationData) => {
     await pool.query('INSERT INTO notifications SET ?', notificationData);
 }
@@ -41,6 +38,5 @@ notification.windows = (title, message) => {
         appID: 'Gestión de Complejo'
       });
 };
-
 
 module.exports = notification;

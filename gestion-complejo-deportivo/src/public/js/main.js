@@ -49,6 +49,8 @@ function isDateHigherThanToday(date) {
 
 $(document).ready(function () {
     $("#form_alert").hide();
+    var actual_hour = parseInt(new Date().getHours()) + 1 + ":00";
+    $("#start_booking").val(actual_hour);
 });
 
 /*

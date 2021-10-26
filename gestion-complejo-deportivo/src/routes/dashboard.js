@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { isLoggedIn } = require('../lib/auth');
-const notis = require('../lib/notifications');
 const pool = require('../database');
 const log = require('../lib/log');
 const dbdata = require('../lib/mydata_api');
 const mydata = require('../lib/mydata_api');
+const { constructor } = require('../lib/stats');
 
 //Create a new route with the name 'dashboard'.
 router.get('/', isLoggedIn, async (req, res) => {
@@ -34,6 +34,9 @@ router.get('/', isLoggedIn, async (req, res) => {
         const metadata = {
             bookingsCount: await mydata.getBookingCountByUser(req.user.username),
             subscriptionsCount: await mydata.getSubscriptionCountByUser(req.user.username),
+            total_users: await constructor('Total de usuarios', await mydata.userCount(), 'Usuarios'),
+            total_bookings: await constructor('Total de reservas', await mydata.getTodayBookingsCount(), 'Reservas'),
+            today_gains : await constructor('Ganancia diaria', await mydata.administration.gainsPerDay(), 'UYU'),
         }
 
         res.render('dashboard/dashboard', { todayBookings, prominentUser, metadata });
