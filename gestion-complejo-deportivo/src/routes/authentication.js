@@ -62,7 +62,7 @@ router.post('/profile/edit', async (req, res) =>{
         direccion
     };
     await pool.query('UPDATE users SET ? WHERE username = ?', [updateUsuario, username]);
-        req.flash('success', 'Usuario actualizado.')
+        req.flash('success', 'Usuario actualizado, se visualizarán cambios en el próximo inicio de sesión.')
         res.redirect('/profile');
 });
 
