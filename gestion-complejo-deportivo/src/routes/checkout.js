@@ -43,13 +43,13 @@ router.post('/verification/:id_booking', isLoggedIn, async (req, res) => {
     if(id_booking != null) {
         if (payment_id != null) {
             mercadopago.payment.get(payment_id).then(async function (payment) {
-                if (payment.status == 'approved') {
-                   await pool.query('UPDATE booking SET paymentStatus = ? payment_id = ? WHERE id_booking = ?', ['Pagado', payment_id, id_booking]);
-                    req.flash('message', 'El pago fue aprovado satisfactoriamente.');
+                if (payment.body.status == 'approved') {
+                   await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pagado', payment_id, id_booking]);
+                    req.flash('success', 'El pago fue aprobado satisfactoriamente.');
                     res.redirect('/bookings');
-                } else if (payment.status == 'pending') {
-                    await pool.query('UPDATE booking SET paymentStatus = ? payment_id = ? WHERE id_booking = ?', ['Pendiente', payment_id, id_booking]);
-                    req.flash('message', 'El pago está pendiente de aprobación.');
+                } else if (payment.body.status == 'pending') {
+                    await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pendiente', payment_id, id_booking]);
+                    req.flash('neutral', 'El pago está pendiente de aprobación.');
                     res.redirect('/bookings');
                 } else {
                    await pool.query('UPDATE booking SET paymentStatus = ? WHERE id_booking = ?', ['Rechazado', id_booking]);

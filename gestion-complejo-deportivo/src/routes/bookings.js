@@ -100,9 +100,17 @@ router.get('/inspect/:id_booking', isLoggedIn, async (req, res) => {
         res.redirect('/bookings/admin/list');
     } else {
 
-        if (booking.user != req.user.username) {
-            req.flash('message', 'No tienes permisos para realizar esta acción');
-            res.redirect('/dashboard');
+        if (booking.payment_id != null && booking.paymentStatus != null) {
+            if (booking.user != req.user.username) {
+                req.flash('message', 'No tienes permisos para realizar esta acción');
+                res.redirect('/dashboard');
+            } else {
+                const payment = mercadopago.payment.get(booking.payment_id).then(function (payment) {
+                    res.render('bookings/inspect', { booking: booking, payment: payment });
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
         } else {
             res.render('bookings/inspect', { booking: booking });
         }

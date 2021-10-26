@@ -73,6 +73,21 @@
                     </div>
                     {{/if}}
 
+                    {{#if neutral}}
+                    <div class="container p-4">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="alert alert-light alert-dissmissible fade show border-left-info"
+                                    role="alert">
+                                    {{neutral}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <i class="fas fa-times text-info"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/if}}
 
                     {{!--Sintaxis de handlebars, el texto entre tres llaves es el contenido de la plantilla (El
                     contenido
