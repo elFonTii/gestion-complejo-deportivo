@@ -71,7 +71,7 @@ router.post('/create/new', isLoggedIn, async (req, res) => {
         res.redirect('/bookings/create');
     } else {
         await _booking.insert();
-        req.flash('message', 'Reserva ingresada correctamente');
+        req.flash('success', 'Reserva ingresada correctamente');
         res.redirect('/bookings');
     }
 });
@@ -85,7 +85,7 @@ router.post('/create/new', isLoggedIn, async (req, res) => {
 router.get('/delete/:id_booking', isLoggedIn, async (req, res) => {
     const id_booking = req.params.id_booking;
     await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
-    req.flash('success', 'Reserva eliminada correctamente');
+    req.flash('message', 'Reserva eliminada correctamente');
     res.redirect('/bookings');
 });
 
