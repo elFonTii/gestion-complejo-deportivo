@@ -103,7 +103,7 @@
 
                         <p id="preference_id" style="display: none;">{{booking.preference_id}}</p>
                         <div class="col-lg-12 d-flex justify-content-center">
-                            {{#ifCond booking.paymentStatus '==' null}}
+                            {{#ifCond booking.paymentStatus '==' "No paga"}}
                             <div class="checkout-container"></div>
                             {{/ifCond}}
 

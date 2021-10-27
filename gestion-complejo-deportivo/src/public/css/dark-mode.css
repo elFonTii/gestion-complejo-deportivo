@@ -144,7 +144,15 @@
   background-color: var(--background) !important;
 }
 
-[data-theme="dark"] .text-secondary, .text-gray-900 {
+[data-theme="dark"] .text-secondary {
+  color: var(--text) !important;
+}
+
+[data-theme="dark"] .text-gray-900 {
+  color: var(--text) !important;
+}
+
+[data-theme="dark"]  {
   color: var(--text) !important;
 }
 
