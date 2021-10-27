@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Reserva de canchas</h1>
+    <h3 class="mb-2 text-gray-800">Reserva de canchas</h3>
     <p class="mb-4">En este apartado podrás ver las canchas que están a tu disposición en nuestro complejo</p>
 
     <!-- DataTales Example -->
@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-borderless table" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>Tipo</th>
@@ -29,7 +29,7 @@
                             <td>{{description}}</td>
                             <td class="text text-dark">UYU{{price}}</td>
                             <td>
-                                <a href="/bookings/create/new/{{id_cancha}}" class="btn btn-dark btn-block">Reservar</a>
+                                <a href="/bookings/create/new/{{id_cancha}}" class="btn btn-success btn-block">Seleccionar</a>
                             </td>
                         </tr>
                         {{/each}}
@@ -39,4 +39,3 @@
         </div>
     </div>
 </div>
-<!-- /.container-fluid -->
