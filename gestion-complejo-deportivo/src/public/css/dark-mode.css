@@ -40,7 +40,7 @@
   
 }
 
-[data-theme="dark"] #dataTable_wrapper td, th{
+[data-theme="dark"] #dataTable_wrapper{
   color: var(--text) !important;
   border: none;
   
@@ -133,6 +133,11 @@
 
 [data-theme="dark"] .jumbotron{
   background-color: var(--background) !important;
+}
+
+[data-theme="dark"] .modal-content{
+  background-color: var(--background) !important;
+  border: none;
 }
 
 [data-theme="dark"] .h1, .h2, .h3, .h4, .h5, .p, .a, small{
