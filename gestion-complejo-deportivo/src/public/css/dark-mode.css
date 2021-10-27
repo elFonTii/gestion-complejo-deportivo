@@ -5,6 +5,7 @@
   --border: #232527;
   --simple: #6e6e6e;
   --text: #ffffff;
+  --danger: #ff0000;
   --border-dark: #3b3b3b;
   --nav-dark: rgb(25, 32, 39);
   --onhover: rgb(85, 85, 85);
@@ -121,6 +122,12 @@
 
 [data-theme="dark"] .bg-gradient-secondary{
   background-color: var(--surface) !important;
+  background-image: none !important;
+}
+
+[data-theme="dark"] .bg-gray-200{
+  background-color: var(--surface) !important;
+  background-image: none !important;
 }
 
 
@@ -134,6 +141,17 @@
 
 [data-theme="dark"] .container {
   background-color: var(--background) !important;
+}
+
+[data-theme="dark"] .alert-light {
+  background-color: var(--surface) !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+}
+
+[data-theme="dark"] .border-left-danger {
+  background-color: var(--surface) !important;
 }
 
 [data-theme="dark"] .container-fluid {

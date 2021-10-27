@@ -21,6 +21,7 @@
                                             <th>Hora de fin</th>
                                             <th>Cancha</th>
                                             <th>Estado</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -33,6 +34,9 @@
                                             <td>{{end_booking}}</td>
                                             <td><a class="link link-success" href="">{{cancha}}</a></td>
                                             <td>{{paymentStatus}}</td>
+                                            <td>
+                                            <a class="link link-danger" href="/bookings/delete/{{id_booking}}">Eliminar</a>
+                                            </td>
                                         </tr>
                                         {{/each}}
                                     </tbody>

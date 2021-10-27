@@ -84,7 +84,18 @@ router.post('/create/new', isLoggedIn, async (req, res) => {
 */
 router.get('/delete/:id_booking', isLoggedIn, async (req, res) => {
     const id_booking = req.params.id_booking;
-    await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
+    //Select the booking to delete
+    const select = await pool.query('SELECT * FROM booking WHERE id_booking = ?', [id_booking]);
+    //If the booking wasnt paid, delete it
+    if (select[0].payment_id == null) {
+        await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
+        req.flash('success', 'Reserva eliminada correctamente');
+        res.redirect('/bookings');
+    } else {
+        //If the booking was paid, do not delete it
+        req.flash('message', 'No se puede eliminar una reserva paga');
+        res.redirect('/bookings');
+    }
     req.flash('message', 'Reserva eliminada correctamente');
     res.redirect('/bookings');
 });
@@ -125,7 +136,8 @@ router.get('/inspect/:id_booking', isLoggedIn, async (req, res) => {
 // RENDER THE BOOKINGS LIST PAGE
 router.get('/admin/list', isAdmin, async (req, res) => {
     const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha');
-    res.render('bookings/admin/list', { bookings: bookings });
+
+    res.render('bookings/admin/list', { bookings });
 });
 
 

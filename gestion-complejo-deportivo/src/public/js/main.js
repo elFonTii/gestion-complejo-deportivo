@@ -30,7 +30,7 @@ function isDateHigherThanToday(date) {
         if (hours.length > 2 || minutes.length > 2) {
             return false;
         } else {
-            if (hours > 23 || minutes > 59) {
+            if (hours > 23 || minutes > 59 || hours < 0 || minutes < 0 || minutes != 0) {
                 return false;
             } else {
                 dateToCompare.setHours(hours);

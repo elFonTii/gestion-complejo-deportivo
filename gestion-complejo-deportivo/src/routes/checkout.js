@@ -5,6 +5,7 @@ const pool = require('../database');
 const mercadopago = require('mercadopago');
 const { createProduct } = require('../lib/checkout');
 const log = require('../lib/log');
+const { payment } = require('mercadopago');
 
 /*
 router.get('/:id_booking', isLoggedIn, async (req, res) => {
@@ -31,40 +32,54 @@ router.get('/:id_booking', isLoggedIn, async (req, res) => {
 router.get('/verification/:id_booking/', isLoggedIn, async (req, res) => {
     const id_booking = req.params.id_booking;
     const select = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE id_booking = ?', [req.params.id_booking]);
-        const booking = select[0];
-        const user = req.user.username;
-        res.render('checkout/verification', {booking});
+    const booking = select[0];
+    const user = req.user.username;
+    res.render('checkout/verification', { booking });
 });
 
 router.post('/verification/:id_booking', isLoggedIn, async (req, res) => {
     const { payment_id } = req.body;
     const id_booking = req.params.id_booking;
 
-    if(id_booking != null) {
-        if (payment_id != null) {
-            mercadopago.payment.get(payment_id).then(async function (payment) {
-                if (payment.body.status == 'approved') {
-                   await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pagado', payment_id, id_booking]);
-                    req.flash('success', 'El pago fue aprobado satisfactoriamente.');
-                    res.redirect('/bookings');
-                } else if (payment.body.status == 'pending') {
-                    await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pendiente', payment_id, id_booking]);
-                    req.flash('neutral', 'El pago está pendiente de aprobación.');
-                    res.redirect('/bookings');
-                } else {
-                   await pool.query('UPDATE booking SET paymentStatus = ? WHERE id_booking = ?', ['Rechazado', id_booking]);
-                    req.flash('message', 'El pago fue rechazado.');
-                    res.redirect('/bookings');
-                }
-            });
-        } else {
-            req.flash('message', 'No se ha recibido el pago.');
+    //Payment_id only will have numbers.
+    if (payment_id.match(/^[0-9]+$/)) {
+        mercadopago.payment.get(payment_id).then(async function (payment) {
+            if (payment.body.status == 'approved') {
+                const update = await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pagado', payment_id, id_booking]);
+                req.flash('success', 'Pago realizado con éxito');
+                res.redirect('/bookings');
+            } else if (payment.body.status == 'pending') {
+                const update = await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pendiente', payment_id, id_booking]);
+                req.flash('neutral', 'Pago pendiente de aprobación');
+                res.redirect('/bookings');
+            } else {
+                req.flash('error', 'Pago rechazado');
+                res.redirect('/bookings');
+            }
+        }).catch(function (error) {
+            req.flash('message', 'Hubo un error en la verificación');
             res.redirect('/bookings');
-        }
+            console.log(error);
+        });
     } else {
-        req.flash('message', 'No se ha recibido una reserva.');
+        req.flash('message', 'La referencia del pago no puede contener letras');
         res.redirect('/bookings');
     }
 });
 
 module.exports = router;
+
+/*
+if(payment.body.status == 'approved') {
+                const update = await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pagado', payment_id, id_booking]);
+                req.flash('success', 'Pago realizado con éxito');
+                res.redirect('/bookings');
+            } else if(payment.body.status == 'pending') {
+                const update = await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pendiente', payment_id, id_booking]);
+                req.flash('neutral', 'Pago pendiente de aprobación');
+                res.redirect('/bookings');
+            } else{
+                req.flash('error', 'Pago rechazado');
+                res.redirect('/bookings');
+            }
+*/

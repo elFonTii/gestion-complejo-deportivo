@@ -4,7 +4,10 @@ const router = express.Router();
 const { isNotLoggedIn } = require('../lib/auth');
 
 router.get('/', isNotLoggedIn , async (req, res) => {
-    const complejo = await pool.query('SELECT * FROM complejo')
+    const query = await pool.query('SELECT * FROM complejo');
+    const complejo = query[0];
+
+    //Render the comlpex view with
     res.render('main/index', { layout: 'index.hbs', complejo });
 });
 
