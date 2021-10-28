@@ -10,6 +10,21 @@ log.message = function(msg) {
   console.log("\x1b[35m", msg)
 }
 
+//Function to print when the server is ready
+log.deployment = function(app) {
+    if(app.get('env') === 'development') {
+        console.log("\x1b[35m", "Application deployment (Development):" + "\x1b[32m" + "SUCCESS"); 
+        //Warning: This is a development environment
+        console.log("\x1b[33m", "WARNING: This is a development environment, server capacity will be reduced");
+    } else {
+        console.log("\x1b[35m", "Application deployment (Production):" + "\x1b[32m" + "SUCCESS"); 
+    }
+}
+
+log.database = function() {
+    console.log("\x1b[36m", "The connection to the database was correctly established", "\x1b[0m");
+}
+
 log.error = function(err, msg) {
     console.log("\x1b[31m", err, "\x1b[0m", msg);
 }

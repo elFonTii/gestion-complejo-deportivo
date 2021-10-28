@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/",
-    "init": "node src/",
+    "deploy": "node src/",
     "ardreset": "firmata-party uno --debug",
     "arduino": "node src/lib/arduino.js",
     "pack": "electron-builder --dir",

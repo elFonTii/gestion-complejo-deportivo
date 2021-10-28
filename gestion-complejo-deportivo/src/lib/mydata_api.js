@@ -1,6 +1,7 @@
 const log = require('./log');
 const pool = require('../database');
 
+
 const mydata = {};
 /*Normaliza la fecha para ser legible y almacenarla en la base de datos*/
 mydata.normalizeDate = function (date) {

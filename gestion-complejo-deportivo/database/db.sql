@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2021 a las 07:46:57
+-- Tiempo de generación: 28-10-2021 a las 01:55:47
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.2
 
@@ -45,7 +45,8 @@ CREATE TABLE `booking` (
 
 INSERT INTO `booking` (`id_booking`, `date_booking`, `start_booking`, `end_booking`, `paymentStatus`, `payment_id`, `cancha`, `user`, `create_at`) VALUES
 (58, '2021-10-27', '02:00', '03:00', 'Pagado', '17767666569', 4, 'elfontii', '2021-10-26 04:31:38'),
-(59, '2021-10-29', '03:00', '04:00', NULL, NULL, 4, 'elfontii', '2021-10-26 05:02:40');
+(61, '2021-10-26', '00:00', '01:00', 'No paga', NULL, 4, 'fran_cap15', '2021-10-27 02:18:46'),
+(63, '2021-10-27', '04:00', '05:00', 'No paga', NULL, 4, 'elfontii', '2021-10-27 07:32:58');
 
 -- --------------------------------------------------------
 
@@ -108,6 +109,29 @@ CREATE TABLE `generos` (
 INSERT INTO `generos` (`id_gen`, `gen_name`) VALUES
 (1, 'Hombre'),
 (2, 'Mujer');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `movements`
+--
+
+CREATE TABLE `movements` (
+  `created_by` varchar(20) NOT NULL,
+  `movement` int(11) NOT NULL,
+  `payment_id` varchar(40) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `message` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `movements`
+--
+
+INSERT INTO `movements` (`created_by`, `movement`, `payment_id`, `type`, `amount`, `description`, `message`) VALUES
+('elfontii', 58, '17767666569', 'Pago', 30, 'Pago de reserva', 'Pagaste una reserva de la cancha Fútbol 5 por un monto de $30');
 
 -- --------------------------------------------------------
 
@@ -197,8 +221,7 @@ CREATE TABLE `service` (
 INSERT INTO `service` (`service_id`, `service_name`, `service_price`, `service_type`, `service_description`) VALUES
 (1, 'Gimnasio', 700, 1, 'Proporciona acceso total a todas las \"Atracciones\" del complejo, desde maquinas para hacer ejercicio hasta sesiones de yoga'),
 (2, 'Piscina', 1100, 1, 'Proporciona acceso total a la piscina del complejo, desde natación libre hasta clases por profesionales.'),
-(3, 'Golf', 1200, 1, 'Predio con golf insta'),
-(5, 'Gym2', 200, 2, 'asdasdasda');
+(3, 'Golf', 1200, 1, 'Predio con golf insta');
 
 -- --------------------------------------------------------
 
@@ -236,15 +259,47 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('5uErbhZs00c-ZCY08iD9ypdfurJfXbw5', 1635309043, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"email\":\"feluubotta685@gmail.com\",\"name\":\"Felipe\",\"surname\":\"Fontana Botta\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez\",\"localidad\":\"Young\",\"profile\":\"profile_picture_2.svg\",\"password\":\"$2a$10$quVbgqcOmsBAGsI5kTQ1IeSNxGvx4IIbKo43X2qWjGwr1UXg.NNwu\",\"rol\":2,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-10-15\"}}}'),
-('QktOMhj6QIpqVV8RMK2qU9wxA3Cjip44', 1635298052, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('i5m9DVXtS2hB72W7nxnZDHxYNw9bmuYc', 1635297722, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('mkUcaM7QhuaFbrAgtKNfSQbivyI-H-WM', 1635297401, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('mxsE1z038coKvStbXp9gL1ubBkF-uW8R', 1635297448, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('oQbTJZy51kDIAx1UkeizWesT-8B79beY', 1635313032, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('qJfD0GUfPlqDp-zUqC0fx_wuZz7rbjsn', 1635297401, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
-('s63iz6KseiFnKYOYcHZddCu6cEc06f_3', 1635309465, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"email\":\"feluubotta685@gmail.com\",\"name\":\"Felipe\",\"surname\":\"Fontana Botta\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez\",\"localidad\":\"Young\",\"profile\":\"profile_picture_2.svg\",\"password\":\"$2a$10$quVbgqcOmsBAGsI5kTQ1IeSNxGvx4IIbKo43X2qWjGwr1UXg.NNwu\",\"rol\":2,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-10-15\"}}}'),
-('y43k4OkIYLyn0g-wm-WL3IN4U584rE2q', 1635313526, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"email\":\"feluubotta685@gmail.com\",\"name\":\"Felipe\",\"surname\":\"Fontana Botta\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez\",\"localidad\":\"Young\",\"profile\":\"profile_picture_2.svg\",\"password\":\"$2a$10$quVbgqcOmsBAGsI5kTQ1IeSNxGvx4IIbKo43X2qWjGwr1UXg.NNwu\",\"rol\":2,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-10-15\"}}}');
+('2-8to6WqzzlehXuJP4Z0Lttyh--9XtxG', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('43FohAQisfP-zBfuZPNeNs10V1FrCuri', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('4Too6fshh-SCBIfRpRJYIrb5NE5AXLd7', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('5YeadaUYj3YmReNPTND1AA0sruo6ROUC', 1635387941, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('7UbGv0aUnuknjQVd3dUB1FlbAdwrZUo5', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('7w2EcEIrPRQkqLKl5-MQXg3h1meY09yq', 1635387909, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('85pmjwNY_UKP2wcWwivGb_fjtwPL81SU', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('8rcZUFrd74P0NZBa9DNAT6kQI8ULxQfV', 1635465146, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"email\":\"feluubotta685@gmail.com\",\"name\":\"Felipe\",\"surname\":\"Fontana Botta\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez\",\"localidad\":\"Young\",\"profile\":\"profile_picture_2.svg\",\"password\":\"$2a$10$quVbgqcOmsBAGsI5kTQ1IeSNxGvx4IIbKo43X2qWjGwr1UXg.NNwu\",\"rol\":2,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-10-15\"}}}'),
+('9Iip7x2fOP_TbglkK88AfovRivSG9nLp', 1635407318, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('9n7uc8pMMA-qjjB9Qn28HoB5sNazhOqA', 1635388107, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"admin\",\"email\":\"admin@administration.com\",\"name\":\"Administrador\",\"surname\":\"Del Sistema\",\"nacimiento\":\"2021-10-26\",\"direccion\":\"18 de Julio, Martiriné 1321\",\"localidad\":\"Young\",\"profile\":\"profile_picture_2.svg\",\"password\":\"$2a$10$oTUrzus9rtz7WzsBdsq8nOh/DPCZrcGCO5jUBAFsLPNOr6u7UAtie\",\"rol\":1,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-10-26\"}}}'),
+('ALQS2cOC2jFCZ8dDvXQ9dlJake0aiipL', 1635387913, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('DbmuZL47wTGKyr1NRq_gidjrVbdMZOc8', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('DjQVCgsjyPqswz8V0NShd9VM74jPl9Ml', 1635389721, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
+('KBM7TL_dzCrT6g-3_JZaROSccjqVSPeP', 1635393291, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
+('Li1hzSBNR7KrTcpJjPHDolNX4P3OSrJe', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('O2nyoNEyHAnsctrAViy-5s4UAEVwXacP', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('OpAaFZNjcy5K50XHm1lXxWfyqZAlpFGu', 1635378410, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('Ps1wxc-UOM7h1fuc4ZxHrZHHT51eTVpI', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('QExLqr3MfipPOIkvllcMEPeUWi40ig7V', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('UOuPu2oq04PIIdPgXcC6pjljhVThe-j2', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('WK1H1VXgr-hve9hO3enwXf-7jEmVisl2', 1635387952, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('WPRr15T2Rv0vaH92BxYKrX6s0cpGEpdY', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('WZkwbrNu8FBKzuxbtnrMyVqMHwpSKuSK', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('XoSP6GE9Ev8PwnKseRl3OtozuGf1DyCF', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('YMHVk0AbAcflfoDlZqUTE32o-92fwABd', 1635461425, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"email\":\"feluubotta685@gmail.com\",\"name\":\"Felipe\",\"surname\":\"Fontana Botta\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez\",\"localidad\":\"Young\",\"profile\":\"profile_picture_2.svg\",\"password\":\"$2a$10$quVbgqcOmsBAGsI5kTQ1IeSNxGvx4IIbKo43X2qWjGwr1UXg.NNwu\",\"rol\":2,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-10-15\"}}}'),
+('_tpUSRY1XbZJF6apZ9LHIA3xWZhakB5W', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('b7vNT_07lIDgxqujtWfII2-9SULQ0WMF', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('bQdjKBNIqf6_n7hrdliEXA-eguHuVm4H', 1635378794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"elfontii\",\"email\":\"feluubotta685@gmail.com\",\"name\":\"Felipe\",\"surname\":\"Fontana Botta\",\"nacimiento\":\"2003-08-30\",\"direccion\":\"18 de Julio, Joaquin Suarez\",\"localidad\":\"Young\",\"profile\":\"profile_picture_2.svg\",\"password\":\"$2a$10$quVbgqcOmsBAGsI5kTQ1IeSNxGvx4IIbKo43X2qWjGwr1UXg.NNwu\",\"rol\":2,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-10-15\"}}}'),
+('bg5Vnu0oaM9V0He0X8IyIJPtSZxWKChb', 1635383796, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('fIRaxqGXJ-Ei9yXi3sIHA_QsFAvcXa4f', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('hGr1-VqArdLuBEK1vkc_H3MbBpiuA1mm', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('hOYw6hlh26E_wpb-bqQKMuS70omM5Qmy', 1635387917, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('halWxVKHwNBLgimwGEvSNOsmLoqwCvJ6', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('ideOXOSUFbyOhdFm2wQizYdVW916XkO_', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('ivoSaFZJLb-eu48Hh4ISkGDhD4wTT65-', 1635383795, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('nbqcdoL5QZKzKd3rOfQ4pN0DKeyA4Uj2', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('o0xBaajqql76TCq8skmrgmJg6velvPgr', 1635407301, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{}}'),
+('pYQz4NjR06X99O2HilvPNyYVXB2lVP8c', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('vN42aYBe8Kzs0J-Lg7pSpGzUcyxXQWpm', 1635453075, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":{\"username\":\"admin\",\"email\":\"admin@administration.com\",\"name\":\"Administrador\",\"surname\":\"Del Sistema\",\"nacimiento\":\"2021-10-26\",\"direccion\":\"18 de Julio, Martiriné 1321\",\"localidad\":\"Young\",\"profile\":\"profile_picture_2.svg\",\"password\":\"$2a$10$oTUrzus9rtz7WzsBdsq8nOh/DPCZrcGCO5jUBAFsLPNOr6u7UAtie\",\"rol\":1,\"gen\":1,\"isProminent\":{\"type\":\"Buffer\",\"data\":[0]},\"created_at\":\"2021-10-26\"}}}'),
+('wCbPgX4F8z3ai6sch-R5NBMhwJQNG4PR', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}'),
+('wkXrghRlyXlQB-MZOAGcd3DTUwjE7UA4', 1635383794, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{}}');
 
 -- --------------------------------------------------------
 
@@ -298,10 +353,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `email`, `name`, `surname`, `nacimiento`, `direccion`, `localidad`, `profile`, `password`, `rol`, `gen`, `isProminent`, `created_at`) VALUES
-('admin', 'admin@administration.com', 'Administrador', 'Del Padre', '2021-10-05', '18 de Julio, Martiriné 1321', 'Young', 'profile_picture_girl', '$2a$10$y4TEN3bRf.UECj3ut5Svpeyq3qt8c1C5ubWrxzwblxNcV0tXdX.fy', 1, 2, b'0', '2021-10-19'),
+('admin', 'admin@administration.com', 'Administrador', 'Del Sistema', '2021-10-26', '18 de Julio, Martiriné 1321', 'Young', 'profile_picture_2.svg', '$2a$10$oTUrzus9rtz7WzsBdsq8nOh/DPCZrcGCO5jUBAFsLPNOr6u7UAtie', 1, 1, b'0', '2021-10-26'),
 ('elfontii', 'feluubotta685@gmail.com', 'Felipe', 'Fontana Botta', '2003-08-30', '18 de Julio, Joaquin Suarez', 'Young', 'profile_picture_2.svg', '$2a$10$quVbgqcOmsBAGsI5kTQ1IeSNxGvx4IIbKo43X2qWjGwr1UXg.NNwu', 2, 1, b'0', '2021-10-15'),
-('fran_cap15', 'franptc3@gmail.com', 'pruebagarrida', 'Hjlk', '2021-10-12', 'Salto 3165', 'Young', 'profile_picture_2.svg', '$2a$10$CA9cCcYd1zjnKneU6U914e06c04p4Ks92dWt4M0NCiX55PlMGVxLC', 2, 1, b'0', '2021-10-21'),
-('nicolecam24@icl', 'nicolecam24@icloud.com', 'Nicole', 'Camaño', '2021-10-21', 'Doctor José Martirené', 'Young', 'profile_picture_girl', '$2a$10$Pd2fhLarEtsiEQ1yKx0ia.g7IHikk41IJlMfW8qh3EO9ntArP53xy', 2, 2, b'0', '2021-10-21');
+('fran_cap15', 'franptc3@gmail.com', 'Balter', 'Velázquez', '2021-10-12', 'Salto 3165', 'Young', 'profile_picture_2.svg', '$2a$10$CA9cCcYd1zjnKneU6U914e06c04p4Ks92dWt4M0NCiX55PlMGVxLC', 2, 1, b'0', '2021-10-21'),
+('nicolecam24@icl', 'nicolecam24@icloud.com', 'Nicole', 'Camaño', '2021-10-21', 'Doctor José Martirené', 'Young', 'profile_picture_girl', '$2a$10$Pd2fhLarEtsiEQ1yKx0ia.g7IHikk41IJlMfW8qh3EO9ntArP53xy', 2, 2, b'0', '2021-10-21'),
+('Str0op', 'texeiraesteban6@gmail.com', 'Alan', 'Texeira', '2003-10-21', 'Rodo 3637', 'Young', 'profile_picture_2.svg', '$2a$10$IWp/WUCgurrx7f6ejvVcnO/ACv/X5qrih.0md0Lb12ku1AdoymLly', 2, 1, b'0', '2021-10-26');
 
 --
 -- Índices para tablas volcadas
@@ -328,6 +384,13 @@ ALTER TABLE `cancha`
 --
 ALTER TABLE `generos`
   ADD PRIMARY KEY (`id_gen`);
+
+--
+-- Indices de la tabla `movements`
+--
+ALTER TABLE `movements`
+  ADD PRIMARY KEY (`movement`,`payment_id`),
+  ADD KEY `created_by` (`created_by`,`movement`,`payment_id`);
 
 --
 -- Indices de la tabla `notifications`
@@ -390,7 +453,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de la tabla `cancha`
@@ -438,6 +501,13 @@ ALTER TABLE `service_type`
 ALTER TABLE `booking`
   ADD CONSTRAINT `fk_cancha` FOREIGN KEY (`cancha`) REFERENCES `cancha` (`id_cancha`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `ref_02` FOREIGN KEY (`user`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `movements`
+--
+ALTER TABLE `movements`
+  ADD CONSTRAINT `payment_const` FOREIGN KEY (`movement`) REFERENCES `booking` (`id_booking`),
+  ADD CONSTRAINT `user_movement` FOREIGN KEY (`created_by`) REFERENCES `users` (`username`);
 
 --
 -- Filtros para la tabla `service`

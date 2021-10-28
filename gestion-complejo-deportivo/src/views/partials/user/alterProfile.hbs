@@ -23,9 +23,11 @@
                         <!-- Card Content - Collapse -->
                         <div class="collapse hide" id="movementsCollapse">
                             <div class="card-body">
-                                This is a collapsable card example using Bootstrap's built in collapse
-                                functionality. <strong>Click on the card header</strong> to see the card body
-                                collapse and expand!
+                                {{#each movements}}
+                                    <p class="m-1">{{message}}</p><br>
+                                {{else}}
+                                    <p class="m-1">No tienes movimientos</p><br>
+                                {{/each}}
                             </div>
                         </div>
                     </div>

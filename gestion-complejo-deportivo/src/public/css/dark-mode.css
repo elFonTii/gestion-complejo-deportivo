@@ -1,10 +1,11 @@
 :root {
   --surface: rgb(46, 42, 42);
+  --on-surface: rgb(55, 55, 55);
   --background: #09191f;
   --inputdark: #191c1f;
   --border: #232527;
   --simple: #6e6e6e;
-  --text: #ffffff;
+  --text: #c5c5c5;
   --danger: #ff0000;
   --border-dark: #3b3b3b;
   --nav-dark: rgb(25, 32, 39);

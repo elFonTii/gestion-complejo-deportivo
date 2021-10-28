@@ -24,7 +24,8 @@ pool.getConnection((err, connection) => {
     // Si la conexión es exitosa, se ejecuta la función.
     if(connection){
     connection.release();
-    console.log('La conexión con la base de datos ' + database.database + ' se ha establecido correctamente.');
+    //log with colors
+    console.log('\x1b[34m%s\x1b[0m', 'Database connection was released with a result of:', '\x1b[32m\x1b[0m', connection.state);
     return;
     }
 }); 

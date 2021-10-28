@@ -14,10 +14,16 @@ const felino = require('./lib/felino_api');
 const mydata = require('./lib/mydata_api');
 const socketio = require('socket.io');
 const { param } = require('./routes');
+const log = require('./lib/log');
 // initiazing express
 const app = express();
 require('./lib/passport');
 // settings
+
+//SET THE ENVIROMENT
+process.env.NODE_ENV = 'production';
+
+//process.env.NODE_ENV = 'development';
 
 //Incializamos el puerto en el que la app se va a ejecutar
 app.set('port', (process.env.PORT || 90));
@@ -94,7 +100,7 @@ var players = {},
 
 // start server
 const io = socketio(app.listen(app.get('port'), () => {
-  console.log('Express server listening on port ' + app.get('port'));
+  log.deployment(app);
 }));
 io.on('connection', (socket) => {
   socket.emit('connected', { msg: "hello" })

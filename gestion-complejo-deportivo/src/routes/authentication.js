@@ -35,7 +35,8 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
 
 router.get('/profile', isLoggedIn, async(req, res) => {
     const isProminent = await dbdata.setUserProminent(req.user.username);
-    res.render('profile', {isProminent});
+    const movements = await pool.query('SELECT * FROM movements WHERE created_by = ?', [req.user.username]);
+    res.render('profile', {isProminent, movements});
 });
 
 router.get('/profile/modify', isLoggedIn, (req, res) => {

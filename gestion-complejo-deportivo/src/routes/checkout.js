@@ -44,23 +44,33 @@ router.post('/verification/:id_booking', isLoggedIn, async (req, res) => {
     //Payment_id only will have numbers.
     if (payment_id.match(/^[0-9]+$/)) {
         mercadopago.payment.get(payment_id).then(async function (payment) {
-            if (payment.body.status == 'approved') {
-                const update = await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pagado', payment_id, id_booking]);
-                req.flash('success', 'Pago realizado con éxito');
-                res.redirect('/bookings');
-            } else if (payment.body.status == 'pending') {
-                const update = await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pendiente', payment_id, id_booking]);
-                req.flash('neutral', 'Pago pendiente de aprobación');
+            const existingPayment = await pool.query('SELECT * FROM movements WHERE payment_id = ?', [payment_id]);
+            if (existingPayment.length > 0) {
+                req.flash('neutral', 'Ya existe un pago con este número de referencia');
                 res.redirect('/bookings');
             } else {
-                req.flash('error', 'Pago rechazado');
-                res.redirect('/bookings');
+                const booking_data = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE id_booking = ?', [id_booking]);
+                if (payment.body.status == 'approved') {
+                    const update = await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pagado', payment_id, id_booking]);
+                    //Add this to the movements table
+                    const insert = await pool.query('INSERT INTO movements (created_by, movement, payment_id, type, amount, description, message) VALUES (?, ?, ?, ?, ?, ?, ?)', [req.user.username, id_booking, payment_id, 'Pago', payment.body.transaction_amount, 'Pago de reserva', 'Pagaste una reserva de la cancha ' + booking_data[0].tipo_cancha + ' por un monto de $' + payment.body.transaction_amount]);
+                    req.flash('success', 'Pago realizado con éxito');
+                    res.redirect('/bookings');
+                } else if (payment.body.status == 'pending') {
+                    const update = await pool.query('UPDATE booking SET paymentStatus = ?, payment_id = ? WHERE id_booking = ?', ['Pendiente', payment_id, id_booking]);
+                    req.flash('neutral', 'Pago pendiente de aprobación');
+                    res.redirect('/bookings');
+                } else {
+                    req.flash('error', 'Pago rechazado');
+                    res.redirect('/bookings');
+                }
             }
         }).catch(function (error) {
             req.flash('message', 'Hubo un error en la verificación');
             res.redirect('/bookings');
             console.log(error);
         });
+
     } else {
         req.flash('message', 'La referencia del pago no puede contener letras');
         res.redirect('/bookings');
