@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon src/",
     "deploy": "node src/",
+    "app": "python src/app/main.py",
     "ardreset": "firmata-party uno --debug",
     "arduino": "node src/lib/arduino.js",
     "pack": "electron-builder --dir",
