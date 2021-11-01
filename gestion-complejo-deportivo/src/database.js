@@ -28,7 +28,7 @@ pool.getConnection((err, connection) => {
     console.log('\x1b[34m%s\x1b[0m', 'Database connection was released with a result of:', '\x1b[32m\x1b[0m', connection.state);
     return;
     }
-}); 
+});
 
 // Ejecuta una sentencia SQL
 pool.query = promisify(pool.query);
