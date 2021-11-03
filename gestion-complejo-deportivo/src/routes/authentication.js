@@ -36,7 +36,11 @@ router.post('/signin', isNotLoggedIn, async (req, res, next) => {
 router.get('/profile', isLoggedIn, async(req, res) => {
     const isProminent = await dbdata.setUserProminent(req.user.username);
     const movements = await pool.query('SELECT * FROM movements WHERE created_by = ?', [req.user.username]);
-    res.render('profile', {isProminent, movements});
+    const query = await pool.query('SELECT COUNT(*) as COUNT FROM booking WHERE user = ?', [req.user.username]);
+    const bookingCount = query[0].COUNT;
+    console.log(bookingCount)
+
+    res.render('profile', {isProminent, movements, bookingCount});
 });
 
 router.get('/profile/modify', isLoggedIn, (req, res) => {
