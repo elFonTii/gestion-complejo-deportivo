@@ -34,7 +34,7 @@ function isDateHigherThanToday(date) {
                 return false;
             } else {
                 //verify if the hours are out of range between the 08:00 and 23:00
-                if (hours < 8 || hours > 23) {
+                if (parseInt(hours) < 8 || parseInt(hours) > 23) {
                     return false;
                 } else {
                     dateToCompare.setHours(hours);
