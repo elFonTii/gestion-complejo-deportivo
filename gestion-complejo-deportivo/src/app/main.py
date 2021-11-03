@@ -1,45 +1,59 @@
-#Application to show a window with a button and a label
+## Buttons to run the different functions
+
+##Depedencies
 import sys
 import os
-import subprocess
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton ,QLineEdit,QListWidget
-from PyQt5.QtCore import pyqtSlot
- 
-class App(QWidget):
- 
+
+##Console application
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QIcon
+from PyQt5 import *
+
+
+##Start of the main window
+class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.title = 'Some Title'
+        self.title = 'PyQt5 file dialogs - pythonspot.com'
         self.left = 10
         self.top = 10
-        self.width = 500
-        self.height = 500
+        self.width = 640
+        self.height = 480
         self.initUI()
- 
+
     def initUI(self):
         self.setWindowTitle(self.title)
-        #self.setGeometry(self.left, self.top, self.width, self.height)
- 
-        button = QPushButton('Deploy application', self)
-        button.setToolTip('Add')
-        button.move(250,250);
-        button.resize(300,90)
-        button.clicked.connect(self.on_click)
- 
+        self.setGeometry(self.left, self.top, self.width, self.height)
+
+        self.button = QtWidgets.QPushButton('Open', self)
+        # connect button to function on_click
+        self.button.clicked.connect(self.on_deploy)
+
         self.show()
- 
-    @pyqtSlot()
-    def on_click(self):
-        #deploy application
-        subprocess.call([r'deploy.bat'])
-        
-    @pyqtSlot()
-    def onEnterClick(self):
-        print('Enter button click')
-        self.button.move(400,250);
-        
- 
+
+    def on_deploy(self):
+        # Create a text dialog
+        text, ok = QInputDialog.getText(self, 'Input Dialog', 'Enter your name:')
+        if text == "Deploy":
+            self.deploy();
+        if text == "Develop":
+            self.develop();
+        else :
+            print("Nothing")
+
+
+    def deploy(self):
+        print("Executing")
+        return self
+    def develop(self):
+        print("Developing")
+        return self
+
+    ##End of the main window
+
+    ##Start of the main function
+
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = App()
-    sys.exit(app.exec_())
+        app = QApplication(sys.argv)
+        ex = MainWindow()
+        sys.exit(app.exec_())

@@ -9,3 +9,15 @@ module.exports = {
         dateStrings: 'date'
     }
 }
+
+
+/*
+-- Deployment credentials --
+    User: gcomplejo_user
+    Password: p7rz6g!s8tYvY-V
+*/
+
+/* -- Development credentials --
+    User: root
+    Password: root
+*/

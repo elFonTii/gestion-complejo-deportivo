@@ -65,6 +65,13 @@ app.use((req, res, next) => {
   app.locals.user = req.user;
   next();
 });
+
+//Mercado pago//
+mercadopago.configure({
+  access_token: 'APP_USR-4340992889929344-080505-41c84725d553566484820ee3153552d7-195962628'
+});
+
+
 // public folder
 //En la carpeta public se encuentran los archivos estaticos (css, js, imgs, etc)
 app.use(express.static(path.join(__dirname, 'public')));
@@ -86,11 +93,6 @@ app.use('/checkout', require('./routes/checkout'));
 //TOOLS
 app.use('/tools', require('./routes/tools'));
 app.use('*', require('./routes/not-found'));
-
-//Mercado pago//
-mercadopago.configure({
-  access_token: 'APP_USR-4340992889929344-080505-41c84725d553566484820ee3153552d7-195962628'
-});
 
 
 //Socket.io integration
