@@ -6,6 +6,8 @@ const log = require('../lib/log');
 const dbdata = require('../lib/mydata_api');
 const mydata = require('../lib/mydata_api');
 const { constructor } = require('../lib/stats');
+const sheets = require('../lib/sheets');
+const path = require('path');
 
 //Create a new route with the name 'dashboard'.
 router.get('/', isLoggedIn, async (req, res) => {

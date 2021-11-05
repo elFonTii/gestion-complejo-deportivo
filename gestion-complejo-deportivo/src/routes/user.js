@@ -21,7 +21,7 @@ router.get('/inspect/:username', isAdmin, async (req, res) => {
         res.redirect('/users');
     } else {
       const subject_data = {
-        booking_count: await dbdata.getBookingCountByUser(req.params.username),
+        bookings: await dbdata.getBookingCountByUser(req.params.username),
         bookings_per_month: await dbdata.getBookingsPerMonthByUser(req.params.username)
       }
       
