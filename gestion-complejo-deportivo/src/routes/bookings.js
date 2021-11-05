@@ -98,6 +98,7 @@ router.get('/delete/:id_booking', isLoggedIn, async (req, res) => {
     }
     req.flash('message', 'Reserva eliminada correctamente');
     res.redirect('/bookings');
+    res.end();
 });
 
 // RENDER ALL THE INFORMATION ABOUT A BOOKING, USER, CANCHA AND PAYMENT

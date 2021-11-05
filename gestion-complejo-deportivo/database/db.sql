@@ -345,7 +345,7 @@ CREATE TABLE `users` (
   `rol` int(11) DEFAULT NULL,
   `gen` int(11) NOT NULL,
   `isProminent` bit(1) NOT NULL DEFAULT b'0',
-  `created_at` date NOT NULL DEFAULT current_timestamp()
+  `created_at` date NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
