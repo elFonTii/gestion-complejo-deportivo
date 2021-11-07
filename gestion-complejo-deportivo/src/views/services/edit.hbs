@@ -14,7 +14,7 @@
                                         <h1 class="h4 text-gray-900 mb-4">Editar un servicio</h1>
                                         <p class="text text-gray-900 mb-4">Edita la información de tu servicio para que los usuarios puedan acceder a ellos.</p>
                                     </div>
-                                    <form class="user" action="/services/add" method="POST">
+                                    <form class="user" action="/services/edit" method="POST">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 name="service_name" placeholder="Nombre del servicio" required>
@@ -34,7 +34,7 @@
                                             {{/each}}
                                         </select>
                                         </div>
-                                        <button class="btn btn-google btn-user btn-block">
+                                        <button type="submit" class="btn btn-google btn-user btn-block">
                                             <i class="fas fa-check fa-fw"></i> Editar servicio
                                         </button>
                                     </form>

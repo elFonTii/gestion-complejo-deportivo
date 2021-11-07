@@ -24,16 +24,16 @@ router.post('/make', isAdmin, async(req, res) => {
     if(username == req.user.username){
         req.flash('message', 'Mmm, algo me dice que ya eres un administrador...');
         res.redirect('/admin');
-    } else{
+    } else {
         //Select user with the username
         const user = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
         if(user.length == 1){
             await pool.query('UPDATE users SET rol = 1 WHERE username = ?', [username]);
             req.flash('success', 'Administrador añadido satisfactoriamente.');
-            res.redirect('/admin');
+            res.redirect('/users');
         } else{
             req.flash('message', 'El usuario no existe');
-            res.redirect('/admin');
+            res.redirect('/admin/make');
         }
     }
 });

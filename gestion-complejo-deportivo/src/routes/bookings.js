@@ -86,19 +86,26 @@ router.get('/delete/:id_booking', isLoggedIn, async (req, res) => {
     const id_booking = req.params.id_booking;
     //Select the booking to delete
     const select = await pool.query('SELECT * FROM booking WHERE id_booking = ?', [id_booking]);
-    //If the booking wasnt paid, delete it
-    if (select[0].payment_id == null) {
-        await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
-        req.flash('success', 'Reserva eliminada correctamente');
+    const payment = await pool.query('SELECT * FROM movements WHERE movement = ?', [id_booking])[0];
+
+    //if the booking was not found, redirect to the bookings page
+    if (select.length == 0) {
+        req.flash('message', 'La reserva no existe');
         res.redirect('/bookings');
     } else {
-        //If the booking was paid, do not delete it
-        req.flash('message', 'No se puede eliminar una reserva paga');
-        res.redirect('/bookings');
+        //if the booking was found, verify if the user is the owner of the booking
+        if (select[0].user == req.user.username) {
+            //Verify if the booking has a payment
+            if (payment.length == 0) {
+                //Delete the booking
+                await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
+                req.flash('success', 'Reserva eliminada correctamente');
+                res.redirect('/bookings');
+            } else {
+                req.flash('neutral', 'No puedes eliminar reservas pagas');
+            }
+        }
     }
-    req.flash('message', 'Reserva eliminada correctamente');
-    res.redirect('/bookings');
-    res.end();
 });
 
 // RENDER ALL THE INFORMATION ABOUT A BOOKING, USER, CANCHA AND PAYMENT

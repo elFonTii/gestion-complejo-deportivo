@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/",
-    "deploy": "node src/",
+    "start": "node src/",
     "app": "python src/app/main.py",
     "ardreset": "firmata-party uno --debug",
     "arduino": "node src/lib/arduino.js",
@@ -16,7 +16,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@serialport/bindings": "^9.2.0",
     "awesome-notifications": "^3.1.1",
     "bcryptjs": "^2.4.3",
     "bindings": "^1.5.0",
@@ -45,7 +44,6 @@
     "particlesjs": "^2.2.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "serialport": "^9.2.0",
     "simple-context-menu": "^1.3.2",
     "socket.io": "^4.1.3",
     "timeago.js": "^4.0.2",

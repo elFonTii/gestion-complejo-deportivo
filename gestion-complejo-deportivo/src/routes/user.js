@@ -22,7 +22,6 @@ router.get('/inspect/:username', isAdmin, async (req, res) => {
     } else {
       const subject_data = {
         bookings: await dbdata.getBookingCountByUser(req.params.username),
-        bookings_per_month: await dbdata.getBookingsPerMonthByUser(req.params.username)
       }
       
       const isProminent = await dbdata.setUserProminent(subject.username);
