@@ -86,23 +86,25 @@ router.get('/delete/:id_booking', isLoggedIn, async (req, res) => {
     const id_booking = req.params.id_booking;
     //Select the booking to delete
     const select = await pool.query('SELECT * FROM booking WHERE id_booking = ?', [id_booking]);
-    const payment = await pool.query('SELECT * FROM movements WHERE movement = ?', [id_booking])[0];
+    const pay_select = await pool.query('SELECT * FROM movements WHERE movement = ?', [id_booking])
+    const payment = pay_select[0];
 
     //if the booking was not found, redirect to the bookings page
-    if (select.length == 0) {
+    if (select == undefined || select == null) {
         req.flash('message', 'La reserva no existe');
         res.redirect('/bookings');
     } else {
         //if the booking was found, verify if the user is the owner of the booking
         if (select[0].user == req.user.username) {
             //Verify if the booking has a payment
-            if (payment.length == 0) {
+            if (pay_select.length == 0) {
                 //Delete the booking
                 await pool.query('DELETE FROM booking WHERE id_booking = ?', [id_booking]);
                 req.flash('success', 'Reserva eliminada correctamente');
                 res.redirect('/bookings');
             } else {
                 req.flash('neutral', 'No puedes eliminar reservas pagas');
+                res.redirect('/bookings');
             }
         }
     }
