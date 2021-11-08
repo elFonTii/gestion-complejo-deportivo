@@ -1,8 +1,9 @@
 {
   "name": "gestion-complejo-deportivo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web application for managment of sport complex's.",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "dev": "nodemon src/",
     "start": "node src/",
@@ -46,6 +47,8 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
+    "jscs": "^3.0.7",
+    "jscs-loader": "^0.3.0",
     "nodemon": "^2.0.12"
   }
 }
