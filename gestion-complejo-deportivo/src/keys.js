@@ -1,9 +1,9 @@
 module.exports = {
 
     database: {
-        host : 'localhost',
+        host : '35.199.109.166',
         user : 'root',
-        password : '',
+        password : '2910',
         database : 'gestioncomplejo',
         //Nos permite que la fecha sea facil de leer para el usuario.
         dateStrings: 'date'
