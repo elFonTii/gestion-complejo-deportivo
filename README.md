@@ -17,6 +17,8 @@
 #### Administrador
 	username: test
 	password: test
+#### Credenciales de pago
+	reference: 17767666569
 
 
 ### ACTUALIZACIÓN ENTRANTE
