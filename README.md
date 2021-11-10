@@ -15,10 +15,11 @@
 	password: test
 
 #### Administrador
-	username: test
-	password: test
+	username: admin
+	password: admin
 #### Credenciales de pago
 	reference: 17767666569
+	(Los datos del pago pueden no ser iguales a los de la cancha a pagar 
 
 
 ### ACTUALIZACIÓN ENTRANTE
