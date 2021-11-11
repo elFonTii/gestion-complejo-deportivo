@@ -29,6 +29,21 @@ router.get('/:id_booking', isLoggedIn, async (req, res) => {
 })
 */
 
+router.get('/success', isLoggedIn, (req, res) => {
+    req.flash('message', 'El pago ha sido ingresado satisfactoriamente.');
+    res.redirect('/bookings');
+});
+
+router.get('/pending', isLoggedIn, (req, res) => {
+    req.flash('info', 'El pago está pendiente de confirmación, intenta nuevamente más tarde.');
+    res.redirect('/bookings');
+});
+
+router.get('/failure', isLoggedIn, (req, res) => {
+    req.flash('message', 'Ha existido una interrupción en el proceso de pago.');
+    res.redirect('/bookings');
+})
+
 router.get('/verification/:id_booking/', isLoggedIn, async (req, res) => {
     const id_booking = req.params.id_booking;
     const select = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE id_booking = ?', [req.params.id_booking]);

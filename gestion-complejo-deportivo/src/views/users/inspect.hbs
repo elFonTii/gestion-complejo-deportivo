@@ -11,6 +11,9 @@
           <a href="/profile" class="link-secondary">
             <h4 class="card-title text-center mt-3">@{{subject.username}}</h4>
           </a>
+          {{#each subject_data.subscriptions}}
+          <div class="badge badge-secondary">{{service_name}}</div>
+          {{/each}}
         </div>
         <div class="card-body">
           <li class="list-group">

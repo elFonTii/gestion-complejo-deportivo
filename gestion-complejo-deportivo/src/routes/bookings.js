@@ -90,7 +90,7 @@ router.get('/delete/:id_booking', isLoggedIn, async (req, res) => {
     const payment = pay_select[0];
 
     //if the booking was not found, redirect to the bookings page
-    if (select == undefined || select == null) {
+    if (select.length <= 0) {
         req.flash('message', 'La reserva no existe');
         res.redirect('/bookings');
     } else {
@@ -106,6 +106,9 @@ router.get('/delete/:id_booking', isLoggedIn, async (req, res) => {
                 req.flash('neutral', 'No puedes eliminar reservas pagas');
                 res.redirect('/bookings');
             }
+        } else {
+            req.flash('message', 'No tienes permisos para eliminar esta reserva');
+            res.redirect('/bookings');
         }
     }
 });

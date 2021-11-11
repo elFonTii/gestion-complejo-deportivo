@@ -22,6 +22,7 @@ router.get('/inspect/:username', isAdmin, async (req, res) => {
     } else {
       const subject_data = {
         bookings: await dbdata.getBookingCountByUser(req.params.username),
+        subscriptions: await pool.query('SELECT service.service_name FROM suscripcion INNER JOIN service ON suscripcion.subscription = service.service_id WHERE suscripcion.owner = ?', [req.params.username])
       }
       
       const isProminent = await dbdata.setUserProminent(subject.username);
