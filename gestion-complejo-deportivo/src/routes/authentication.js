@@ -38,9 +38,10 @@ router.get('/profile', isLoggedIn, async(req, res) => {
     const movements = await pool.query('SELECT * FROM movements WHERE created_by = ?', [req.user.username]);
     const query = await pool.query('SELECT COUNT(*) as COUNT FROM booking WHERE user = ?', [req.user.username]);
     const bookingCount = query[0].COUNT;
-    console.log(bookingCount)
+    //Get each subscriptions inner join services
+    const subscriptions = await pool.query('SELECT service.service_name FROM suscripcion INNER JOIN service ON suscripcion.subscription = service.service_id WHERE suscripcion.owner = ?', [req.user.username]);
 
-    res.render('profile', {isProminent, movements, bookingCount});
+    res.render('profile', {isProminent, movements, bookingCount, subscriptions});
 });
 
 router.get('/profile/modify', isLoggedIn, (req, res) => {

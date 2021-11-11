@@ -49,25 +49,24 @@ router.post('/delete', isAdmin, async(req, res) => {
     //Make the admin a user and redirect to the admin page
     if(username == req.user.username){
         req.flash('message', 'No puedes auto-eliminarte el rol de Administrador');
-        res.redirect('/admin');
+        res.redirect('/users');
     } else{
         //Select user with the username
         const user = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
         if(user.length == 1){
             await pool.query('UPDATE users SET rol = 2 WHERE username = ?', [username]);
             req.flash('success', 'Administrador eliminado satisfactoriamente.');
-            res.redirect('/admin');
+            res.redirect('/users');
         } else{
             req.flash('message', 'El usuario no existe');
-            res.redirect('/admin');
+            res.redirect('/users');
         }
     }
 });
 
 
 router.get('/dashboard', isAdmin, async(req, res) => {
-
-    res.render('admin/dashboard')
+    res.render('/dashboard')
 });
 
 module.exports = router;

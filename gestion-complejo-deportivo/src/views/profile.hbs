@@ -22,6 +22,9 @@
             <h4 class="card-title text-center mt-3">@{{user.username}}</h4>
           </a>
           {{/if}}
+          {{#each subscriptions}}
+          <div class="badge badge-success">{{service_name}}</div>
+          {{/each}}
         </div>
         <div class="card-body">
           <p>Aquí podrás visualizar tus datos personales, métodos de facturación y preferencias.</p>
