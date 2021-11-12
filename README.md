@@ -1,4 +1,5 @@
 # Gestionate
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 ## Instructivo para inicializar la aplicación
 
 ###### Abrir una instancia de powershell
@@ -6,7 +7,7 @@
 ###### También es posible hacerlo mediante Visual Studio Code.
 ###### Para desplegar la aplicación en modo de desarrollo ejecutar ```npm run dev```.
 ###### Iniciar una instancia en un navegador e introducir ```localhost``` o la ip privada de la máquina.
-###### [Es importante que no exista otra aplicación escuchando en el puerto 80], ya que eso generaría un conflicto con nuestra aplicación.
+###### `${Es importante que no exista otra aplicación escuchando en el puerto 80}`, ya que eso generaría un conflicto con nuestra aplicación.
 ###### Donde el proyecto se encuentra instalado, se dejó el servicio de apache2 escuchando en el puerto 90, por lo que si se quiere ingresar al dom de phpmyadmin se debe introducir ```localhost:90/phpmyadmin```
 ###### La aplicación está lista para su utilización.
 
