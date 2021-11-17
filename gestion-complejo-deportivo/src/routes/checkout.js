@@ -29,20 +29,29 @@ router.get('/:id_booking', isLoggedIn, async (req, res) => {
 })
 */
 
-router.get('/success', isLoggedIn, (req, res) => {
-    req.flash('message', 'El pago ha sido ingresado satisfactoriamente.');
-    res.redirect('/bookings');
+router.get('/:status', isLoggedIn, (req, res) => {
+    const { status } = req.params;
+    const data = req.query;
+    if(data.collection_id) {
+        if (status == 'success') {
+            //Set the booking as paid
+            req.flash('success', 'Pago realizado con éxito, debes verificar el pago.');
+            res.redirect('/bookings');
+        } else if (status == 'pending') {
+            req.flash('neutral', 'Pago pendiente, espera un tiempo y verifica el pago.');
+            res.redirect('/bookings');
+        } else if (status == 'failure' && data != null) {
+            req.flash('message', 'Algo ha salido mal durante el pago.');
+            res.redirect('/bookings');
+        } else {
+            req.flash('message', 'Algo ha salido mal, intenta nuevamente.');
+            res.redirect('/bookings');
+        }
+    } else {
+        req.flash('message', 'Algo ha salido mal, intenta nuevamente.');
+        res.redirect('/bookings');
+    }
 });
-
-router.get('/pending', isLoggedIn, (req, res) => {
-    req.flash('info', 'El pago está pendiente de confirmación, intenta nuevamente más tarde.');
-    res.redirect('/bookings');
-});
-
-router.get('/failure', isLoggedIn, (req, res) => {
-    req.flash('message', 'Ha existido una interrupción en el proceso de pago.');
-    res.redirect('/bookings');
-})
 
 router.get('/verification/:id_booking/', isLoggedIn, async (req, res) => {
     const id_booking = req.params.id_booking;

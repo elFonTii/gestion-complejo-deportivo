@@ -106,14 +106,18 @@ router.get('/', isLoggedIn, async (req, res) => {
 });
 
 //RENDER EDIT SERVICE FORM
-router.get('/edit', isAdmin, async (req, res) => {
+router.get('/edit/:id', isAdmin, async (req, res) => {
+    const id = req.params.id;
+    var service = await pool.query('SELECT * FROM service WHERE service_id = ?', [id]);
+    service = service[0];
     const service_type = await pool.query('SELECT * FROM service_type');
-    res.render('services/edit', { service_type });
+    res.render('services/edit', { service, service_type });
 });
 
 
 //EDIT SERVICE
-router.post('/edit', isAdmin, async (req, res) => {
+router.post('/edit/:id', isAdmin, async (req, res) => {
+    const id = req.params.id;
     const { service_name, service_price, service_description, type } = req.body;
 
     //Verify the type of service
@@ -124,7 +128,7 @@ router.post('/edit', isAdmin, async (req, res) => {
             service_description,
             service_type: 1,
         };
-        await pool.query('UPDATE service SET ?', updateService);
+        await pool.query('UPDATE service SET ? WHERE service_id = ?', [updateService, id]);
         req.flash('success', 'Servicio actualizado');
         res.redirect('/services');
     } else if (type === 'Anual') {
@@ -134,7 +138,7 @@ router.post('/edit', isAdmin, async (req, res) => {
             service_description,
             service_type: 2,
         };
-        await pool.query('UPDATE service SET ?', updateService);
+        await pool.query('UPDATE service SET ? WHERE service_id = ?', [updateService, id]);
         req.flash('success', 'Servicio actualizado.');
         res.redirect('/services');
     }

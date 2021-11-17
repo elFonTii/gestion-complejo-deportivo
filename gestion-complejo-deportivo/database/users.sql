@@ -25,24 +25,7 @@ SET time_zone = "+00:00";
 
 --
 -- Estructura de tabla para la tabla `users`
---
-
-CREATE TABLE `users` (
-  `username` varchar(15) NOT NULL,
-  `email` varchar(25) NOT NULL,
-  `name` varchar(20) DEFAULT NULL,
-  `surname` varchar(20) DEFAULT NULL,
-  `nacimiento` date NOT NULL,
-  `direccion` varchar(70) NOT NULL,
-  `localidad` varchar(20) NOT NULL,
-  `profile` varchar(50) NOT NULL,
-  `password` varchar(60) DEFAULT NULL,
-  `rol` int(11) DEFAULT NULL,
-  `gen` int(11) NOT NULL,
-  `isProminent` bit(1) NOT NULL DEFAULT b'0',
-  `created_at` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+USE gestioncomplejo;
 --
 -- Volcado de datos para la tabla `users`
 --
@@ -61,7 +44,6 @@ INSERT INTO `users` (`username`, `email`, `name`, `surname`, `nacimiento`, `dire
 ('adayly95', 'adayly95@blogger.com', 'Aileen', 'Dayly', '1963-08-27', '8 Logan Point', 'Fray Bentos', 'profile_picture_girl', 'W0bRJod', 2, 2, b'0', '2021-11-15'),
 ('adenziloe58', 'adenziloe58@jalbum.net', 'Abby', 'Denziloe', '2004-04-30', '94561 Dunning Hill', 'Guichon', 'profile_picture_girl', 'x387ky', 2, 2, b'0', '2021-11-15'),
 ('adisleec0', 'adisleec0@last.fm', 'Ashli', 'Dislee', '1970-06-08', '5110 Bonner Center', 'Young', 'profile_picture_2.svg', 'Ep4EofQCRQqq', 2, 1, b'0', '2021-11-15'),
-('admin', 'admin@administration.com', 'Administrador', 'Del Sistema', '2021-10-26', '18 de Julio, Martiriné 1321', 'Young', 'profile_picture_2.svg', '$2a$10$oTUrzus9rtz7WzsBdsq8nOh/DPCZrcGCO5jUBAFsLPNOr6u7UAtie', 1, 1, b'0', '2021-10-26'),
 ('afeore7v', 'afeore7v@unblog.fr', 'Andrus', 'Feore', '1963-09-19', '02 Pawling Road', 'Algorta', 'profile_picture_2.svg', '1F3oY2z10mk', 2, 1, b'0', '2021-11-15'),
 ('agurys77', 'agurys77@nps.gov', 'Amalea', 'Gurys', '1995-09-02', '79 Namekagon Crossing', 'Fray Bentos', 'profile_picture_girl', 'mfotdOnXYf', 2, 2, b'0', '2021-11-15'),
 ('ahatliffe8x', 'ahatliffe8x@deviantart.co', 'Abagael', 'Hatliffe', '1984-05-04', '437 Moland Lane', 'Young', 'profile_picture_girl', 'LLSWTvWOr', 2, 2, b'0', '2021-11-15'),
@@ -205,7 +187,6 @@ INSERT INTO `users` (`username`, `email`, `name`, `surname`, `nacimiento`, `dire
 ('egorriessendf', 'egorriessendf@ning.com', 'Edita', 'Gorriessen', '1964-01-28', '81 Oak Drive', 'Fray Bentos', 'profile_picture_girl', 'I6GYPQ', 2, 2, b'0', '2021-11-15'),
 ('eickowics3o', 'eickowics3o@businessinsid', 'Ethelin', 'Ickowics', '1981-09-28', '4 Warner Court', 'Guichon', 'profile_picture_2.svg', 'ThpF6m0t0', 2, 1, b'0', '2021-11-15'),
 ('ejoesbury2z', 'ejoesbury2z@wikispaces.co', 'Ernestus', 'Joesbury', '1979-02-04', '03 Maywood Terrace', 'Algorta', 'profile_picture_2.svg', 'RZ5nmUsRfIQM', 2, 1, b'0', '2021-11-15'),
-('elfontii', 'feluubotta685@gmail.com', 'Felipe', 'Fontana Botta', '2003-08-30', '18 de Julio, Joaquin Suarez', 'Young', 'profile_picture_2.svg', '$2a$10$quVbgqcOmsBAGsI5kTQ1IeSNxGvx4IIbKo43X2qWjGwr1UXg.NNwu', 2, 1, b'0', '2021-10-15'),
 ('elinebargern', 'elinebargern@dagondesign.', 'Eleonore', 'Linebarger', '2005-05-02', '593 Maywood Drive', 'Young', 'profile_picture_2.svg', 'FXWYMcSY', 2, 1, b'0', '2021-11-15'),
 ('emethley7k', 'emethley7k@spotify.com', 'Ellerey', 'Methley', '1973-12-31', '6 Oakridge Center', 'Young', 'profile_picture_2.svg', 'Wn6UrN5', 2, 1, b'0', '2021-11-15'),
 ('emewhirterx', 'emewhirterx@baidu.com', 'Elli', 'Mewhirter', '2000-09-27', '9431 Washington Road', 'Paysandú', 'profile_picture_2.svg', 'AAxxQYB', 2, 1, b'0', '2021-11-15'),
@@ -230,7 +211,6 @@ INSERT INTO `users` (`username`, `email`, `name`, `surname`, `nacimiento`, `dire
 ('fmanifieldcz', 'fmanifieldcz@sfgate.com', 'Fonsie', 'Manifield', '1970-12-29', '5 1st Parkway', 'Guichon', 'profile_picture_girl', 'YAAUkVq9', 2, 2, b'0', '2021-11-15'),
 ('fmounch6g', 'fmounch6g@microsoft.com', 'Frederigo', 'Mounch', '1989-12-16', '20 Cottonwood Crossing', 'Young', 'profile_picture_2.svg', 'agM4PDhXje', 2, 1, b'0', '2021-11-15'),
 ('fpinnick26', 'fpinnick26@time.com', 'Felike', 'Pinnick', '2000-05-20', '013 Katie Plaza', 'Young', 'profile_picture_girl', 'Va6pbUThWeT', 2, 2, b'0', '2021-11-15'),
-('fran_cap15', 'franptc3@gmail.com', 'Balter', 'Velázquez', '2003-04-11', 'Salto 3165', 'Young', 'profile_picture_2.svg', '$2a$10$CA9cCcYd1zjnKneU6U914e06c04p4Ks92dWt4M0NCiX55PlMGVxLC', 2, 1, b'0', '2021-10-21'),
 ('fsabathier1x', 'fsabathier1x@irs.gov', 'Ferrell', 'Sabathier', '2005-09-01', '5 Aberg Crossing', 'Algorta', 'profile_picture_2.svg', 'eQzHunUdhy5', 2, 1, b'0', '2021-11-15'),
 ('ftattam2y', 'ftattam2y@bandcamp.com', 'Ferdinanda', 'Tattam', '1965-09-13', '0 Evergreen Pass', 'Paysandú', 'profile_picture_2.svg', 'BiHgmj', 2, 1, b'0', '2021-11-15'),
 ('ftesmondcw', 'ftesmondcw@earthlink.net', 'Frasco', 'Tesmond', '1985-06-09', '88530 Huxley Alley', 'Paysandú', 'profile_picture_2.svg', 'JJno9m3', 2, 1, b'0', '2021-11-15'),
@@ -402,7 +382,6 @@ INSERT INTO `users` (`username`, `email`, `name`, `surname`, `nacimiento`, `dire
 ('nbeetlestoneo', 'nbeetlestoneo@mac.com', 'Niel', 'Beetlestone', '1961-10-02', '47 Scoville Road', 'Young', 'profile_picture_2.svg', 'DwQtVb2s', 2, 1, b'0', '2021-11-15'),
 ('ndamerell8k', 'ndamerell8k@foxnews.com', 'Noby', 'Damerell', '1999-11-01', '1590 Hintze Street', 'Young', 'profile_picture_2.svg', 'RDJQzwBus', 2, 1, b'0', '2021-11-15'),
 ('nhay3p', 'nhay3p@whitehouse.gov', 'Nari', 'Hay', '1965-03-26', '91 Glendale Center', 'Guichon', 'profile_picture_2.svg', 'lUS831Spk', 2, 1, b'0', '2021-11-15'),
-('nicolecam24@icl', 'nicolecam24@icloud.com', 'Nicole', 'Camaño', '2021-10-21', 'Doctor José Martirené', 'Young', 'profile_picture_girl', '$2a$10$Pd2fhLarEtsiEQ1yKx0ia.g7IHikk41IJlMfW8qh3EO9ntArP53xy', 2, 2, b'0', '2021-10-21'),
 ('njillis1d', 'njillis1d@shutterfly.com', 'Noak', 'Jillis', '1981-06-08', '46831 Sunbrook Lane', 'Guichon', 'profile_picture_girl', 'Idvq6BGUEnjt', 2, 2, b'0', '2021-11-15'),
 ('nmacconnell7p', 'nmacconnell7p@symantec.co', 'Neddie', 'MacConnell', '1980-05-25', '77401 Esker Park', 'Young', 'profile_picture_2.svg', 'quQyMZFKwJ', 2, 1, b'0', '2021-11-15'),
 ('nnoseworthyao', 'nnoseworthyao@w3.org', 'Nessa', 'Noseworthy', '1992-06-19', '6 Talisman Hill', 'Guichon', 'profile_picture_girl', 'NIfpAWB3zk06', 2, 2, b'0', '2021-11-15'),
@@ -497,7 +476,6 @@ INSERT INTO `users` (`username`, `email`, `name`, `surname`, `nacimiento`, `dire
 ('sshewsmith1p', 'sshewsmith1p@tuttocitta.i', 'Sherri', 'Shewsmith', '1987-06-09', '47 Rowland Center', 'Young', 'profile_picture_2.svg', 'YpMMIvw4', 2, 1, b'0', '2021-11-15'),
 ('sstrephand4', 'sstrephand4@theguardian.c', 'Stacey', 'Strephan', '2004-06-30', '6 Lawn Point', 'Young', 'profile_picture_girl', 'I5Uu13', 2, 2, b'0', '2021-11-15'),
 ('sternottdq', 'sternottdq@wordpress.org', 'Shoshana', 'Ternott', '2002-03-26', '12461 Banding Drive', 'Fray Bentos', 'profile_picture_girl', 'jo2b80nR', 2, 2, b'0', '2021-11-15'),
-('Str0op', 'texeiraesteban6@gmail.com', 'Alan', 'Texeira', '2003-10-21', 'Rodo 3637', 'Young', 'profile_picture_2.svg', '$2a$10$IWp/WUCgurrx7f6ejvVcnO/ACv/X5qrih.0md0Lb12ku1AdoymLly', 2, 1, b'0', '2021-10-26'),
 ('stunnah7m', 'stunnah7m@shareasale.com', 'Sylvester', 'Tunnah', '1975-07-30', '5 Jana Junction', 'Paysandú', 'profile_picture_girl', 'fTebPClqRQ', 2, 2, b'0', '2021-11-15'),
 ('suptona3', 'suptona3@unicef.org', 'Shelley', 'Upton', '1961-10-19', '1018 Arkansas Road', 'Algorta', 'profile_picture_2.svg', '5ioInzg0yIy1', 2, 1, b'0', '2021-11-15'),
 ('sussher29', 'sussher29@feedburner.com', 'Silvan', 'Ussher', '1989-04-11', '2594 Scott Trail', 'Guichon', 'profile_picture_girl', 'AqgU7mo0zMF', 2, 2, b'0', '2021-11-15'),
@@ -554,32 +532,3 @@ INSERT INTO `users` (`username`, `email`, `name`, `surname`, `nacimiento`, `dire
 ('zpobjoy25', 'zpobjoy25@amazon.co.uk', 'Zorina', 'Pobjoy', '1997-07-05', '12 Division Hill', 'Young', 'profile_picture_2.svg', 'LTDYVm74ah', 2, 1, b'0', '2021-11-15'),
 ('zshepton15', 'zshepton15@bluehost.com', 'Zebedee', 'Shepton', '1984-03-20', '0 Brentwood Crossing', 'Young', 'profile_picture_2.svg', '3PrufQ', 2, 1, b'0', '2021-11-15'),
 ('zsinnatt7q', 'zsinnatt7q@usa.gov', 'Zonda', 'Sinnatt', '1996-09-05', '25 Prairieview Terrace', 'Guichon', 'profile_picture_girl', 'VAD8qx840Wcy', 2, 2, b'0', '2021-11-15');
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`username`,`email`),
-  ADD KEY `ref_01` (`rol`),
-  ADD KEY `profile` (`profile`),
-  ADD KEY `gen` (`gen`);
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `ref_01` FOREIGN KEY (`rol`) REFERENCES `roles` (`id_rol`),
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gen`) REFERENCES `generos` (`id_gen`);
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

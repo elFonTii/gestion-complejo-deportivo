@@ -34,9 +34,9 @@ router.post('/add', isAdmin, async (req, res) => {
             }
         ],
         back_urls: {
-            success: 'localhost:90/checkout/success',
-            pending: 'localhost:90/checkout/pending',
-            failure: 'localhost:90/checkout/failure'
+            success: 'localhost/checkout/success',
+            pending: 'localhost/checkout/pending',
+            failure: 'localhost/checkout/failure'
         }
     };
     mp.preferences.create(preference).then(async function (response) {
@@ -73,18 +73,18 @@ router.post('/edit/:id_cancha', isAdmin, async (req, res) => {
     const id = query[0].preference_id;
 
     mercadopago.preferences.create({
-        "items": [
+        items: [
             {
-                "title": tipo_cancha,
-                "unit_price": parseInt(price),
-                "description": description,
-                "quantity": 1
+                title: tipo_cancha,
+                unit_price: parseInt(price),
+                description: description,
+                quantity: 1
             }
         ],
-        "back_urls": {
-            "success": "http://localhost:90/checkout/success",
-            "pending": "http://localhost:90/checkout/pending",
-            "failure": "http://localhost:90/checkout/failure"
+        back_urls: {
+            success: 'localhost/checkout/success',
+            pending: 'localhost/checkout/pending',
+            failure: 'localhost/checkout/failure'
         }
     }).then(function (response) {
         const preference_id = response.body.id;
