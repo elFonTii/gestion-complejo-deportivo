@@ -13,8 +13,12 @@
   --divider: #424242;
 }
 
+
 [data-theme="dark"] .bg-black {
   background-color: #fff !important;
+}
+[data-theme="dark"] .list-group-item {
+  background-color: var(--onhover) !important;
 }
 
 [data-theme="dark"] .bg-dark {

@@ -90,6 +90,7 @@ app.use('/games', require('./routes/games'));
 app.use('/complejo', require('./routes/complejo'));
 app.use('/notification-center', require('./routes/notification-center'));
 app.use('/checkout', require('./routes/checkout'));
+app.use('/tutorials', require('./routes/tutorials'));
 //TOOLS
 app.use('/tools', require('./routes/tools'));
 app.use('*', require('./routes/not-found'));

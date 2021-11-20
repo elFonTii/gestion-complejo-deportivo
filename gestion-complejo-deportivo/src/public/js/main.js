@@ -108,3 +108,11 @@ function sendAlert(text) {
         alert.fadeOut("slow");
     }, 5000);
 }
+
+//LIVE URL UPDATE
+function changeQueryString(searchString, documentTitle){      
+    documentTitle = typeof documentTitle !== 'undefined' ? documentTitle : document.title;      
+    var urlSplit=( window.location.href ).split( "?" );      
+    var obj = { Title: documentTitle, Url: urlSplit[0] + searchString };      
+    history.pushState(obj, obj.Title, obj.Url);      
+}

@@ -1,0 +1,54 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-md-3">
+        <ul class="list-group list-group-flush border-0">
+            <li class="list-group-item border-bottom-dark">
+                <a class="btn btn-block text-dark" href="videos?video=registro_usuario">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-md-2">
+                            <i class="fas fa-film text-info"></i>
+                        </div>
+                        <div class="col-md-10">
+                            <p class="mb-0 text-start">¿Como me registro en Gestionate?</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="list-group-item border-bottom-dark">
+                <a class="btn btn-block text-dark" href="videos?video=reserva_cancha">
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-md-2">
+                            <i class="fas fa-film text-info"></i>
+                        </div>
+                        <div class="col-md-10">
+                            <p class="mb-0 text-start">¿Como reservo una cancha?</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+          </ul>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <video
+            id="my-video"
+            class="video-js vjs-theme-fantasy"
+            controls
+            preload="auto"
+            width="640"
+            height="360"
+            data-setup="{}"
+            poster="/img/tutorials.jpeg"
+          >
+            <source src="{{videoPath}}" type="video/mp4" />
+            <source src="{{videoPath}}" type="video/mp4" />
+            <p class="vjs-no-js">
+              To view this video please enable JavaScript, and consider upgrading to a
+              web browser that
+              <a href="https://videojs.com/html5-video-support/" target="_blank"
+                >supports HTML5 video</a
+              >
+            </p>
+          </video>
+        </div>
+    </div>
+</div>
