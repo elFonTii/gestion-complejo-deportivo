@@ -15,7 +15,7 @@
 
 <main role="main" class="">
 
-    <section class="jumbotron text-center m-5">
+    <section class="jumbotron text-center m-5 bg-light">
         <div class="container">
             <h1 class="jumbotron-heading text-dark text-uppercase">{{complejo.nombre_complejo}}</h1>
             <p class="lead text-muted">{{complejo.informacion_complejo}}</p>
@@ -52,7 +52,8 @@
                                     readonly>
                             </div>
                             <div class="col-1">
-                                <a href="mailto:{{complejo.correo_complejo}}" class="btn btn-primary btn-block" target="_BLANK">
+                                <a href="mailto:{{complejo.correo_complejo}}" class="btn btn-primary btn-block"
+                                    target="_BLANK">
                                     <i class="fas fa-envelope"></i>
                                 </a>
                             </div>
@@ -66,9 +67,36 @@
                                     readonly>
                             </div>
                             <div class="col-1">
-                                <a href="https://wa.me/{{complejo.telefono_complejo}}?text=Necesito ayuda para registrarme" class="btn btn-primary btn-block" target="_BLANK">
+                                <a href="https://wa.me/{{complejo.telefono_complejo}}?text=Necesito ayuda para registrarme"
+                                    class="btn btn-primary btn-block" target="_BLANK">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center m-5">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header">
+                    <h5 class="card-title text-dark font-weight-bold text-center">¿Como me registro en Gestionate?</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-12">
+                            <video id="my-video" class="video-js vjs-theme-fantasy" controls preload="auto" width="853"
+                                height="480" data-setup="{}" poster="/img/tutorials.jpeg">
+                                <source src="/videos/registro_usuario.mp4" type="video/mp4" />
+                                <p class="vjs-no-js">
+                                    To view this video please enable JavaScript, and consider upgrading to a
+                                    web browser that
+                                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5
+                                        video</a>
+                                </p>
+                            </video>
                         </div>
                     </div>
                 </div>
