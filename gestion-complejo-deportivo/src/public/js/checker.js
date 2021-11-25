@@ -49,17 +49,6 @@ function validmail(element){
 
 // ------------------------ CHECKERS ----------------------------
 
-function chekAllInputs(form){
-    var inputs = form.find("input");
-    var valid = true;
-    for(var i = 0; i < inputs.length; i++){
-        if(!checkInput($(inputs[i]))){
-            valid = false;
-        }
-    }
-    return valid;
-}
-
 function checkInput(element){
     if(element.val() == "" || !valid(element)){
         setRedBorder(element);

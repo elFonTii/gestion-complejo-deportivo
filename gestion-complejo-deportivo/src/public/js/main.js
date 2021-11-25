@@ -9,6 +9,11 @@
     <param name="date">The date to be verified</param>
 </summary>
 */
+
+function shake(element){
+    element.effect("shake", {times:2}, 750);
+}
+
 function isDateHigherThanToday(date) {
     var today = new Date();
     var dateToCompare = new Date(date);
@@ -87,11 +92,55 @@ $("#confirm").on("click", function () {
     if (isDateHigherThanToday(date)) {
         $("#form_booking").submit();
     } else {
+        shake($("#date_booking"));
+        shake($("#start_booking"));
         sendAlert("Verifica que la hora y fecha introducidas sean en válidas");
+        $("#form_booking").preventDefault();
         return;
     }
 });
 
+$("#date_booking").change(function () {
+    var date = $("#date_booking").val();
+    if (isDateHigherThanToday(date)) {
+        $("#date_booking").css("border-color", "green");
+        $("#date_booking").css("border-width", "1px");
+        return true;
+    } else {
+        $("#date_booking").css("border-color", "red");
+        $("#date_booking").css("border-width", "2px");
+        return false;
+    }
+});
+
+$("#start_booking").change(function () {
+    var date = $("#date_booking").val();
+    if (isDateHigherThanToday(date)) {
+        $("#start_booking").css("border-color", "green");
+        $("#start_booking").css("border-width", "1px");
+        return true;
+    } else {
+        $("#start_booking").css("border-color", "red");
+        $("#start_booking").css("border-width", "2px");
+        return false;
+    }
+});
+
+$("#form_booking").keypress(function (e) {
+    var keycode = (e.keyCode ? e.keyCode : e.which);
+    if (keycode == 13) {
+        var date = $("#date_booking").val();
+        if (isDateHigherThanToday(date)) {
+            $("#form_booking").submit();
+        } else {
+            shake($("#date_booking"));
+            shake($("#start_booking"));
+            sendAlert("Verifica que la hora y fecha introducidas sean en válidas");
+            e.preventDefault();
+            return;
+        }
+    }
+});
 /*
 <summary>
     This function send an alert to the user when is called
@@ -108,7 +157,6 @@ function sendAlert(text) {
         alert.fadeOut("slow");
     }, 5000);
 }
-
 //LIVE URL UPDATE
 function changeQueryString(searchString, documentTitle){      
     documentTitle = typeof documentTitle !== 'undefined' ? documentTitle : document.title;      
