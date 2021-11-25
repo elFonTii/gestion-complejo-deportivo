@@ -49,5 +49,19 @@ router.get('/', isLoggedIn, async (req, res) => {
     }
 });
 
+router.get('/:date', isLoggedIn, async (req, res) => {
+    const params = req.params.date;
+    const data = req.query.date;
+
+    if(params == "date"){
+        //Get all the bookings for the selected date
+        const todayBookings = await pool.query('SELECT * FROM booking WHERE date_booking = ?', [data]);
+    res.render('dashboard/dashboard', { todayBookings });
+    } else {
+        req.flash('message', 'La fecha solicitada no es correcta');
+        res.redirect('/dashboard');
+    }
+});
+
 
 module.exports = router;

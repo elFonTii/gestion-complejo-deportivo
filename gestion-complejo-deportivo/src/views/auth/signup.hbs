@@ -43,40 +43,40 @@
                                         <p class="text text-gray-900 mb-4">Registrate para obtener acceso a nuestra
                                             plataforma</p>
                                     </div>
-                                    <form class="user" action="/signup" method="POST">
+                                    <form class="user" action="/signup" method="POST" id="signup">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" name="username"
-                                                placeholder="Username: jmartinez1" required>
+                                                placeholder="Username: jmartinez1" id="username">
                                         </div>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" name="email"
-                                                placeholder="e-mail: jmartinez1@dominio.com" required>
+                                                placeholder="e-mail: jmartinez1@dominio.com" id="email">
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-user"
-                                                        name="name" placeholder="Nombre: Juan" required>
+                                                        name="name" placeholder="Nombre: Juan" id="name">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-user"
-                                                        name="surname" placeholder="Apellido: Martinez" required>
+                                                        name="surname" placeholder="Apellido: Martinez" id="surname">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <input type="date" min="1940-12-31" max="2010-12-31" class="form-control form-control-user" name="nacimiento"
-                                                required>
+                                                id="nacimiento">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                name="password" placeholder="Contraseña: micontraseña123" required>
+                                                name="password" placeholder="Contraseña: micontraseña123" id="password">
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" name="direccion"
-                                                placeholder="Dirección: 18 de Julio, José Artigas 2211" required>
+                                                placeholder="Dirección: 18 de Julio, José Artigas 2211" id="direccion">
                                         </div>
                                         <select class="form-control border mb-3" name="localidad">
                                             <option>Young</option>
@@ -86,8 +86,8 @@
                                         </select>
 
                                         <select class="form-control border mb-3" name="gen">
-                                            <option value="1">Hombre</option>
-                                            <option value="2">Mujer</option>
+                                            <option value="1">Masculino</option>
+                                            <option value="2">Femenino</option>
                                         </select>
 
                                         <button class="btn btn-google btn-user btn-block">
