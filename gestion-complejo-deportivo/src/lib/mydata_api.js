@@ -109,9 +109,32 @@ mydata.get = async function () {
 mydata.getTodayBookings = async function (limit) {
     const today = new Date();
     const currentDate = this.normalizeDate(today);
-    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha WHERE date_booking = ? LIMIT ?', [currentDate, limit]);
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha LEFT JOIN movements ON movements.movement = booking.id_booking WHERE date_booking = ? LIMIT ?', [currentDate, limit]);
     return bookings;
 }
+
+mydata.getWeekBookings = async function (limit) {
+    const today = new Date();
+    const maxDays = today.getDate() + 7;
+    const maxDate = new Date();
+    maxDate.setDate(maxDays);
+    const currentDate = this.normalizeDate(today);
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha LEFT JOIN movements ON movements.movement = booking.id_booking WHERE date_booking >= ? AND date_booking <= ? LIMIT ?', [currentDate, maxDate, limit]);
+    return bookings;
+}
+
+mydata.getMonthBookings = async function (limit) {
+    const today = new Date();
+    const nextMonth = today.getMonth() + 1;
+    const maxDate = new Date();
+    maxDate.setMonth(nextMonth);
+    const currentDate = this.normalizeDate(today);
+    const bookings = await pool.query('SELECT * FROM booking INNER JOIN cancha ON booking.cancha = cancha.id_cancha LEFT JOIN movements ON movements.movement = booking.id_booking WHERE date_booking >= ? AND date_booking <= ? LIMIT ?', [currentDate, maxDate, limit]);
+    console.log(bookings);
+    return bookings;
+}
+
+
 /*Devuelve el conteo de reservas que son de este dia.*/
 mydata.getTodayBookingsCount = async function () {
     const today = new Date();

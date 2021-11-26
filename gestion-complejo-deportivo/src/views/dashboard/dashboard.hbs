@@ -14,7 +14,7 @@
                 <!-- Card Header - Accordion -->
                 <a href="#bookingsCard" class="d-block card-header py-3" data-toggle="collapse" role="button"
                     aria-expanded="true" aria-controls="bookingsCard">
-                    <h6 class="m-0 font-weight-bold text-dark">Reservas de hoy</h6>
+                    <h6 class="m-0 font-weight-bold text-dark">Reservas de {{stamp}}</h6>
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="bookingsCard">
@@ -24,8 +24,8 @@
                                 <thead>
                                     <tr>
                                         <th>Cancha</th>
-                                        <th>Inicio</th>
-                                        <th>Fin</th>
+                                        <th>Inicia</th>
+                                        <th>Finaliza</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,7 +121,8 @@
                 <!-- Card Header - Accordion -->
                 <a href="#bookingsCard" class="d-block card-header py-3" data-toggle="collapse" role="button"
                     aria-expanded="true" aria-controls="bookingsCard">
-                    <h6 class="m-0 font-weight-bold text-dark">Reservas de hoy</h6>
+                    <h6 class="m-0 font-weight-bold text-dark">Reservas realizadas por usuarios</h6>
+                    <p class="small text-secondary mb-0">Mostrando reservas de: {{stamp}}</p>
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="bookingsCard">
@@ -131,8 +132,10 @@
                                 <thead>
                                     <tr>
                                         <th>Cancha</th>
-                                        <th>Inicio</th>
-                                        <th>Fin</th>
+                                        <th>Inicia</th>
+                                        <th>Finaliza</th>
+                                        <th>Fecha</th>
+                                        <th>Paga</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -141,9 +144,21 @@
                                         <td>{{tipo_cancha}}</td>
                                         <td>{{start_booking}}</td>
                                         <td>{{end_booking}}</td>
+                                        <td>{{dateNormalized date_booking}}</td>
+                                        {{#ifCond paymentStatus '==' 'No paga'}}
+                                        <td><i class="fas fa-circle text-danger"></i></td>
+                                        {{else}}
+                                        <td><i class="fas fa-circle text-success"></i></td>
+                                        {{/ifCond}}
+                                        {{else}}
                                     </tr>
                                     {{/each}}
                                 </tbody>
+                                <tfoot>
+                                    <a href="/dashboard/today" class="btn btn-sm btn-outline-primary ml-1 mb-2">Día</a>
+                                    <a href="/dashboard/week" class="btn btn-sm btn-outline-primary ml-1 mb-2">Semana</a>
+                                    <a href="/dashboard/month" class="btn btn-sm btn-outline-primary ml-1 mb-2">Mes</a>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
