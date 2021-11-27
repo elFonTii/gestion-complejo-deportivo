@@ -148,5 +148,7 @@ router.get('/:date', isLoggedIn, async (req, res) => {
     }
 });
 
-
+router.get('/', isLoggedIn, async (req, res) => {
+    res.redirect('/dashboard/today');
+});
 module.exports = router;
